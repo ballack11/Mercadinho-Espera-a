@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mercadinho Esperança</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<img src="logo.png" class="logo">
+<h1>🛒 Mercadinho Esperança</h1>
+<p>Confira nossos produtos e preços</p>
+<p class="aviso">⚠️ Não realizamos entregas. Preços válidos somente na loja física.</p>
+</header>
+
+<div class="container">
+
+<input type="text" id="pesquisa" placeholder="Pesquisar produto..." onkeyup="filtrarProdutos()">
+
+<!-- ================= ALIMENTOS ================= -->
+<h2 class="categoria">🍚 Alimentos</h2>
+
+<div class="produto" data-name="arroz"><img src="imagens/arroz.webp"><h2>Arroz 5kg</h2><p>R$ 25,00</p></div>
+<div class="produto" data-name="feijao"><img src="imagens/feijao.jpg"><h2>Feijão 1kg</h2><p>R$ 8,50</p></div>
+<div class="produto" data-name="macarrao"><img src="imagens/macarrao.jpg"><h2>Macarrão 500g</h2><p>R$ 3,80</p></div>
+<div class="produto" data-name="acucar"><img src="imagens/acucar.jpg"><h2>Açúcar 1kg</h2><p>R$ 4,20</p></div>
+<div class="produto" data-name="sal"><img src="imagens/sal.jpg"><h2>Sal 1kg</h2><p>R$ 2,00</p></div>
+<div class="produto" data-name="oleo"><img src="imagens/oleo.jpg"><h2>Óleo 900ml</h2><p>R$ 6,90</p></div>
+<div class="produto" data-name="farinha"><img src="imagens/farinha.jpg"><h2>Farinha de Trigo</h2><p>R$ 4,80</p></div>
+<div class="produto" data-name="cafe"><img src="imagens/cafe.jpg"><h2>Café 500g</h2><p>R$ 14,90</p></div>
+<div class="produto" data-name="leite"><img src="imagens/leite.jpg"><h2>Leite 1L</h2><p>R$ 4,70</p></div>
+<div class="produto" data-name="ovos"><img src="imagens/ovos.jpg"><h2>Dúzia de Ovos</h2><p>R$ 11,90</p></div>
+
+<!-- ================= BEBIDAS ================= -->
+<h2 class="categoria">🥤 Bebidas</h2>
+
+<div class="produto" data-name="refrigerante"><img src="imagens/refrigerante.jpg"><h2>Refrigerante 2L</h2><p>R$ 7,99</p></div>
+<div class="produto" data-name="agua"><img src="imagens/agua-mineral.jpg"><h2>Água Mineral</h2><p>R$ 2,50</p></div>
+<div class="produto" data-name="suco"><img src="imagens/suco.jpg"><h2>Suco 1L</h2><p>R$ 5,20</p></div>
+<div class="produto" data-name="cerveja"><img src="imagens/cerveja.jpg"><h2>Cerveja Lata</h2><p>R$ 3,50</p></div>
+<div class="produto" data-name="energetico"><img src="imagens/energetico.jpg"><h2>Energético</h2><p>R$ 9,90</p></div>
+<div class="produto" data-name="cha"><img src="imagens/cha.jpg"><h2>Chá Gelado</h2><p>R$ 4,80</p></div>
+
+<!-- ================= LIMPEZA ================= -->
+<h2 class="categoria">🧼 Limpeza</h2>
+
+<div class="produto" data-name="detergente"><img src="imagens/detergente.jpg"><h2>Detergente</h2><p>R$ 2,80</p></div>
+<div class="produto" data-name="sabao"><img src="imagens/sabao.jpg"><h2>Sabão em Pó</h2><p>R$ 12,90</p></div>
+<div class="produto" data-name="agua-sanitaria"><img src="imagens/agua-sanitaria.jpg"><h2>Água Sanitária</h2><p>R$ 3,40</p></div>
+<div class="produto" data-name="desinfetante"><img src="imagens/desinfetante.jpg"><h2>Desinfetante</h2><p>R$ 4,90</p></div>
+<div class="produto" data-name="esponja"><img src="imagens/esponja.jpg"><h2>Esponja</h2><p>R$ 1,80</p></div>
+<div class="produto" data-name="limpa-vidro"><img src="imagens/limpa-vidro.jpg"><h2>Limpa Vidro</h2><p>R$ 7,20</p></div>
+
+<!-- ================= HIGIENE ================= -->
+<h2 class="categoria">🧴 Higiene</h2>
+
+<div class="produto" data-name="sabonete"><img src="imagens/sabonete.jpg"><h2>Sabonete</h2><p>R$ 2,20</p></div>
+<div class="produto" data-name="shampoo"><img src="imagens/shampoo.jpg"><h2>Shampoo</h2><p>R$ 14,50</p></div>
+<div class="produto" data-name="condicionador"><img src="imagens/condicionador.jpg"><h2>Condicionador</h2><p>R$ 14,50</p></div>
+<div class="produto" data-name="creme-dental"><img src="imagens/creme-dental.jpg"><h2>Creme Dental</h2><p>R$ 4,90</p></div>
+<div class="produto" data-name="papel-higienico"><img src="imagens/papel-higienico.jpg"><h2>Papel Higiênico</h2><p>R$ 15,90</p></div>
+
+<!-- ================= AÇOUGUE ================= -->
+<h2 class="categoria">🥩 Açougue</h2>
+
+<div class="produto" data-name="carne-bovina"><img src="imagens/carne-bovina.jpg"><h2>Carne Bovina kg</h2><p>R$ 34,90</p></div>
+<div class="produto" data-name="frango"><img src="imagens/frango.jpg"><h2>Frango kg</h2><p>R$ 14,90</p></div>
+<div class="produto" data-name="linguica"><img src="imagens/linguica.jpg"><h2>Linguiça kg</h2><p>R$ 18,90</p></div>
+<div class="produto" data-name="peixe"><img src="imagens/peixe.jpg"><h2>Peixe kg</h2><p>R$ 29,90</p></div>
+
+<!-- ================= HORTIFRUTI ================= -->
+<h2 class="categoria">🍌 Hortifruti</h2>
+
+<div class="produto" data-name="banana"><img src="imagens/banana.jpg"><h2>Banana kg</h2><p>R$ 4,60</p></div>
+<div class="produto" data-name="tomate"><img src="imagens/tomate.jpg"><h2>Tomate kg</h2><p>R$ 5,90</p></div>
+<div class="produto" data-name="batata"><img src="imagens/batata.jpg"><h2>Batata kg</h2><p>R$ 4,30</p></div>
+<div class="produto" data-name="cebola"><img src="imagens/cebola.jpg"><h2>Cebola kg</h2><p>R$ 4,80</p></div>
+<div class="produto" data-name="maca"><img src="imagens/maca.jpg"><h2>Maçã kg</h2><p>R$ 6,20</p></div>
+<div class="produto" data-name="laranja"><img src="imagens/laranja.jpg"><h2>Laranja kg</h2><p>R$ 3,90</p></div>
+
+<!-- ================= RODAPÉ ================= -->
+<h2 class="categoria">📍 Informações</h2>
+
+<footer>
+<p><strong>Endereço:</strong> Rua Exemplo, 123 – Centro</p>
+<p><strong>Horário:</strong> Seg a Sáb 08h às 20h | Dom 08h às 12h</p>
+<p><strong>Telefone:</strong> (11) 99999-9999</p>
+</footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
