@@ -283,3 +283,203 @@ body{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   MELHORIAS MOBILE (acabamento)
+   Cole no FINAL do <style>
+   ========================= */
+
+@media (max-width: 980px){
+
+  /* Safe area (iPhone notch) + deixa topo mais fino */
+  .topbar{
+    padding-top: env(safe-area-inset-top);
+  }
+  .top-row{
+    padding: 10px 0 8px;
+    gap: 8px;
+  }
+
+  /* Logo e título mais compactos */
+  .brand{
+    gap: 10px;
+  }
+  .brand h1{
+    font-size: 16px;
+  }
+  .brand small{
+    font-size: 11px;
+    opacity: .9;
+  }
+
+  /* Busca mais “reta” e compacta */
+  .search{
+    gap: 8px;
+  }
+  .search input{
+    height: 44px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+  .search button{
+    height: 44px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    letter-spacing: .2px;
+  }
+
+  /* Botões mobile (Menu/Carrinho) mais alinhados e menos altos */
+  .mobile-actions{
+    gap: 10px;
+  }
+  .hamb,
+  #cartBtnMobile{
+    height: 48px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    align-items: center;
+  }
+  .hamb .ic,
+  #cartBtnMobile .cart-ic{
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+  #cartBtnMobile{
+    justify-content: center;
+  }
+  #cartBtnMobile .badge{
+    top: -6px;
+    right: -6px;
+    padding: 3px 7px;
+    font-size: 11px;
+  }
+
+  /* Barra de departamentos: mais “app”, menos “tijolo” */
+  .menu-row{
+    padding: 8px 0 10px;
+    gap: 10px;
+  }
+  .dept{
+    padding: 9px 10px;
+    border-radius: 14px;
+  }
+  .dept .ic{
+    width: 26px;
+    height: 26px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  .dept span{
+    font-size: 12px;
+  }
+
+  /* Submenu compacto e fácil de deslizar */
+  .submenu{
+    padding: 8px 0 12px;
+  }
+  .sub{
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* Carrossel menor (na sua imagem ele está grande) */
+  .carousel{
+    min-height: 0;
+  }
+  .slide{
+    padding: 14px;
+  }
+  .slide .inner{
+    min-height: 0;
+  }
+  .tag{
+    font-size: 11px;
+    padding: 6px 9px;
+  }
+  .slide h2{
+    font-size: 17px;
+    line-height: 1.15;
+  }
+  .slide p{
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .cta{
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+  .nav button{
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  /* Área "Ordenar": mais enxuta */
+  .controls{
+    padding: 12px;
+    border-radius: 16px;
+    gap: 10px;
+  }
+  .controls select{
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  /* Cards: mais “limpos” e botões não quebram */
+  .grid{
+    gap: 12px;
+  }
+  .card{
+    padding: 12px;
+    border-radius: 16px;
+  }
+  .meta{
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .chip, .unit{
+    padding: 6px 9px;
+    border-radius: 999px;
+  }
+  .card h3{
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .price{
+    padding: 8px 10px;
+    border-radius: 14px;
+  }
+
+  /* Botões do card sempre 100% no mobile (evita ficar apertado) */
+  .card .btn{
+    width: 100%;
+    min-width: 0 !important;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+
+  /* WhatsApp: não cobre os produtos */
+  .whatsapp{
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+  }
+
+  /* Dá espaço no final da página pra o WhatsApp não “sentar” em cima */
+  footer{
+    padding-bottom: 110px;
+  }
+}
+
+/* Telas bem pequenas: melhora o respiro */
+@media (max-width: 420px){
+  .wrap{ padding: 0 12px; }
+  .dept{ padding: 8px 10px; }
+}
