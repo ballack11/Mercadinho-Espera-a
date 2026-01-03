@@ -7,6 +7,7 @@ function verificarHorario(){
   else if(dia===0) aberto=h>=7 && h<12;            // domingo
 
   const el=document.getElementById("status");
+  if(!el) return;
   el.textContent = aberto ? "🟢 ABERTO AGORA" : "🔴 FECHADO AGORA";
   el.className = "status " + (aberto ? "open" : "closed");
 }
@@ -26,7 +27,7 @@ const departamentos = [
   {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
 ];
 
-/* ===== PRODUTOS ===== */
+/* ===== PRODUTOS (LISTA COMPLETA) ===== */
 const produtos = [
   // BÁSICOS
   {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
@@ -168,93 +169,27 @@ const produtos = [
   {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
 ];
 
-/* ===== IMAGENS: caminho certo com suas pastas ===== */
-const IMG_PADRAO = "logo.png"; // usa o logo como padrão (garante que sempre aparece)
-
+/* ===== IMAGENS (PEGA DAS SUAS PASTAS) ===== */
+const IMG_PADRAO = "logo.png";
 function imgDoProduto(p){
-  // HORTIFRUTI
+  // Hortifruti
   if(p.nome === "Banana (kg)") return "img/01-hortifruti/banana.jpg";
-  if(p.nome === "Maçã (kg)") return "img/01-hortifruti/maca.jpg";
-  if(p.nome === "Laranja (kg)") return "img/01-hortifruti/laranja.jpg";
-  if(p.nome === "Mamão (unidade)") return "img/01-hortifruti/mamao.jpg";
-  if(p.nome === "Uva (bandeja)") return "img/01-hortifruti/uva.jpg";
-  if(p.nome === "Limão (kg)") return "img/01-hortifruti/limao.jpg";
   if(p.nome === "Tomate (kg)") return "img/01-hortifruti/tomate.jpg";
-  if(p.nome === "Batata (kg)") return "img/01-hortifruti/batata.jpg";
   if(p.nome === "Cebola (kg)") return "img/01-hortifruti/cebola.jpg";
-  if(p.nome === "Cenoura (kg)") return "img/01-hortifruti/cenoura.jpg";
-  if(p.nome === "Alface (unidade)") return "img/01-hortifruti/alface.jpg";
-  if(p.nome === "Repolho (unidade)") return "img/01-hortifruti/repolho.jpg";
-  if(p.nome === "Alho (100g)") return "img/01-hortifruti/alho.jpg";
 
-  // BÁSICOS
+  // Básicos
   if(p.nome.includes("Arroz")) return "img/02-basicos/arroz.jpg";
   if(p.nome.includes("Feijão")) return "img/02-basicos/feijao.jpg";
-  if(p.nome.includes("Açúcar")) return "img/02-basicos/acucar.jpg";
-  if(p.nome.includes("Sal")) return "img/02-basicos/sal.jpg";
   if(p.nome.includes("Óleo")) return "img/02-basicos/oleo.jpg";
-  if(p.nome.includes("Café")) return "img/02-basicos/cafe.jpg";
-  if(p.nome.includes("Leite 1L")) return "img/02-basicos/leite.jpg";
+  if(p.nome.includes("Leite")) return "img/02-basicos/leite.jpg";
   if(p.nome.includes("Ovos")) return "img/02-basicos/ovos.jpg";
   if(p.nome.includes("Farinha") || p.nome.includes("Cuscuz")) return "img/02-basicos/farinha.jpg";
 
-  // BEBIDAS
-  if(p.nome.includes("Água mineral")) return "img/03-bebidas/agua.jpg";
+  // Bebidas
   if(p.nome.includes("Refrigerante")) return "img/03-bebidas/refrigerante.jpg";
-  if(p.nome.startsWith("Suco")) return "img/03-bebidas/suco.jpg";
-  if(p.nome.startsWith("Cerveja")) return "img/03-bebidas/cerveja.jpg";
-  if(p.nome === "Energético") return "img/03-bebidas/energetico.jpg";
-  if(p.nome === "Chá gelado") return "img/03-bebidas/cha.jpg";
-  if(p.nome === "Água de coco") return "img/03-bebidas/coco.jpg";
 
-  // LIMPEZA
+  // Limpeza
   if(p.nome === "Detergente") return "img/04-limpeza/detergente.jpg";
-  if(p.nome === "Sabão em pó") return "img/04-limpeza/sabao-po.jpg";
-  if(p.nome === "Água sanitária") return "img/04-limpeza/agua-sanitaria.jpg";
-  if(p.nome === "Desinfetante") return "img/04-limpeza/desinfetante.jpg";
-  if(p.nome === "Esponja") return "img/04-limpeza/esponja.jpg";
-  if(p.nome === "Papel toalha") return "img/04-limpeza/papel-toalha.jpg";
-  if(p.nome === "Pano de chão") return "img/04-limpeza/pano-chao.jpg";
-  if(p.nome.includes("Saco de lixo")) return "img/04-limpeza/saco-lixo.jpg";
-  if(p.nome === "Amaciante") return "img/04-limpeza/amaciante.jpg";
-  if(p.nome === "Sabão em barra") return "img/04-limpeza/sabao-barra.jpg";
-
-  // HIGIENE
-  if(p.nome === "Sabonete") return "img/05-higiene/sabonete.jpg";
-  if(p.nome === "Shampoo") return "img/05-higiene/shampoo.jpg";
-  if(p.nome === "Condicionador") return "img/05-higiene/condicionador.jpg";
-  if(p.nome === "Creme dental") return "img/05-higiene/creme-dental.jpg";
-  if(p.nome === "Escova de dente") return "img/05-higiene/escova.jpg";
-  if(p.nome === "Fio dental") return "img/05-higiene/fio-dental.jpg";
-  if(p.nome === "Papel higiênico") return "img/05-higiene/papel-higienico.jpg";
-  if(p.nome === "Papel lenço") return "img/05-higiene/papel-lenco.jpg";
-  if(p.nome === "Desodorante") return "img/05-higiene/desodorante.jpg";
-  if(p.nome === "Absorvente") return "img/05-higiene/absorvente.jpg";
-  if(p.nome === "Sabonete líquido") return "img/05-higiene/sabonete-liquido.jpg";
-
-  // MERCEARIA (genéricas)
-  if(p.cat === "Mercearia"){
-    if(p.sub === "Biscoitos") return "img/06-mercearia/biscoito.jpg";
-    if(p.sub === "Massas") return "img/06-mercearia/macarrao.jpg";
-    if(p.sub === "Molhos") return "img/06-mercearia/molho-tomate.jpg";
-    if(p.sub === "Enlatados") return "img/06-mercearia/atum.jpg";
-    if(p.sub === "Temperos") return "img/06-mercearia/mostarda.jpg";
-    if(p.sub === "Doces") return "img/06-mercearia/chocolate.jpg";
-  }
-
-  // FRIOS & LATICÍNIOS (genéricas — se você tiver baixado depois, é só ajustar)
-  if(p.cat === "Frios & Laticínios"){
-    return "img/02-basicos/leite.jpg";
-  }
-
-  // AÇOUGUE (genéricas)
-  if(p.cat === "Açougue"){
-    if(p.sub === "Frango") return "img/07-acougue/frango.jpg";
-    if(p.sub === "Peixes") return "img/07-acougue/peixe.jpg";
-    if(p.sub === "Linguiças") return "img/07-acougue/linguica.jpg";
-    if(p.sub === "Suína") return "img/07-acougue/carne-suina.jpg";
-    return "img/07-acougue/carne-bovina.jpg";
-  }
 
   return IMG_PADRAO;
 }
@@ -342,7 +277,6 @@ function render(){
   list.forEach((p,idx)=>{
     const card=document.createElement("div");
     card.className="card";
-
     const imgSrc = imgDoProduto(p);
 
     card.innerHTML=`
@@ -357,6 +291,7 @@ function render(){
       <h3>${p.nome}</h3>
       <div class="price">R$ ${Number(p.preco).toFixed(2)}</div>
       ${p.obs?`<div class="note">${p.obs}</div>`:""}
+
       <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn green" data-add="${idx}" style="flex:1;min-width:140px">Adicionar</button>
         <button class="btn" data-viewcart="1" style="min-width:140px">Ver carrinho</button>
@@ -365,7 +300,6 @@ function render(){
     grid.appendChild(card);
   });
 
-  // bind botoes
   document.querySelectorAll("[data-add]").forEach(b=>{
     b.onclick=()=>{ addToCart(); };
   });
