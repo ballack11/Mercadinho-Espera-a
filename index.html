@@ -22,10 +22,6 @@
     --green2:#16a34a;
 
     --text:#f3f4f6;
-
-    /* mobile */
-    --pad: 14px;
-    --bottomBarH: 64px;
   }
   *{box-sizing:border-box}
   body{
@@ -36,6 +32,7 @@
       radial-gradient(900px 500px at 10% -10%, rgba(216,31,38,.35), transparent 60%),
       radial-gradient(900px 500px at 90% -10%, rgba(34,197,94,.22), transparent 60%),
       linear-gradient(180deg, var(--bg), #071024 40%, var(--bg));
+    -webkit-tap-highlight-color: transparent;
   }
 
   @keyframes drop{from{transform:translateY(-18px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -44,7 +41,7 @@
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   @keyframes shine{0%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
 
-  .wrap{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 14px}
 
   /* ===== TOP BAR (vermelho) ===== */
   .topbar{
@@ -62,15 +59,11 @@
     display:flex;gap:12px;align-items:center;
     min-width:280px;
   }
-
-  /* ===== LOGO MAIOR (desktop) ===== */
   .logo{
-    width:78px;height:78px;
+    width:58px;height:58px;
     filter: drop-shadow(0 12px 18px rgba(0,0,0,.35));
     animation: pop 3s ease-in-out infinite;
-    flex: 0 0 auto;
   }
-
   .brand h1{margin:0;font-size:18px;line-height:1.1}
   .brand small{display:block;color:#ffe7e7;font-size:12px;margin-top:2px;opacity:.95}
 
@@ -84,7 +77,7 @@
     padding:12px 14px;
     border-radius:14px;
     outline:none;
-    font-size:14px;
+    font-size:16px; /* melhor no mobile */
   }
   .search button{
     border:none;
@@ -95,6 +88,8 @@
     background:#111827;
     color:#fff;
     transition:.2s;
+    white-space:nowrap;
+    font-size:16px; /* melhor no mobile */
   }
   .search button:hover{transform:translateY(-2px)}
 
@@ -155,7 +150,6 @@
     padding:4px 8px;
     font-size:11px;
     border:2px solid rgba(0,0,0,.25);
-    transition: transform .12s ease;
   }
 
   /* ===== MENU DEPARTAMENTOS + SUBMENU ===== */
@@ -266,7 +260,7 @@
   /* CONTEÚDO */
   .content{display:flex;flex-direction:column;gap:16px;animation: up .45s ease}
 
-  /* ===== CARROSSEL (BANNER + ANIMAÇÃO) ===== */
+  /* ===== CARROSSEL ===== */
   .carousel{
     border-radius:18px;
     border:1px solid rgba(255,255,255,.10);
@@ -371,6 +365,7 @@
     padding:10px 12px;border-radius:14px;
     background:#0b1220;color:var(--text);
     border:1px solid rgba(255,255,255,.10);
+    font-size:16px;
   }
   .hint{color:var(--muted);font-size:12px}
 
@@ -491,6 +486,7 @@
     padding:10px 12px;border-radius:14px;
     cursor:pointer;
     border:1px solid rgba(255,255,255,.12);
+    font-size:16px;
   }
   .btn.green{
     background: rgba(34,197,94,.95);
@@ -499,7 +495,7 @@
     font-weight:bold;
   }
 
-  /* WHATS flutuante (desktop) */
+  /* WHATS flutuante */
   .whatsapp{
     position:fixed;
     right:18px;bottom:18px;
@@ -516,113 +512,124 @@
 
   footer{padding:26px 0 50px;color:var(--muted);font-size:12px;text-align:center}
 
-  /* ===== BOTTOM BAR (mobile) ===== */
-  .bottom-bar{
-    position:fixed;
-    left:0;right:0;
-    bottom:0;
-    z-index:220;
-    padding-bottom: env(safe-area-inset-bottom);
-    background: rgba(15,23,42,.92);
-    border-top:1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(8px);
-    display:none;
-  }
-  .bottom-inner{
-    max-width:1400px;
-    margin:0 auto;
-    padding:8px var(--pad);
-    display:grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap:8px;
-  }
-  .bbtn{
-    border:none;
-    background: transparent;
-    color:#fff;
-    border-radius:14px;
-    padding:8px 6px;
-    min-height: 50px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:2px;
-    cursor:pointer;
-    user-select:none;
-    font-size:10px;
-    opacity:.92;
-  }
-  .bbtn .ic{font-size:20px;line-height:1}
-  .bbtn:active{transform: scale(.98)}
-  .bbtn.primary{
-    background: rgba(34,197,94,.14);
-    border:1px solid rgba(34,197,94,.25);
-    opacity:1;
-  }
-  .bbtn.whats{
-    background: rgba(34,197,94,.95);
-    color:#022c22;
-    border:1px solid rgba(34,197,94,.55);
-    font-weight:bold;
-    opacity:1;
-  }
-  .bbtn.cart{position:relative}
-  .b-badge{
-    position:absolute;
-    top:4px; right:12px;
-    background: var(--green);
-    color:#022c22;
-    font-weight:bold;
-    border-radius:999px;
-    padding:2px 7px;
-    font-size:11px;
-    border:2px solid rgba(0,0,0,.25);
-  }
+  /* ====== MOBILE FIRST EXTRA (sidebar drawer + menus roláveis + cards) ====== */
+  .hamb, .mobile-actions, .side-backdrop{ display:none; }
 
-  /* ===== BOTÃO "TOPO" ===== */
-  .to-top{
-    position:fixed;
-    right:14px;
-    bottom: calc(var(--bottomBarH) + 14px + env(safe-area-inset-bottom));
-    z-index:230;
-    display:none;
-    border:none;
-    cursor:pointer;
-    padding:12px 14px;
-    border-radius:16px;
-    background: rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    box-shadow:0 16px 34px rgba(0,0,0,.35);
-  }
-  .to-top.show{display:block}
-
-  /* ===== RESPONSIVO ===== */
   @media (max-width: 980px){
-    /* topo em 2 linhas (logo+nome em cima, busca embaixo) */
-    .top-row{
-      flex-direction: column;
-      align-items: stretch;
-      gap:12px;
-    }
-    .brand{
-      flex-direction: column;
-      align-items:center;
-      text-align:center;
-      min-width:auto;
-      gap:6px;
-    }
-    .logo{ width:96px; height:96px; }
-    .brand h1{ font-size:20px; }
-    .brand small{ font-size:13px; }
-
+    .brand{min-width:auto}
     .top-actions{display:none}
     .main{grid-template-columns: 1fr}
-    .sidebar{display:none} /* no celular fica tudo mais limpo */
-    .whatsapp{display:none} /* usa o botão Whats da barra de baixo */
-    .bottom-bar{display:block}
-    body{padding-bottom: calc(var(--bottomBarH) + env(safe-area-inset-bottom) + 10px);}
+
+    /* topo em 2 linhas */
+    .top-row{flex-wrap:wrap; gap:10px; padding:10px 0}
+    .brand{width:100%}
+    .logo{width:46px;height:46px}
+
+    .search{width:100%; flex: 0 0 100%; gap:8px}
+    .search input{padding:12px;border-radius:14px}
+    .search button{padding:12px 14px;border-radius:14px}
+
+    /* actions mobile */
+    .mobile-actions{
+      display:flex;
+      width:100%;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hamb{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.25);
+      color:#fff;
+      cursor:pointer;
+      user-select:none;
+    }
+    .hamb .ic{
+      width:34px;height:34px;border-radius:12px;
+      display:grid;place-items:center;
+      background: rgba(34,197,94,.22);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:18px;
+    }
+
+    /* menu departamentos vira faixa rolável */
+    .menu-row{
+      flex-wrap:nowrap;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width:none;
+    }
+    .menu-row::-webkit-scrollbar{display:none}
+    .dept{flex:0 0 auto}
+
+    /* submenu rolável */
+    .subrow{
+      flex-wrap:nowrap;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width:none;
+    }
+    .subrow::-webkit-scrollbar{display:none}
+    .sub{flex:0 0 auto}
+
+    /* sidebar off-canvas */
+    .sidebar{
+      position:fixed;
+      top:0; left:0;
+      height:100dvh;
+      width:min(360px, 88vw);
+      z-index:260;
+      transform:translateX(-110%);
+      transition: transform .25s ease;
+      border-radius:0 18px 18px 0;
+      box-shadow: 20px 0 60px rgba(0,0,0,.55);
+    }
+    .sidebar.open{ transform:translateX(0) }
+
+    .side-backdrop{
+      display:none;
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      z-index:250;
+    }
+    .side-backdrop.show{ display:block; }
+
+    /* carrossel mais compacto */
+    .carousel{min-height:160px}
+    .slide .inner{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:12px;
+      min-height:150px;
+    }
+    .slide h2{font-size:18px}
+    .slide p{font-size:12px}
+
+    /* cards 2 colunas */
+    .grid{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+
+    /* botões do card empilhados */
+    .card .btn{width:100%; min-width:0 !important}
+    .card > div:last-child{flex-direction:column}
+
+    /* whatsapp menor */
+    .whatsapp{
+      right:12px; bottom:12px;
+      padding:12px 14px;
+      border-radius:16px;
+    }
+  }
+
+  @media (max-width: 420px){
+    .grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -655,6 +662,22 @@
       <div class="search">
         <input id="search" placeholder="Digite aqui: carne, banana, biscoito, detergente..." />
         <button id="btnSearch">BUSCAR</button>
+      </div>
+
+      <!-- AÇÕES MOBILE (aparece só no celular) -->
+      <div class="mobile-actions">
+        <div class="hamb" id="hambBtn" aria-label="Abrir navegação">
+          <div class="ic">☰</div>
+          <div style="font-weight:bold;font-size:12px;line-height:1.1">
+            Menu<br><span style="font-weight:normal;opacity:.9;font-size:11px">Categorias</span>
+          </div>
+        </div>
+
+        <div class="cart" id="cartBtnMobile" title="Carrinho (visual)">
+          <div class="cart-ic">🛒</div>
+          <div style="font-weight:bold;font-size:12px;">Carrinho</div>
+          <div class="badge" id="cartCountMobile">0</div>
+        </div>
       </div>
 
       <div class="top-actions">
@@ -693,7 +716,10 @@
 <div class="wrap">
   <div class="main">
 
-    <!-- SIDEBAR (aparece no desktop) -->
+    <!-- Backdrop da sidebar (mobile) -->
+    <div class="side-backdrop" id="sideBackdrop"></div>
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="side-header">Navegação rápida</div>
 
@@ -737,7 +763,7 @@
     <!-- CONTEÚDO -->
     <section class="content">
 
-      <!-- BANNER / CARROSSEL -->
+      <!-- CARROSSEL -->
       <div class="carousel" id="carousel">
         <div class="slides" id="slides">
           <div class="slide">
@@ -746,13 +772,13 @@
                 <div class="tag">Mercadinho Esperança</div>
                 <h2>Variedade para o dia a dia</h2>
                 <p>Alimentos, carnes, hortifruti, bebidas, limpeza e higiene — tudo organizado por departamentos.</p>
-                <div class="cta" id="ctaProdutos">🔎 Ver produtos</div>
+                <div class="cta" onclick="window.scrollTo({top:320,behavior:'smooth'})">🔎 Ver produtos</div>
               </div>
               <div style="text-align:right">
                 <div class="tag green">Atendimento</div>
                 <h2 style="margin-top:10px">WhatsApp</h2>
                 <p>(81) 8317-3613</p>
-                <div class="cta" id="ctaWhats">💬 Abrir WhatsApp</div>
+                <div class="cta" onclick="window.open('https://wa.me/558183173613','_blank')">💬 Abrir WhatsApp</div>
               </div>
             </div>
           </div>
@@ -763,7 +789,7 @@
                 <div class="tag">Interface estilo grande mercado</div>
                 <h2>Menu com submenu + busca rápida</h2>
                 <p>Clique em um departamento e depois em uma subcategoria para filtrar melhor.</p>
-                <div class="cta" id="ctaDept">🧭 Escolher departamento</div>
+                <div class="cta" onclick="document.getElementById('deptRow').scrollIntoView({behavior:'smooth'})">🧭 Escolher departamento</div>
               </div>
               <div style="text-align:right">
                 <div class="tag green">Dica</div>
@@ -779,13 +805,13 @@
                 <div class="tag">Horário</div>
                 <h2>Aberto/Fechado automático</h2>
                 <p>Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</p>
-                <div class="cta" id="ctaInfo">📍 Ver informações</div>
+                <div class="cta" onclick="document.getElementById('infoBox').scrollIntoView({behavior:'smooth'})">📍 Ver informações</div>
               </div>
               <div style="text-align:right">
                 <div class="tag green">Pagamento</div>
                 <h2 style="margin-top:10px">Pix e Cartões</h2>
                 <p>Dinheiro • Crédito • Débito • Pix • Vale</p>
-                <div class="cta" id="ctaPay">💳 Ver pagamentos</div>
+                <div class="cta" onclick="document.getElementById('payBox').scrollIntoView({behavior:'smooth'})">💳 Ver pagamentos</div>
               </div>
             </div>
           </div>
@@ -866,24 +892,7 @@
   </div>
 </div>
 
-<!-- Whats flutuante (desktop) -->
 <a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
-
-<!-- Bottom bar (mobile) -->
-<nav class="bottom-bar" aria-label="Menu inferior">
-  <div class="bottom-inner">
-    <button class="bbtn primary" id="bHome" type="button"><span class="ic">🏠</span><span>Início</span></button>
-    <button class="bbtn" id="bDept" type="button"><span class="ic">🧭</span><span>Menu</span></button>
-    <button class="bbtn cart" id="bCart" type="button">
-      <span class="ic">🛒</span><span>Carrinho</span>
-      <span class="b-badge" id="bCartCount">0</span>
-    </button>
-    <button class="bbtn" id="bInfo" type="button"><span class="ic">📍</span><span>Info</span></button>
-    <button class="bbtn whats" id="bWhats" type="button"><span class="ic">💬</span><span>Whats</span></button>
-  </div>
-</nav>
-
-<button class="to-top" id="toTop" aria-label="Voltar ao topo">⬆️ Topo</button>
 
 <script>
 /* ===== HORÁRIO ABERTO/FECHADO ===== */
@@ -904,21 +913,19 @@ setInterval(verificarHorario,60000);
 /* ===== DEPARTAMENTOS + SUBMENU ===== */
 const departamentos = [
   {key:"Todos", icon:"🛒", subs:["Tudo"]},
-  {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos","Macarrão","Molhos","Caldos"]},
-  {key:"Mercearia", icon:"🍪", subs:["Biscoitos","Enlatados","Massas","Molhos","Temperos","Doces","Cereais","Snacks"]},
-  {key:"Frios & Laticínios", icon:"🧀", subs:["Queijos","Presunto","Mortadela","Iogurte","Manteiga","Requeijão","Bebidas lácteas"]},
+  {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos"]},
+  {key:"Mercearia", icon:"🍪", subs:["Biscoitos","Enlatados","Massas","Molhos","Temperos","Doces"]},
+  {key:"Frios & Laticínios", icon:"🧀", subs:["Queijos","Presunto","Mortadela","Iogurte","Manteiga","Requeijão"]},
   {key:"Açougue", icon:"🥩", subs:["Bovina","Frango","Suína","Linguiças","Peixes"]},
   {key:"Hortifruti", icon:"🥬", subs:["Frutas","Verduras","Legumes","Temperos"]},
-  {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos","Cafés prontos"]},
-  {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo","Inseticidas"]},
-  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino","Barbear","Infantil"]},
+  {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos"]},
+  {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo"]},
+  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
 ];
 
-/* ===== PRODUTOS (SEM PÃO FRANCÊS E SEM GÁS) ===== */
+/* ===== PRODUTOS (TUDO QUE VOCÊ PEDIU + MAIS) ===== */
 const produtos = [
-  // =========================
-  // BÁSICOS (já tinha) + mais
-  // =========================
+  // BÁSICOS
   {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
   {nome:"Arroz 1kg", preco:5.80, cat:"Básicos", sub:"Arroz", un:"pacote"},
   {nome:"Arroz parboilizado 1kg", preco:6.40, cat:"Básicos", sub:"Arroz", un:"pacote"},
@@ -934,26 +941,14 @@ const produtos = [
   {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
   {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
 
-  // + MAIS BÁSICOS
-  {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Básicos", sub:"Macarrão", un:"pacote"},
-  {nome:"Macarrão Parafuso 500g", preco:4.10, cat:"Básicos", sub:"Macarrão", un:"pacote"},
-  {nome:"Macarrão instantâneo", preco:2.50, cat:"Básicos", sub:"Macarrão", un:"unid."},
-  {nome:"Molho de Tomate", preco:2.90, cat:"Básicos", sub:"Molhos", un:"unid."},
-  {nome:"Extrato de Tomate", preco:3.50, cat:"Básicos", sub:"Molhos", un:"unid."},
-  {nome:"Caldo de carne", preco:2.50, cat:"Básicos", sub:"Caldos", un:"cx"},
-  {nome:"Caldo de galinha", preco:2.50, cat:"Básicos", sub:"Caldos", un:"cx"},
-  {nome:"Vinagre 750ml", preco:3.90, cat:"Básicos", sub:"Molhos", un:"unid."},
-  {nome:"Óleo composto 500ml", preco:7.90, cat:"Básicos", sub:"Óleo", un:"unid."},
-  {nome:"Azeite 250ml", preco:16.90, cat:"Básicos", sub:"Óleo", un:"unid."},
-  {nome:"Farinha de mandioca 1kg", preco:7.90, cat:"Básicos", sub:"Farinha", un:"pacote"},
-  {nome:"Macarrão (talharim) 500g", preco:4.60, cat:"Básicos", sub:"Macarrão", un:"pacote"},
-  {nome:"Milho para cuscuz 1kg", preco:6.90, cat:"Básicos", sub:"Farinha", un:"pacote"},
-
-  // =============
-  // MERCEARIA
-  // =============
+  // MERCEARIA (biscoitos etc.)
   {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
+  {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
+  {nome:"Macarrão Parafuso 500g", preco:4.10, cat:"Mercearia", sub:"Massas", un:"pacote"},
+  {nome:"Macarrão instantâneo", preco:2.50, cat:"Mercearia", sub:"Massas", un:"unid."},
+  {nome:"Extrato de Tomate", preco:3.50, cat:"Mercearia", sub:"Molhos", un:"unid."},
+  {nome:"Molho de Tomate", preco:2.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
   {nome:"Milho Verde (lata)", preco:4.20, cat:"Mercearia", sub:"Enlatados", un:"lata"},
   {nome:"Ervilha (lata)", preco:4.10, cat:"Mercearia", sub:"Enlatados", un:"lata"},
   {nome:"Sardinha (lata)", preco:6.50, cat:"Mercearia", sub:"Enlatados", un:"lata"},
@@ -967,6 +962,7 @@ const produtos = [
   {nome:"Ketchup", preco:6.00, cat:"Mercearia", sub:"Temperos", un:"unid."},
   {nome:"Mostarda", preco:5.80, cat:"Mercearia", sub:"Temperos", un:"unid."},
   {nome:"Tempero completo", preco:3.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Caldo de galinha", preco:2.50, cat:"Mercearia", sub:"Temperos", un:"cx"},
   {nome:"Pipoca (milho) 500g", preco:4.20, cat:"Mercearia", sub:"Doces", un:"pacote"},
   {nome:"Fermento químico", preco:4.90, cat:"Mercearia", sub:"Doces", un:"unid."},
   {nome:"Canjica", preco:5.50, cat:"Mercearia", sub:"Doces", un:"pacote"},
@@ -974,28 +970,7 @@ const produtos = [
   {nome:"Pão de forma", preco:7.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Bolo pronto", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
 
-  // + MAIS MERCEARIA (cereais/snacks/itens comuns)
-  {nome:"Aveia em flocos", preco:6.90, cat:"Mercearia", sub:"Cereais", un:"unid."},
-  {nome:"Granola", preco:12.90, cat:"Mercearia", sub:"Cereais", un:"unid."},
-  {nome:"Cereal matinal", preco:13.90, cat:"Mercearia", sub:"Cereais", un:"unid."},
-  {nome:"Biscoito água e sal", preco:4.20, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Biscoito maisena", preco:4.30, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Torrada", preco:5.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Batata palha", preco:6.90, cat:"Mercearia", sub:"Snacks", un:"unid."},
-  {nome:"Salgadinho", preco:4.90, cat:"Mercearia", sub:"Snacks", un:"pacote"},
-  {nome:"Amendoim", preco:5.90, cat:"Mercearia", sub:"Snacks", un:"unid."},
-  {nome:"Azeitona", preco:8.50, cat:"Mercearia", sub:"Enlatados", un:"unid."},
-  {nome:"Palmito", preco:12.90, cat:"Mercearia", sub:"Enlatados", un:"unid."},
-  {nome:"Farofa pronta", preco:6.90, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Molho shoyu", preco:8.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Pimenta (molho)", preco:6.50, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Molho barbecue", preco:12.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Café solúvel", preco:12.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Chá (caixa)", preco:6.90, cat:"Mercearia", sub:"Doces", un:"cx"},
-
-  // ====================
   // FRIOS & LATICÍNIOS
-  // ====================
   {nome:"Mortadela (kg)", preco:12.90, cat:"Frios & Laticínios", sub:"Mortadela", un:"kg", obs:"Preço por kg"},
   {nome:"Presunto (kg)", preco:28.90, cat:"Frios & Laticínios", sub:"Presunto", un:"kg", obs:"Preço por kg"},
   {nome:"Queijo Mussarela (kg)", preco:39.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
@@ -1008,17 +983,7 @@ const produtos = [
   {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
   {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
 
-  // + MAIS FRIOS/LATICÍNIOS
-  {nome:"Bebida láctea", preco:3.20, cat:"Frios & Laticínios", sub:"Bebidas lácteas", un:"unid."},
-  {nome:"Iogurte grego", preco:5.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Leite fermentado", preco:6.50, cat:"Frios & Laticínios", sub:"Bebidas lácteas", un:"unid."},
-  {nome:"Margarina cremosa", preco:6.20, cat:"Frios & Laticínios", sub:"Manteiga", un:"unid."},
-  {nome:"Queijo ralado", preco:8.90, cat:"Frios & Laticínios", sub:"Queijos", un:"unid."},
-  {nome:"Creme de ricota", preco:9.90, cat:"Frios & Laticínios", sub:"Requeijão", un:"unid."},
-
-  // =========
   // AÇOUGUE
-  // =========
   {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
@@ -1038,20 +1003,7 @@ const produtos = [
   {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
   {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
 
-  // + MAIS AÇOUGUE
-  {nome:"Coração de frango (kg)", preco:24.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Moela (kg)", preco:12.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Sobrecoxa temperada (kg)", preco:16.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne de sol (kg)", preco:49.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Charque (kg)", preco:46.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Costelinha suína (kg)", preco:26.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Hambúrguer (caixa)", preco:14.90, cat:"Açougue", sub:"Bovina", un:"cx"},
-  {nome:"Filé de peixe (kg)", preco:39.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
-  {nome:"Camarão (kg)", preco:59.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
-
-  // ===========
   // HORTIFRUTI
-  // ===========
   {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
@@ -1069,25 +1021,7 @@ const produtos = [
   {nome:"Cebolinha (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
   {nome:"Alho (100g)", preco:3.50, cat:"Hortifruti", sub:"Temperos", un:"100g"},
 
-  // + MAIS HORTIFRUTI
-  {nome:"Abacaxi (unidade)", preco:7.90, cat:"Hortifruti", sub:"Frutas", un:"unid."},
-  {nome:"Melancia (unidade)", preco:14.90, cat:"Hortifruti", sub:"Frutas", un:"unid."},
-  {nome:"Manga (kg)", preco:6.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Goiaba (kg)", preco:7.50, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Abacate (unidade)", preco:6.90, cat:"Hortifruti", sub:"Frutas", un:"unid."},
-  {nome:"Pepino (kg)", preco:5.20, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Pimentão (kg)", preco:8.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Chuchu (kg)", preco:4.20, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Abobrinha (kg)", preco:6.40, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Couve (maço)", preco:3.50, cat:"Hortifruti", sub:"Verduras", un:"maço"},
-  {nome:"Espinafre (maço)", preco:4.50, cat:"Hortifruti", sub:"Verduras", un:"maço"},
-  {nome:"Couve-flor (unidade)", preco:8.90, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Brócolis (unidade)", preco:8.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Gengibre (100g)", preco:3.90, cat:"Hortifruti", sub:"Temperos", un:"100g"},
-
-  // ========
   // BEBIDAS
-  // ========
   {nome:"Água mineral 500ml", preco:2.50, cat:"Bebidas", sub:"Água", un:"unid."},
   {nome:"Água mineral 1,5L", preco:4.50, cat:"Bebidas", sub:"Água", un:"unid."},
   {nome:"Refrigerante 2L", preco:7.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
@@ -1101,16 +1035,7 @@ const produtos = [
   {nome:"Chá gelado", preco:4.80, cat:"Bebidas", sub:"Sucos", un:"unid."},
   {nome:"Água de coco", preco:6.50, cat:"Bebidas", sub:"Sucos", un:"unid."},
 
-  // + MAIS BEBIDAS (sem álcool pesado)
-  {nome:"Água com gás", preco:3.50, cat:"Bebidas", sub:"Água", un:"unid."},
-  {nome:"Isotônico", preco:7.90, cat:"Bebidas", sub:"Energéticos", un:"unid."},
-  {nome:"Café gelado (pronto)", preco:9.50, cat:"Bebidas", sub:"Cafés prontos", un:"unid."},
-  {nome:"Achocolatado pronto", preco:5.90, cat:"Bebidas", sub:"Cafés prontos", un:"unid."},
-  {nome:"Leite saborizado", preco:4.90, cat:"Bebidas", sub:"Cafés prontos", un:"unid."},
-
-  // ========
   // LIMPEZA
-  // ========
   {nome:"Detergente", preco:2.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
   {nome:"Sabão em pó", preco:12.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
   {nome:"Água sanitária", preco:3.40, cat:"Limpeza", sub:"Casa", un:"unid."},
@@ -1126,22 +1051,7 @@ const produtos = [
   {nome:"Lustra móveis", preco:10.90, cat:"Limpeza", sub:"Casa", un:"unid."},
   {nome:"Papel toalha", preco:7.50, cat:"Limpeza", sub:"Cozinha", un:"pacote"},
 
-  // + MAIS LIMPEZA
-  {nome:"Limpador multiuso", preco:8.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Desengordurante", preco:9.90, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Sabão líquido", preco:14.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Tira manchas", preco:14.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Cera líquida", preco:12.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Inseticida aerosol", preco:16.90, cat:"Limpeza", sub:"Inseticidas", un:"unid."},
-  {nome:"Repelente elétrico", preco:12.90, cat:"Limpeza", sub:"Inseticidas", un:"unid."},
-  {nome:"Cloro gel", preco:7.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Esponja de aço", preco:2.90, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Papel alumínio", preco:9.90, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Filme plástico", preco:7.90, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-
-  // ==================
-  // HIGIENE & CUIDADOS
-  // ==================
+  // HIGIENE
   {nome:"Sabonete", preco:2.20, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
   {nome:"Shampoo", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
   {nome:"Condicionador", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
@@ -1153,18 +1063,6 @@ const produtos = [
   {nome:"Desodorante", preco:11.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
   {nome:"Absorvente", preco:9.90, cat:"Higiene & Cuidados", sub:"Feminino", un:"pacote"},
   {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-
-  // + MAIS HIGIENE
-  {nome:"Creme hidratante", preco:14.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Protetor solar", preco:29.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Lâmina de barbear", preco:6.90, cat:"Higiene & Cuidados", sub:"Barbear", un:"unid."},
-  {nome:"Espuma de barbear", preco:12.90, cat:"Higiene & Cuidados", sub:"Barbear", un:"unid."},
-  {nome:"Enxaguante bucal", preco:14.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Sabonete infantil", preco:3.20, cat:"Higiene & Cuidados", sub:"Infantil", un:"unid."},
-  {nome:"Lenços umedecidos", preco:12.90, cat:"Higiene & Cuidados", sub:"Infantil", un:"pacote"},
-  {nome:"Fraldas (pacote)", preco:39.90, cat:"Higiene & Cuidados", sub:"Infantil", un:"pacote"},
-  {nome:"Algodão", preco:5.50, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Cotonete", preco:4.50, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
 ];
 
 /* ===== ELEMENTOS ===== */
@@ -1297,17 +1195,10 @@ const closeCart = document.getElementById("closeCart");
 const clearCart = document.getElementById("clearCart");
 const goWhatsapp = document.getElementById("goWhatsapp");
 
-// mobile badge
-const bCartCountEl = document.getElementById("bCartCount");
-
-function syncCartBadges(){
-  cartCountEl.textContent = cartCount;
-  bCartCountEl.textContent = cartCount;
-}
-
 function addToCart(){
   cartCount++;
-  syncCartBadges();
+  cartCountEl.textContent = cartCount;
+  // animação rápida no badge
   cartCountEl.style.transform = "scale(1.2)";
   setTimeout(()=>cartCountEl.style.transform="scale(1)",120);
 }
@@ -1319,10 +1210,10 @@ function closeCartFn(){
   cartModal.classList.remove("show");
   cartModal.setAttribute("aria-hidden","true");
 }
-cartBtn && (cartBtn.onclick=openCart);
+cartBtn.onclick=openCart;
 closeCart.onclick=closeCartFn;
 cartModal.onclick=(e)=>{ if(e.target===cartModal) closeCartFn(); };
-clearCart.onclick=()=>{ cartCount=0; syncCartBadges(); };
+clearCart.onclick=()=>{ cartCount=0; cartCountEl.textContent="0"; };
 goWhatsapp.onclick=()=>window.open("https://wa.me/558183173613","_blank");
 
 /* ===== CARROSSEL ===== */
@@ -1359,35 +1250,66 @@ next.onclick=()=>goTo(current+1,true);
 renderDots();
 restartAuto();
 
-/* ===== CTAs do banner ===== */
-document.getElementById("ctaProdutos").onclick = ()=> window.scrollTo({top: 320, behavior:'smooth'});
-document.getElementById("ctaWhats").onclick = ()=> window.open('https://wa.me/558183173613','_blank');
-document.getElementById("ctaDept").onclick = ()=> document.getElementById('deptRow').scrollIntoView({behavior:'smooth'});
-document.getElementById("ctaInfo").onclick = ()=> document.getElementById('infoBox').scrollIntoView({behavior:'smooth'});
-document.getElementById("ctaPay").onclick  = ()=> document.getElementById('payBox').scrollIntoView({behavior:'smooth'});
-
-/* ===== Bottom bar (mobile) ===== */
-document.getElementById("bHome").onclick = ()=> window.scrollTo({top:0, behavior:"smooth"});
-document.getElementById("bDept").onclick = ()=> document.getElementById("deptRow").scrollIntoView({behavior:"smooth"});
-document.getElementById("bCart").onclick = ()=> openCart();
-document.getElementById("bInfo").onclick = ()=> document.getElementById("infoBox").scrollIntoView({behavior:"smooth"});
-document.getElementById("bWhats").onclick = ()=> window.open("https://wa.me/558183173613","_blank");
-
-/* ===== BOTÃO TOPO ===== */
-const toTop = document.getElementById("toTop");
-function onScroll(){
-  const y = window.scrollY || document.documentElement.scrollTop;
-  if(y > 600) toTop.classList.add("show");
-  else toTop.classList.remove("show");
-}
-window.addEventListener("scroll", onScroll, {passive:true});
-toTop.onclick = ()=> window.scrollTo({top:0, behavior:"smooth"});
-onScroll();
-
 /* ===== INIT ===== */
 renderDept();
 renderSubmenu();
 render();
+
+/* =========================================================
+   MOBILE: SIDEBAR DRAWER + CART (SINCRONIZAÇÃO)
+   ========================================================= */
+const sidebar = document.querySelector(".sidebar");
+const hambBtn = document.getElementById("hambBtn");
+const sideBackdrop = document.getElementById("sideBackdrop");
+
+function openSidebar(){
+  if(!sidebar) return;
+  sidebar.classList.add("open");
+  sideBackdrop.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+function closeSidebar(){
+  if(!sidebar) return;
+  sidebar.classList.remove("open");
+  sideBackdrop.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+if(hambBtn) hambBtn.onclick = openSidebar;
+if(sideBackdrop) sideBackdrop.onclick = closeSidebar;
+
+/* Fecha ao clicar em algum item da sidebar (mobile) */
+document.querySelectorAll(".sidebar .side-item").forEach(el=>{
+  el.addEventListener("click", ()=>{
+    if(window.innerWidth <= 980) closeSidebar();
+  });
+});
+
+/* Carrinho mobile */
+const cartBtnMobile = document.getElementById("cartBtnMobile");
+const cartCountMobile = document.getElementById("cartCountMobile");
+if(cartBtnMobile) cartBtnMobile.onclick = openCart;
+
+function syncCartBadges(){
+  if(cartCountMobile) cartCountMobile.textContent = String(cartCount);
+  if(cartCountEl) cartCountEl.textContent = String(cartCount);
+}
+
+/* Envolve addToCart e clearCart para sempre sincronizar */
+const _oldAddToCart = addToCart;
+addToCart = function(){
+  _oldAddToCart();
+  syncCartBadges();
+};
+
+const _oldClearHandler = clearCart.onclick;
+clearCart.onclick = ()=>{
+  cartCount = 0;
+  syncCartBadges();
+  // mantém a animação/efeito original (se houver)
+  if(typeof _oldClearHandler === "function") _oldClearHandler();
+};
+
 syncCartBadges();
 </script>
 
