@@ -1,384 +1,835 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mercadinho Esperança</title>
 
 <style>
-:root{
-  --verde-escuro:#064e3b;
-  --verde:#16a34a;
-  --verde-claro:#22c55e;
-  --verde-mais-escuro:#022c22;
-}
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:linear-gradient(180deg,var(--verde-escuro),var(--verde-mais-escuro));
-  color:#fff;
-}
-header{
-  background:linear-gradient(135deg,var(--verde),var(--verde-claro));
-  padding:22px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 6px 20px rgba(0,0,0,.35);
-}
-.container{max-width:1350px;margin:auto;padding:15px}
-.top{display:flex;align-items:center;gap:18px}
-h1{margin:0;font-size:26px}
-.subtitle{font-size:14px;color:#ecfdf5}
+  :root{
+    --bg:#050814;
+    --panel:#0f172a;
+    --panel2:#111a2e;
+    --border:rgba(255,255,255,.10);
+    --muted:#cbd5e1;
 
-.status{
-  margin-top:8px;
-  padding:6px 14px;
-  border-radius:14px;
-  font-size:12px;
-  font-weight:bold;
-  display:inline-block;
-}
-.open{background:#052e16;color:#bbf7d0}
-.closed{background:#7f1d1d;color:#fee2e2}
+    /* parecido com varejo grande */
+    --red:#d81f26;
+    --red2:#b30d13;
 
-.search{display:flex;gap:12px;margin:22px 0}
-input,select{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:none;
-  outline:none;
-}
+    /* identidade do mercadinho */
+    --green:#22c55e;
+    --green2:#16a34a;
 
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
-.chip{
-  background:#065f46;
-  padding:10px 16px;
-  border-radius:22px;
-  cursor:pointer;
-  font-size:13px;
-  color:#ecfdf5;
-}
-.chip.active{background:#22c55e;color:#022c22}
+    --text:#f3f4f6;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(900px 500px at 10% -10%, rgba(216,31,38,.35), transparent 60%),
+      radial-gradient(900px 500px at 90% -10%, rgba(34,197,94,.22), transparent 60%),
+      linear-gradient(180deg, var(--bg), #071024 40%, var(--bg));
+  }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:20px;
-}
-.card{
-  background:linear-gradient(180deg,#064e3b,#022c22);
-  border-radius:20px;
-  padding:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.08);
-}
-.card h3{margin:0 0 6px;font-size:16px}
-.cat{font-size:12px;color:#bbf7d0}
-.price{
-  margin-top:10px;
-  font-weight:bold;
-  background:#22c55e;
-  color:#022c22;
-  padding:8px 14px;
-  border-radius:14px;
-  display:inline-block;
-}
-.note{margin-top:10px;font-size:12px;color:#d1fae5;opacity:.9}
+  @keyframes drop{from{transform:translateY(-18px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes up{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
-.info{
-  background:#064e3b;
-  margin-top:30px;
-  padding:22px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.08);
-}
-footer{text-align:center;font-size:12px;color:#bbf7d0;margin:30px 0}
-.whatsapp{
-  position:fixed;right:18px;bottom:18px;
-  background:#22c55e;color:#022c22;
-  padding:15px 20px;border-radius:20px;
-  text-decoration:none;font-weight:bold;
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
-}
-.small{font-size:12px;color:#d1fae5}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 14px}
+
+  /* ===== TOP BAR (vermelho) ===== */
+  .topbar{
+    background: linear-gradient(135deg, var(--red), var(--red2));
+    box-shadow:0 12px 35px rgba(0,0,0,.45);
+    position:sticky; top:0; z-index:100;
+    animation: drop .45s ease;
+  }
+  .top-row{
+    display:flex;gap:14px;align-items:center;
+    padding:12px 0;
+  }
+
+  .brand{
+    display:flex;gap:12px;align-items:center;
+    min-width:280px;
+  }
+  .logo{
+    width:58px;height:58px;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,.35));
+    animation: pop 3s ease-in-out infinite;
+  }
+  .brand h1{margin:0;font-size:18px;line-height:1.1}
+  .brand small{display:block;color:#ffe7e7;font-size:12px;margin-top:2px;opacity:.95}
+
+  .search{
+    flex:1;
+    display:flex;gap:10px;align-items:center;
+  }
+  .search input{
+    width:100%;
+    border:none;
+    padding:12px 14px;
+    border-radius:14px;
+    outline:none;
+    font-size:14px;
+  }
+  .search button{
+    border:none;
+    cursor:pointer;
+    padding:12px 16px;
+    border-radius:14px;
+    font-weight:bold;
+    background:#111827;
+    color:#fff;
+    transition:.2s;
+  }
+  .search button:hover{transform:translateY(-2px)}
+
+  .top-actions{display:flex;gap:10px;align-items:center}
+  .pill{
+    display:flex;gap:10px;align-items:flex-start;
+    background: rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.18);
+    padding:10px 12px;
+    border-radius:14px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .status{
+    font-weight:bold;
+    padding:7px 10px;border-radius:999px;
+    background: rgba(0,0,0,.3);
+    border:1px solid rgba(255,255,255,.18);
+  }
+  .open{color:#bbf7d0;border-color:rgba(34,197,94,.45)}
+  .closed{color:#fee2e2;border-color:rgba(239,68,68,.45)}
+  .tiny{font-size:11px;color:#ffe7e7;opacity:.95;margin-top:2px}
+
+  /* ===== MENU DEPARTAMENTOS + SUBMENU ===== */
+  .menu{
+    background: rgba(17,24,39,.35);
+    border-top:1px solid rgba(255,255,255,.10);
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .menu-row{
+    display:flex;gap:10px;flex-wrap:wrap;
+    padding:10px 0;
+    align-items:center;
+  }
+  .dept{
+    display:flex;gap:10px;align-items:center;
+    padding:10px 12px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(15,23,42,.60);
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+  }
+  .dept:hover{transform:translateY(-2px);border-color:rgba(34,197,94,.35)}
+  .dept.active{
+    background: rgba(34,197,94,.14);
+    border-color: rgba(34,197,94,.55);
+  }
+  .dept .ic{
+    width:28px;height:28px;border-radius:10px;
+    display:grid;place-items:center;
+    background: rgba(216,31,38,.20);
+    border:1px solid rgba(255,255,255,.10);
+    font-size:16px;
+  }
+  .dept span{font-size:13px}
+
+  .submenu{
+    display:none;
+    padding:10px 0 14px;
+    border-top:1px solid rgba(255,255,255,.08);
+    animation: up .25s ease;
+  }
+  .submenu.show{display:block}
+  .subrow{
+    display:flex;gap:10px;flex-wrap:wrap;
+  }
+  .sub{
+    padding:9px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(15,23,42,.65);
+    cursor:pointer;
+    transition:.2s;
+    font-size:12px;
+    color:var(--text);
+    user-select:none;
+  }
+  .sub:hover{transform:translateY(-2px);border-color:rgba(34,197,94,.35)}
+  .sub.active{
+    background: rgba(34,197,94,.18);
+    border-color: rgba(34,197,94,.50);
+    color:#eafff2;
+  }
+
+  /* ===== LAYOUT PRINCIPAL ===== */
+  .main{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:16px;
+    margin-top:16px;
+    align-items:start;
+  }
+
+  /* SIDEBAR estilo varejo */
+  .sidebar{
+    background: rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    overflow:hidden;
+    animation: up .45s ease;
+  }
+  .side-header{
+    padding:14px;
+    font-weight:bold;
+    background: linear-gradient(135deg, rgba(216,31,38,.32), rgba(34,197,94,.18));
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .side-block{padding:12px 12px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .side-block:last-child{border-bottom:none}
+  .side-title{font-weight:bold;margin:0 0 10px;font-size:13px}
+  .side-item{
+    display:flex;gap:10px;align-items:center;
+    padding:10px;border-radius:14px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .side-item:hover{background:rgba(255,255,255,.05);border-color:rgba(34,197,94,.25);transform:translateY(-2px)}
+  .side-ic{
+    width:34px;height:34px;border-radius:12px;
+    display:grid;place-items:center;
+    background: rgba(216,31,38,.18);
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .side-item b{font-size:13px}
+  .side-item small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+
+  /* CONTEÚDO */
+  .content{display:flex;flex-direction:column;gap:16px;animation: up .45s ease}
+
+  /* BANNERS estilo vitrine */
+  .hero{
+    display:grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap:16px;
+  }
+  .banner{
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.10);
+    overflow:hidden;
+    min-height:170px;
+    position:relative;
+    background:
+      radial-gradient(650px 220px at 18% 28%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(550px 240px at 80% 0%, rgba(216,31,38,.25), transparent 60%),
+      linear-gradient(135deg, rgba(15,23,42,.88), rgba(2,44,34,.55));
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:.25s;
+  }
+  .banner:hover{transform:translateY(-3px)}
+  .tag{
+    position:absolute;top:14px;left:14px;
+    background: rgba(216,31,38,.92);
+    color:#fff;
+    padding:7px 10px;border-radius:999px;
+    font-size:12px;font-weight:bold;
+  }
+  .tag.green{background: rgba(34,197,94,.95); color:#022c22;}
+  .banner .txt{position:absolute;left:14px;right:14px;bottom:14px}
+  .banner h2{margin:0 0 6px;font-size:20px}
+  .banner p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+  .cta{
+    margin-top:10px;
+    display:inline-flex;align-items:center;gap:8px;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.12);
+    color:#fff;
+    padding:10px 12px;border-radius:14px;
+    font-weight:bold;font-size:13px;
+    cursor:pointer;
+  }
+
+  /* CONTROLES */
+  .controls{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    background: rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    padding:12px;
+  }
+  .controls select{
+    border:none;outline:none;
+    padding:10px 12px;border-radius:14px;
+    background:#0b1220;color:var(--text);
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .hint{color:var(--muted);font-size:12px}
+
+  /* PRODUTOS */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:14px;
+  }
+  .card{
+    background: rgba(15,23,42,.78);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    padding:14px;
+    box-shadow:0 12px 26px rgba(0,0,0,.30);
+    transition:.22s;
+    animation: up .30s ease;
+  }
+  .card:hover{
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(34,197,94,.35);
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  .meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
+  .chip{
+    font-size:11px;color:#bbf7d0;
+    background: rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.18);
+    padding:6px 10px;border-radius:999px;
+  }
+  .unit{
+    font-size:11px;color:var(--muted);
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.10);
+    padding:6px 10px;border-radius:999px;
+  }
+  .card h3{margin:0 0 8px;font-size:15px}
+  .price{
+    display:inline-block;
+    font-weight:bold;
+    background: rgba(34,197,94,.95);
+    color:#022c22;
+    padding:8px 12px;border-radius:14px;
+  }
+  .note{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.35}
+
+  /* INFO + PAGAMENTOS */
+  .info{
+    background: rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+    padding:14px;
+  }
+  .info h4{margin:0 0 10px}
+  .paygrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+    gap:12px;
+    margin-top:10px;
+  }
+  .pay{
+    background: rgba(2,44,34,.55);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:16px;
+    padding:12px;
+    text-align:center;
+    transition:.2s;
+  }
+  .pay:hover{
+    transform: translateY(-4px) scale(1.03);
+    background: rgba(34,197,94,.18);
+    border-color: rgba(34,197,94,.35);
+  }
+
+  /* WHATS */
+  .whatsapp{
+    position:fixed;
+    right:18px;bottom:18px;
+    background: var(--green);
+    color:#022c22;
+    padding:14px 18px;
+    border-radius:18px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 16px 34px rgba(0,0,0,.45);
+    animation: float 2.6s ease-in-out infinite;
+    z-index:120;
+  }
+
+  footer{padding:26px 0 50px;color:var(--muted);font-size:12px;text-align:center}
+
+  @media (max-width: 980px){
+    .brand{min-width:auto}
+    .top-actions{display:none}
+    .main{grid-template-columns: 1fr}
+    .hero{grid-template-columns: 1fr}
+  }
 </style>
 </head>
-
 <body>
 
-<header>
-  <div class="container">
-    <div class="top">
-
-      <!-- LOGO -->
-      <svg width="110" height="110" viewBox="0 0 200 200" aria-label="Logo Mercadinho Esperança">
-        <defs>
-          <radialGradient id="grad" cx="30%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="#bbf7d0"/>
-            <stop offset="100%" stop-color="#16a34a"/>
-          </radialGradient>
-        </defs>
-        <circle cx="100" cy="100" r="96" fill="url(#grad)"/>
-        <circle cx="100" cy="100" r="86" fill="#052e16"/>
-        <rect x="25" y="90" width="150" height="55" rx="22" fill="#16a34a"/>
-        <text x="100" y="70" text-anchor="middle" font-size="24" fill="#ecfdf5" font-weight="bold">
-          MERCADINHO
-        </text>
-        <text x="100" y="125" text-anchor="middle" font-size="28" fill="#052e16" font-weight="bold">
-          ESPERANÇA
-        </text>
-      </svg>
-
-      <div>
-        <h1>Mercadinho Esperança</h1>
-        <div class="subtitle">Qualidade, variedade e preço justo</div>
-        <div id="status" class="status">Verificando horário...</div>
-        <div class="small">Preços sujeitos a alteração • Válidos na loja física</div>
+<!-- TOPO -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 200 200" aria-label="Logo Mercadinho Esperança">
+          <defs>
+            <radialGradient id="g" cx="30%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#bbf7d0"/>
+              <stop offset="100%" stop-color="#16a34a"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="96" fill="url(#g)"/>
+          <circle cx="100" cy="100" r="86" fill="#052e16"/>
+          <rect x="25" y="92" width="150" height="52" rx="22" fill="#16a34a"/>
+          <text x="100" y="70" text-anchor="middle" font-size="22" fill="#ecfdf5" font-weight="bold">MERCADINHO</text>
+          <text x="100" y="126" text-anchor="middle" font-size="26" fill="#052e16" font-weight="bold">ESPERANÇA</text>
+        </svg>
+        <div>
+          <h1>Mercadinho Esperança</h1>
+          <small>Produtos • preços • atendimento rápido</small>
+        </div>
       </div>
 
+      <div class="search">
+        <input id="search" placeholder="Digite aqui: carne, banana, biscoito, detergente..." />
+        <button id="btnSearch">BUSCAR</button>
+      </div>
+
+      <div class="top-actions">
+        <div class="pill">
+          <span>🕒</span>
+          <div>
+            <div id="status" class="status">Verificando…</div>
+            <div class="tiny">Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</div>
+          </div>
+        </div>
+        <div class="pill">
+          <span>📞</span>
+          <div>
+            <div><b>WhatsApp</b></div>
+            <div class="tiny">(81) 8317-3613</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</header>
 
-<div class="container">
-
-  <div class="search">
-    <input id="search" placeholder="Buscar produto... (ex: arroz, frango, sabonete)" />
-    <select id="order">
-      <option value="relevancia">Relevância</option>
-      <option value="menor">Menor preço</option>
-      <option value="maior">Maior preço</option>
-      <option value="az">Nome (A–Z)</option>
-    </select>
+  <!-- MENU DEPARTAMENTOS -->
+  <div class="menu">
+    <div class="wrap">
+      <div class="menu-row" id="deptRow"></div>
+      <div class="submenu" id="submenu">
+        <div class="subrow" id="subRow"></div>
+      </div>
+    </div>
   </div>
-
-  <div class="chips" id="chips"></div>
-  <div class="grid" id="grid"></div>
-
-  <div class="info">
-    <h3>📍 Informações</h3>
-    <p>
-      <strong>Horário:</strong><br>
-      Segunda: 07h às 12h<br>
-      Terça a Sábado: 07h às 19h<br>
-      Domingo: 07h às 12h
-    </p>
-    <p><strong>WhatsApp:</strong> (81) 8317-3613</p>
-  </div>
-
 </div>
 
-<footer>Mercadinho Esperança • Tudo que você precisa no dia a dia</footer>
+<div class="wrap">
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="side-header">Navegação rápida</div>
+
+      <div class="side-block">
+        <div class="side-title">Listas prontas</div>
+        <div class="side-item" id="goAll">
+          <div class="side-ic">🛒</div>
+          <div><b>Todos os produtos</b><small>Ver lista completa</small></div>
+        </div>
+        <div class="side-item" id="goBasics">
+          <div class="side-ic">🧺</div>
+          <div><b>Básicos do dia a dia</b><small>Arroz, feijão, óleo, café…</small></div>
+        </div>
+        <div class="side-item" id="goMeat">
+          <div class="side-ic">🥩</div>
+          <div><b>Açougue</b><small>Várias carnes (kg)</small></div>
+        </div>
+        <div class="side-item" id="goHorti">
+          <div class="side-ic">🥬</div>
+          <div><b>Hortifruti</b><small>Frutas e verduras</small></div>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <div class="side-title">Serviços</div>
+        <div class="side-item" id="goPay">
+          <div class="side-ic">💳</div>
+          <div><b>Formas de pagamento</b><small>Pix • cartões • dinheiro</small></div>
+        </div>
+        <div class="side-item" id="goInfo">
+          <div class="side-ic">📍</div>
+          <div><b>Informações</b><small>Horário e contato</small></div>
+        </div>
+        <div class="side-item" onclick="window.open('https://wa.me/558183173613','_blank')">
+          <div class="side-ic">💬</div>
+          <div><b>Chamar no WhatsApp</b><small>Atendimento rápido</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <section class="content">
+
+      <!-- BANNERS -->
+      <div class="hero">
+        <div class="banner">
+          <div class="tag">Mercadinho Esperança</div>
+          <div class="txt">
+            <h2>Interface estilo grande mercado</h2>
+            <p>Menu de departamentos com submenu, busca rápida e produtos organizados.</p>
+            <div class="cta" onclick="window.scrollTo({top:0,behavior:'smooth'})">🔎 Use a busca para achar rápido</div>
+          </div>
+        </div>
+        <div class="banner">
+          <div class="tag green">Contato</div>
+          <div class="txt">
+            <h2>WhatsApp: (81) 8317-3613</h2>
+            <p>Chame agora para tirar dúvidas e pedir informações.</p>
+            <div class="cta" onclick="window.open('https://wa.me/558183173613','_blank')">💬 Abrir WhatsApp</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTROLES -->
+      <div class="controls">
+        <label class="hint"><b>Ordenar:</b></label>
+        <select id="order">
+          <option value="relevancia">Relevância</option>
+          <option value="menor">Menor preço</option>
+          <option value="maior">Maior preço</option>
+          <option value="az">Nome (A–Z)</option>
+        </select>
+        <span class="hint">Sem promoções da semana • Preços sujeitos a alteração</span>
+      </div>
+
+      <!-- PRODUTOS -->
+      <div class="grid" id="grid"></div>
+
+      <!-- PAGAMENTOS -->
+      <div class="info" id="payBox">
+        <h4>💳 Formas de Pagamento</h4>
+        <div class="paygrid">
+          <div class="pay">💰<br><b>Dinheiro</b></div>
+          <div class="pay">💳<br><b>Crédito</b></div>
+          <div class="pay">💳<br><b>Débito</b></div>
+          <div class="pay">📱<br><b>Pix</b></div>
+          <div class="pay">🧾<br><b>Vale Alimentação</b></div>
+        </div>
+      </div>
+
+      <!-- INFORMAÇÕES -->
+      <div class="info" id="infoBox">
+        <h4>📍 Informações</h4>
+        <div style="color:var(--muted);line-height:1.6">
+          <b>Horário:</b><br>
+          Segunda: 07h às 12h<br>
+          Terça a Sábado: 07h às 19h<br>
+          Domingo: 07h às 12h<br><br>
+          <b>WhatsApp:</b> (81) 8317-3613
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <footer>Mercadinho Esperança • Layout estilo grande varejo • Produtos organizados por categoria</footer>
+</div>
+
 <a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
 
 <script>
-/* -------- ABERTO / FECHADO -------- */
+/* ===== HORÁRIO ABERTO/FECHADO ===== */
 function verificarHorario(){
-  const d=new Date(),dia=d.getDay(),h=d.getHours()+d.getMinutes()/60;
+  const d=new Date(), dia=d.getDay(), h=d.getHours()+d.getMinutes()/60;
   let aberto=false;
-  if(dia===1) aberto=h>=7&&h<12;          // Segunda
-  else if(dia>=2&&dia<=6) aberto=h>=7&&h<19; // Terça a Sábado
-  else if(dia===0) aberto=h>=7&&h<12;     // Domingo
+  if(dia===1) aberto=h>=7 && h<12;                 // segunda
+  else if(dia>=2 && dia<=6) aberto=h>=7 && h<19;   // terça-sábado
+  else if(dia===0) aberto=h>=7 && h<12;            // domingo
 
-  const s=document.getElementById("status");
-  if(aberto){
-    s.textContent="🟢 ABERTO AGORA";
-    s.className="status open";
-  }else{
-    s.textContent="🔴 FECHADO AGORA";
-    s.className="status closed";
-  }
+  const el=document.getElementById("status");
+  el.textContent = aberto ? "🟢 ABERTO AGORA" : "🔴 FECHADO AGORA";
+  el.className = "status " + (aberto ? "open" : "closed");
 }
 verificarHorario();
 setInterval(verificarHorario,60000);
 
-/* -------- PRODUTOS (com categorias melhores) -------- */
-const produtos=[
-
-  // 🧺 BÁSICOS
-  {nome:"Arroz 5kg",preco:25.00,cat:"Básicos"},
-  {nome:"Arroz 1kg",preco:5.80,cat:"Básicos"},
-  {nome:"Feijão Carioca 1kg",preco:8.50,cat:"Básicos"},
-  {nome:"Feijão Preto 1kg",preco:9.20,cat:"Básicos"},
-  {nome:"Açúcar 1kg",preco:4.20,cat:"Básicos"},
-  {nome:"Sal 1kg",preco:2.00,cat:"Básicos"},
-  {nome:"Óleo de Soja 900ml",preco:6.90,cat:"Básicos"},
-  {nome:"Café 500g",preco:14.90,cat:"Básicos"},
-  {nome:"Leite 1L",preco:4.70,cat:"Básicos"},
-  {nome:"Ovos (dúzia)",preco:11.90,cat:"Básicos"},
-  {nome:"Farinha de Trigo 1kg",preco:4.80,cat:"Básicos"},
-  {nome:"Farinha de Milho 500g",preco:3.90,cat:"Básicos"},
-
-  // 🍞 MERCEARIA
-  {nome:"Macarrão Espaguete 500g",preco:3.80,cat:"Mercearia"},
-  {nome:"Macarrão Parafuso 500g",preco:4.10,cat:"Mercearia"},
-  {nome:"Extrato de Tomate",preco:3.50,cat:"Mercearia"},
-  {nome:"Molho de Tomate",preco:2.90,cat:"Mercearia"},
-  {nome:"Milho Verde (lata)",preco:4.20,cat:"Mercearia"},
-  {nome:"Ervilha (lata)",preco:4.10,cat:"Mercearia"},
-  {nome:"Sardinha (lata)",preco:6.50,cat:"Mercearia"},
-  {nome:"Atum (lata)",preco:7.90,cat:"Mercearia"},
-  {nome:"Achocolatado",preco:6.80,cat:"Mercearia"},
-  {nome:"Biscoito Cream Cracker",preco:4.50,cat:"Mercearia"},
-  {nome:"Biscoito Recheado",preco:3.90,cat:"Mercearia"},
-  {nome:"Margarina",preco:5.50,cat:"Mercearia"},
-  {nome:"Maionese",preco:6.20,cat:"Mercearia"},
-  {nome:"Ketchup",preco:6.00,cat:"Mercearia"},
-  {nome:"Mostarda",preco:5.80,cat:"Mercearia"},
-  {nome:"Tempero completo",preco:3.50,cat:"Mercearia"},
-  {nome:"Caldo de galinha",preco:2.50,cat:"Mercearia"},
-  {nome:"Arroz parboilizado 1kg",preco:6.40,cat:"Mercearia"},
-  {nome:"Cuscuz (flocão) 500g",preco:3.60,cat:"Mercearia"},
-  {nome:"Pão de forma",preco:7.50,cat:"Mercearia"},
-  {nome:"Bolo pronto",preco:6.90,cat:"Mercearia"},
-  {nome:"Gelatina",preco:2.20,cat:"Mercearia"},
-  {nome:"Pipoca (milho) 500g",preco:4.20,cat:"Mercearia"},
-  {nome:"Fermento químico",preco:4.90,cat:"Mercearia"},
-
-  // 🧀 FRIOS & LATICÍNIOS
-  {nome:"Mortadela kg",preco:12.90,cat:"Frios & Laticínios"},
-  {nome:"Presunto kg",preco:28.90,cat:"Frios & Laticínios"},
-  {nome:"Queijo Mussarela kg",preco:39.90,cat:"Frios & Laticínios"},
-  {nome:"Queijo coalho kg",preco:44.90,cat:"Frios & Laticínios"},
-  {nome:"Iogurte (unidade)",preco:3.50,cat:"Frios & Laticínios"},
-  {nome:"Manteiga",preco:9.90,cat:"Frios & Laticínios"},
-  {nome:"Requeijão",preco:8.90,cat:"Frios & Laticínios"},
-  {nome:"Creme de leite",preco:4.80,cat:"Frios & Laticínios"},
-  {nome:"Leite condensado",preco:6.90,cat:"Frios & Laticínios"},
-
-  // 🥩 AÇOUGUE
-  {nome:"Carne Bovina 1ª kg",preco:39.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Carne Bovina 2ª kg",preco:32.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Acém kg",preco:29.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Patinho kg",preco:36.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Costela Bovina kg",preco:27.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Carne moída kg",preco:33.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Fígado bovino kg",preco:17.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Frango Inteiro kg",preco:12.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Peito de Frango kg",preco:18.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Coxa e Sobrecoxa kg",preco:14.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Asa de frango kg",preco:15.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Linguiça Toscana kg",preco:19.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Linguiça calabresa kg",preco:23.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Carne Suína kg",preco:22.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Costela Suína kg",preco:24.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Bisteca suína kg",preco:23.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Bacon kg",preco:34.90,cat:"Açougue",obs:"Preço por kg"},
-  {nome:"Peixe kg",preco:29.90,cat:"Açougue",obs:"Preço por kg"},
-
-  // 🥬 HORTIFRUTI
-  {nome:"Banana kg",preco:4.60,cat:"Hortifruti"},
-  {nome:"Tomate kg",preco:5.90,cat:"Hortifruti"},
-  {nome:"Batata kg",preco:4.30,cat:"Hortifruti"},
-  {nome:"Cebola kg",preco:4.80,cat:"Hortifruti"},
-  {nome:"Maçã kg",preco:6.20,cat:"Hortifruti"},
-  {nome:"Laranja kg",preco:3.90,cat:"Hortifruti"},
-  {nome:"Cenoura kg",preco:4.40,cat:"Hortifruti"},
-  {nome:"Alface (unidade)",preco:3.50,cat:"Hortifruti"},
-  {nome:"Coentro (maço)",preco:2.00,cat:"Hortifruti"},
-  {nome:"Cebolinha (maço)",preco:2.00,cat:"Hortifruti"},
-  {nome:"Alho (100g)",preco:3.50,cat:"Hortifruti"},
-  {nome:"Limão kg",preco:4.50,cat:"Hortifruti"},
-  {nome:"Mamão (unidade)",preco:6.00,cat:"Hortifruti"},
-  {nome:"Uva (bandeja)",preco:8.90,cat:"Hortifruti"},
-  {nome:"Repolho (unidade)",preco:5.50,cat:"Hortifruti"},
-  {nome:"Beterraba kg",preco:4.90,cat:"Hortifruti"},
-
-  // 🥤 BEBIDAS
-  {nome:"Água Mineral 500ml",preco:2.50,cat:"Bebidas"},
-  {nome:"Água Mineral 1,5L",preco:4.50,cat:"Bebidas"},
-  {nome:"Refrigerante 2L",preco:7.99,cat:"Bebidas"},
-  {nome:"Refrigerante 1L",preco:5.99,cat:"Bebidas"},
-  {nome:"Refrigerante Lata",preco:4.50,cat:"Bebidas"},
-  {nome:"Suco 1L",preco:5.20,cat:"Bebidas"},
-  {nome:"Suco (caixinha)",preco:3.90,cat:"Bebidas"},
-  {nome:"Cerveja Lata",preco:3.50,cat:"Bebidas"},
-  {nome:"Cerveja 600ml",preco:7.90,cat:"Bebidas"},
-  {nome:"Energético",preco:9.90,cat:"Bebidas"},
-  {nome:"Chá gelado",preco:4.80,cat:"Bebidas"},
-  {nome:"Água de coco",preco:6.50,cat:"Bebidas"},
-
-  // 🧼 LIMPEZA
-  {nome:"Detergente",preco:2.80,cat:"Limpeza"},
-  {nome:"Sabão em Pó",preco:12.90,cat:"Limpeza"},
-  {nome:"Água Sanitária",preco:3.40,cat:"Limpeza"},
-  {nome:"Desinfetante",preco:4.90,cat:"Limpeza"},
-  {nome:"Esponja",preco:1.80,cat:"Limpeza"},
-  {nome:"Limpa Vidro",preco:7.20,cat:"Limpeza"},
-  {nome:"Pano de Chão",preco:4.00,cat:"Limpeza"},
-  {nome:"Saco de lixo 30L",preco:8.90,cat:"Limpeza"},
-  {nome:"Saco de lixo 50L",preco:12.90,cat:"Limpeza"},
-  {nome:"Sabão em barra",preco:6.90,cat:"Limpeza"},
-  {nome:"Amaciante",preco:12.50,cat:"Limpeza"},
-  {nome:"Álcool 70%",preco:9.90,cat:"Limpeza"},
-  {nome:"Lustra móveis",preco:10.90,cat:"Limpeza"},
-  {nome:"Papel toalha",preco:7.50,cat:"Limpeza"},
-
-  // 🪥 HIGIENE & CUIDADOS
-  {nome:"Sabonete",preco:2.20,cat:"Higiene & Cuidados"},
-  {nome:"Shampoo",preco:14.50,cat:"Higiene & Cuidados"},
-  {nome:"Condicionador",preco:14.50,cat:"Higiene & Cuidados"},
-  {nome:"Creme Dental",preco:4.90,cat:"Higiene & Cuidados"},
-  {nome:"Papel Higiênico",preco:15.90,cat:"Higiene & Cuidados"},
-  {nome:"Desodorante",preco:11.90,cat:"Higiene & Cuidados"},
-  {nome:"Escova de Dente",preco:5.50,cat:"Higiene & Cuidados"},
-  {nome:"Fio dental",preco:6.90,cat:"Higiene & Cuidados"},
-  {nome:"Absorvente",preco:9.90,cat:"Higiene & Cuidados"},
-  {nome:"Sabonete líquido",preco:12.90,cat:"Higiene & Cuidados"},
-  {nome:"Papel lenço",preco:6.50,cat:"Higiene & Cuidados"}
+/* ===== DADOS: departamentos + submenus ===== */
+const departamentos = [
+  {key:"Todos", icon:"🛒", subs:["Tudo"]},
+  {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos"]},
+  {key:"Mercearia", icon:"🍪", subs:["Biscoitos","Enlatados","Massas","Molhos","Temperos","Doces"]},
+  {key:"Frios & Laticínios", icon:"🧀", subs:["Queijos","Presunto","Mortadela","Iogurte","Manteiga","Requeijão"]},
+  {key:"Açougue", icon:"🥩", subs:["Bovina","Frango","Suína","Linguiças","Peixes"]},
+  {key:"Hortifruti", icon:"🥬", subs:["Frutas","Verduras","Legumes","Temperos"]},
+  {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos"]},
+  {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo"]},
+  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
 ];
 
-/* -------- UI -------- */
-const grid=document.getElementById("grid"),
-chips=document.getElementById("chips"),
-search=document.getElementById("search"),
-order=document.getElementById("order");
+/* ===== PRODUTOS (TUDO + MAIS) ===== */
+const produtos = [
+  // BÁSICOS
+  {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
+  {nome:"Arroz 1kg", preco:5.80, cat:"Básicos", sub:"Arroz", un:"pacote"},
+  {nome:"Arroz parboilizado 1kg", preco:6.40, cat:"Básicos", sub:"Arroz", un:"pacote"},
+  {nome:"Feijão Carioca 1kg", preco:8.50, cat:"Básicos", sub:"Feijão", un:"pacote"},
+  {nome:"Feijão Preto 1kg", preco:9.20, cat:"Básicos", sub:"Feijão", un:"pacote"},
+  {nome:"Açúcar 1kg", preco:4.20, cat:"Básicos", sub:"Açúcar", un:"pacote"},
+  {nome:"Sal 1kg", preco:2.00, cat:"Básicos", sub:"Sal", un:"pacote"},
+  {nome:"Óleo de Soja 900ml", preco:6.90, cat:"Básicos", sub:"Óleo", un:"unid."},
+  {nome:"Café 500g", preco:14.90, cat:"Básicos", sub:"Café", un:"pacote"},
+  {nome:"Leite 1L", preco:4.70, cat:"Básicos", sub:"Leite", un:"unid."},
+  {nome:"Ovos (dúzia)", preco:11.90, cat:"Básicos", sub:"Ovos", un:"dúzia"},
+  {nome:"Farinha de Trigo 1kg", preco:4.80, cat:"Básicos", sub:"Farinha", un:"pacote"},
+  {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
+  {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
 
-let categoria="Todas";
-const categorias=["Todas",...new Set(produtos.map(p=>p.cat))];
+  // MERCEARIA (inclui biscoitos)
+  {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
+  {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
+  {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
+  {nome:"Macarrão Parafuso 500g", preco:4.10, cat:"Mercearia", sub:"Massas", un:"pacote"},
+  {nome:"Macarrão instantâneo", preco:2.50, cat:"Mercearia", sub:"Massas", un:"unid."},
+  {nome:"Extrato de Tomate", preco:3.50, cat:"Mercearia", sub:"Molhos", un:"unid."},
+  {nome:"Molho de Tomate", preco:2.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
+  {nome:"Milho Verde (lata)", preco:4.20, cat:"Mercearia", sub:"Enlatados", un:"lata"},
+  {nome:"Ervilha (lata)", preco:4.10, cat:"Mercearia", sub:"Enlatados", un:"lata"},
+  {nome:"Sardinha (lata)", preco:6.50, cat:"Mercearia", sub:"Enlatados", un:"lata"},
+  {nome:"Atum (lata)", preco:7.90, cat:"Mercearia", sub:"Enlatados", un:"lata"},
+  {nome:"Achocolatado", preco:6.80, cat:"Mercearia", sub:"Doces", un:"unid."},
+  {nome:"Chocolate (barra)", preco:6.50, cat:"Mercearia", sub:"Doces", un:"unid."},
+  {nome:"Gelatina", preco:2.20, cat:"Mercearia", sub:"Doces", un:"unid."},
+  {nome:"Adoçante", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
+  {nome:"Margarina", preco:5.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Maionese", preco:6.20, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Ketchup", preco:6.00, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Mostarda", preco:5.80, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Tempero completo", preco:3.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
+  {nome:"Caldo de galinha", preco:2.50, cat:"Mercearia", sub:"Temperos", un:"cx"},
+  {nome:"Pipoca (milho) 500g", preco:4.20, cat:"Mercearia", sub:"Doces", un:"pacote"},
+  {nome:"Fermento químico", preco:4.90, cat:"Mercearia", sub:"Doces", un:"unid."},
+  {nome:"Canjica", preco:5.50, cat:"Mercearia", sub:"Doces", un:"pacote"},
+  {nome:"Arroz doce (mistura)", preco:4.90, cat:"Mercearia", sub:"Doces", un:"pacote"},
+  {nome:"Pão de forma", preco:7.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
+  {nome:"Bolo pronto", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
 
-function renderChips(){
-  chips.innerHTML="";
-  categorias.forEach(c=>{
-    const b=document.createElement("div");
-    b.className="chip"+(c===categoria?" active":"");
-    b.textContent=c;
-    b.onclick=()=>{categoria=c;render()};
-    chips.appendChild(b);
+  // FRIOS & LATICÍNIOS
+  {nome:"Mortadela (kg)", preco:12.90, cat:"Frios & Laticínios", sub:"Mortadela", un:"kg", obs:"Preço por kg"},
+  {nome:"Presunto (kg)", preco:28.90, cat:"Frios & Laticínios", sub:"Presunto", un:"kg", obs:"Preço por kg"},
+  {nome:"Queijo Mussarela (kg)", preco:39.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
+  {nome:"Queijo Prato (kg)", preco:42.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
+  {nome:"Queijo Coalho (kg)", preco:44.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
+  {nome:"Iogurte (unidade)", preco:3.50, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
+  {nome:"Manteiga", preco:9.90, cat:"Frios & Laticínios", sub:"Manteiga", un:"unid."},
+  {nome:"Requeijão", preco:8.90, cat:"Frios & Laticínios", sub:"Requeijão", un:"unid."},
+  {nome:"Creme de leite", preco:4.80, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
+  {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
+  {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
+
+  // AÇOUGUE (carnes)
+  {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Patinho (kg)", preco:36.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Costela Bovina (kg)", preco:27.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Carne moída (kg)", preco:33.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Fígado bovino (kg)", preco:17.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
+  {nome:"Frango inteiro (kg)", preco:12.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
+  {nome:"Peito de frango (kg)", preco:18.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
+  {nome:"Coxa e sobrecoxa (kg)", preco:14.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
+  {nome:"Asa de frango (kg)", preco:15.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
+  {nome:"Linguiça Toscana (kg)", preco:19.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
+  {nome:"Linguiça Calabresa (kg)", preco:23.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
+  {nome:"Carne suína (kg)", preco:22.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
+  {nome:"Costela suína (kg)", preco:24.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
+  {nome:"Bisteca suína (kg)", preco:23.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
+  {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
+  {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
+
+  // HORTIFRUTI (frutas e verduras)
+  {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
+  {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
+  {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
+  {nome:"Mamão (unidade)", preco:6.00, cat:"Hortifruti", sub:"Frutas", un:"unid."},
+  {nome:"Uva (bandeja)", preco:8.90, cat:"Hortifruti", sub:"Frutas", un:"bandeja"},
+  {nome:"Limão (kg)", preco:4.50, cat:"Hortifruti", sub:"Frutas", un:"kg"},
+  {nome:"Tomate (kg)", preco:5.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
+  {nome:"Batata (kg)", preco:4.30, cat:"Hortifruti", sub:"Legumes", un:"kg"},
+  {nome:"Cebola (kg)", preco:4.80, cat:"Hortifruti", sub:"Legumes", un:"kg"},
+  {nome:"Cenoura (kg)", preco:4.40, cat:"Hortifruti", sub:"Legumes", un:"kg"},
+  {nome:"Beterraba (kg)", preco:4.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
+  {nome:"Repolho (unidade)", preco:5.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
+  {nome:"Alface (unidade)", preco:3.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
+  {nome:"Coentro (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
+  {nome:"Cebolinha (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
+  {nome:"Alho (100g)", preco:3.50, cat:"Hortifruti", sub:"Temperos", un:"100g"},
+
+  // BEBIDAS
+  {nome:"Água mineral 500ml", preco:2.50, cat:"Bebidas", sub:"Água", un:"unid."},
+  {nome:"Água mineral 1,5L", preco:4.50, cat:"Bebidas", sub:"Água", un:"unid."},
+  {nome:"Refrigerante 2L", preco:7.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
+  {nome:"Refrigerante 1L", preco:5.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
+  {nome:"Refrigerante (lata)", preco:4.50, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
+  {nome:"Suco 1L", preco:5.20, cat:"Bebidas", sub:"Sucos", un:"unid."},
+  {nome:"Suco (caixinha)", preco:3.90, cat:"Bebidas", sub:"Sucos", un:"unid."},
+  {nome:"Cerveja (lata)", preco:3.50, cat:"Bebidas", sub:"Cervejas", un:"unid."},
+  {nome:"Cerveja 600ml", preco:7.90, cat:"Bebidas", sub:"Cervejas", un:"unid."},
+  {nome:"Energético", preco:9.90, cat:"Bebidas", sub:"Energéticos", un:"unid."},
+  {nome:"Chá gelado", preco:4.80, cat:"Bebidas", sub:"Sucos", un:"unid."},
+  {nome:"Água de coco", preco:6.50, cat:"Bebidas", sub:"Sucos", un:"unid."},
+
+  // LIMPEZA
+  {nome:"Detergente", preco:2.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
+  {nome:"Sabão em pó", preco:12.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
+  {nome:"Água sanitária", preco:3.40, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Desinfetante", preco:4.90, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Esponja", preco:1.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
+  {nome:"Limpa vidro", preco:7.20, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Pano de chão", preco:4.00, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Saco de lixo 30L", preco:8.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
+  {nome:"Saco de lixo 50L", preco:12.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
+  {nome:"Sabão em barra", preco:6.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
+  {nome:"Amaciante", preco:12.50, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
+  {nome:"Álcool 70%", preco:9.90, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Lustra móveis", preco:10.90, cat:"Limpeza", sub:"Casa", un:"unid."},
+  {nome:"Papel toalha", preco:7.50, cat:"Limpeza", sub:"Cozinha", un:"pacote"},
+
+  // HIGIENE
+  {nome:"Sabonete", preco:2.20, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
+  {nome:"Shampoo", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
+  {nome:"Condicionador", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
+  {nome:"Creme dental", preco:4.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
+  {nome:"Escova de dente", preco:5.50, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
+  {nome:"Fio dental", preco:6.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
+  {nome:"Papel higiênico", preco:15.90, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
+  {nome:"Papel lenço", preco:6.50, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
+  {nome:"Desodorante", preco:11.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
+  {nome:"Absorvente", preco:9.90, cat:"Higiene & Cuidados", sub:"Feminino", un:"pacote"},
+  {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
+];
+
+/* ===== UI ===== */
+const grid = document.getElementById("grid");
+const deptRow = document.getElementById("deptRow");
+const submenu = document.getElementById("submenu");
+const subRow = document.getElementById("subRow");
+const search = document.getElementById("search");
+const btnSearch = document.getElementById("btnSearch");
+const order = document.getElementById("order");
+
+let filtroDept = "Todos";
+let filtroSub = "Tudo";
+
+function renderDept(){
+  deptRow.innerHTML="";
+  departamentos.forEach(d=>{
+    const el=document.createElement("div");
+    el.className="dept"+(d.key===filtroDept?" active":"");
+    el.innerHTML=`<div class="ic">${d.icon}</div><span>${d.key}</span>`;
+    el.onclick=()=>{
+      filtroDept=d.key;
+      filtroSub="Tudo";
+      renderDept();
+      renderSubmenu();
+      render();
+    };
+    deptRow.appendChild(el);
   });
+}
+
+function renderSubmenu(){
+  const dept = departamentos.find(x=>x.key===filtroDept);
+  if(!dept || dept.key==="Todos"){
+    submenu.classList.remove("show");
+    subRow.innerHTML="";
+    return;
+  }
+  submenu.classList.add("show");
+  subRow.innerHTML="";
+
+  const all = ["Tudo", ...dept.subs];
+  all.forEach(s=>{
+    const el=document.createElement("div");
+    el.className="sub"+(s===filtroSub?" active":"");
+    el.textContent=s;
+    el.onclick=()=>{
+      filtroSub=s;
+      renderSubmenu();
+      render();
+    };
+    subRow.appendChild(el);
+  });
+}
+
+function relScore(nome,q){
+  if(!q) return 0;
+  nome=nome.toLowerCase();
+  if(nome===q) return 100;
+  if(nome.startsWith(q)) return 60;
+  if(nome.includes(q)) return 30;
+  return 0;
 }
 
 function render(){
-  const q=(search.value||"").toLowerCase().trim();
-  let lista=produtos.filter(p=>{
-    const okCat=(categoria==="Todas"||p.cat===categoria);
-    const okQ=!q || p.nome.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q);
-    return okCat && okQ;
+  const q=(search.value||"").trim().toLowerCase();
+
+  let list = produtos.filter(p=>{
+    const okDept = (filtroDept==="Todos") || (p.cat===filtroDept);
+    const okSub  = (filtroDept==="Todos") || (filtroSub==="Tudo") || (p.sub===filtroSub);
+    const okQ    = !q || p.nome.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || (p.sub||"").toLowerCase().includes(q);
+    return okDept && okSub && okQ;
   });
 
-  if(order.value==="menor") lista.sort((a,b)=>a.preco-b.preco);
-  if(order.value==="maior") lista.sort((a,b)=>b.preco-a.preco);
-  if(order.value==="az") lista.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+  if(order.value==="menor") list.sort((a,b)=>a.preco-b.preco);
+  if(order.value==="maior") list.sort((a,b)=>b.preco-a.preco);
+  if(order.value==="az") list.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+  if(order.value==="relevancia" && q) list.sort((a,b)=>relScore(b.nome,q)-relScore(a.nome,q));
 
   grid.innerHTML="";
-  lista.forEach(p=>{
-    grid.innerHTML += `
-      <div class="card">
-        <h3>${p.nome}</h3>
-        <div class="cat">${p.cat}</div>
-        <div class="price">R$ ${p.preco.toFixed(2)}</div>
-        ${p.obs ? `<div class="note">${p.obs}</div>` : ``}
-      </div>`;
+  list.forEach(p=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <div class="meta">
+        <span class="chip">${p.cat}</span>
+        <span class="unit">${p.un || "unid."}</span>
+      </div>
+      <h3>${p.nome}</h3>
+      <div class="price">R$ ${Number(p.preco).toFixed(2)}</div>
+      ${p.obs?`<div class="note">${p.obs}</div>`:""}
+    `;
+    grid.appendChild(card);
   });
 }
 
-search.oninput=render;
+/* SIDEBAR atalhos */
+document.getElementById("goAll").onclick=()=>{filtroDept="Todos";filtroSub="Tudo";renderDept();renderSubmenu();render();window.scrollTo({top:0,behavior:"smooth"});};
+document.getElementById("goBasics").onclick=()=>{filtroDept="Básicos";filtroSub="Tudo";renderDept();renderSubmenu();render();};
+document.getElementById("goMeat").onclick=()=>{filtroDept="Açougue";filtroSub="Tudo";renderDept();renderSubmenu();render();};
+document.getElementById("goHorti").onclick=()=>{filtroDept="Hortifruti";filtroSub="Tudo";renderDept();renderSubmenu();render();};
+document.getElementById("goPay").onclick=()=>{document.getElementById("payBox").scrollIntoView({behavior:"smooth"});};
+document.getElementById("goInfo").onclick=()=>{document.getElementById("infoBox").scrollIntoView({behavior:"smooth"});};
+
+/* eventos */
+btnSearch.onclick=render;
+search.addEventListener("keydown",(e)=>{if(e.key==="Enter") render();});
 order.onchange=render;
-renderChips();
+
+/* init */
+renderDept();
+renderSubmenu();
 render();
 </script>
 
+<a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
 </body>
 </html>
