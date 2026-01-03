@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#b30d13" />
+
 <title>Mercadinho Esperança</title>
+
+<!-- PWA (GitHub Pages: precisa do nome do repo no caminho) -->
+<link rel="manifest" href="/Mercadinho-Espera-a/manifest.webmanifest">
+<meta name="theme-color" content="#16a34a">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mercadinho Esperança">
+
+<link rel="icon" href="/Mercadinho-Espera-a/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/Mercadinho-Espera-a/icons/icon-192.png">
 
 <!-- Fonte moderna (mais profissional) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1264,14 +1275,13 @@ const departamentos = [
   {key:"Hortifruti", icon:"🥬", subs:["Frutas","Verduras","Legumes","Temperos"]},
   {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos"]},
   {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo"]},
-  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
+  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]}
 ];
 
 /* ==========================
    PRODUTOS (SUA LISTA)
    ========================== */
 const produtos = [
-  // BÁSICOS
   {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
   {nome:"Arroz 1kg", preco:5.80, cat:"Básicos", sub:"Arroz", un:"pacote"},
   {nome:"Arroz parboilizado 1kg", preco:6.40, cat:"Básicos", sub:"Arroz", un:"pacote"},
@@ -1287,7 +1297,6 @@ const produtos = [
   {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
   {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
 
-  // MERCEARIA
   {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
@@ -1316,7 +1325,6 @@ const produtos = [
   {nome:"Pão de forma", preco:7.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Bolo pronto", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
 
-  // FRIOS & LATICÍNIOS
   {nome:"Mortadela (kg)", preco:12.90, cat:"Frios & Laticínios", sub:"Mortadela", un:"kg", obs:"Preço por kg"},
   {nome:"Presunto (kg)", preco:28.90, cat:"Frios & Laticínios", sub:"Presunto", un:"kg", obs:"Preço por kg"},
   {nome:"Queijo Mussarela (kg)", preco:39.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
@@ -1329,7 +1337,6 @@ const produtos = [
   {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
   {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
 
-  // AÇOUGUE
   {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
@@ -1349,7 +1356,6 @@ const produtos = [
   {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
   {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
 
-  // HORTIFRUTI
   {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
@@ -1367,7 +1373,6 @@ const produtos = [
   {nome:"Cebolinha (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
   {nome:"Alho (100g)", preco:3.50, cat:"Hortifruti", sub:"Temperos", un:"100g"},
 
-  // BEBIDAS
   {nome:"Água mineral 500ml", preco:2.50, cat:"Bebidas", sub:"Água", un:"unid."},
   {nome:"Água mineral 1,5L", preco:4.50, cat:"Bebidas", sub:"Água", un:"unid."},
   {nome:"Refrigerante 2L", preco:7.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
@@ -1381,7 +1386,6 @@ const produtos = [
   {nome:"Chá gelado", preco:4.80, cat:"Bebidas", sub:"Sucos", un:"unid."},
   {nome:"Água de coco", preco:6.50, cat:"Bebidas", sub:"Sucos", un:"unid."},
 
-  // LIMPEZA
   {nome:"Detergente", preco:2.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
   {nome:"Sabão em pó", preco:12.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
   {nome:"Água sanitária", preco:3.40, cat:"Limpeza", sub:"Casa", un:"unid."},
@@ -1397,7 +1401,6 @@ const produtos = [
   {nome:"Lustra móveis", preco:10.90, cat:"Limpeza", sub:"Casa", un:"unid."},
   {nome:"Papel toalha", preco:7.50, cat:"Limpeza", sub:"Cozinha", un:"pacote"},
 
-  // HIGIENE
   {nome:"Sabonete", preco:2.20, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
   {nome:"Shampoo", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
   {nome:"Condicionador", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
@@ -1408,7 +1411,7 @@ const produtos = [
   {nome:"Papel lenço", preco:6.50, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
   {nome:"Desodorante", preco:11.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
   {nome:"Absorvente", preco:9.90, cat:"Higiene & Cuidados", sub:"Feminino", un:"pacote"},
-  {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
+  {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."}
 ];
 
 /* ==========================
@@ -1469,15 +1472,12 @@ function syncCartUI(){
   cartbarSub.textContent = `${count} item${count===1?"":"s"} • ${money(total)}`;
   cartTotalEl.textContent = money(total);
 
-  // atualiza link do WhatsApp flutuante (sempre com resumo)
   const link = buildWhatsLink();
   whatsFloat.href = link;
 
-  // CTA do carrossel também
   const cta = document.getElementById("ctaWhats");
   if(cta) cta.onclick = ()=> window.open(link,"_blank");
 
-  // hint: se tiver kg no carrinho, mantem; senão fica menor (opcional)
   let temKg = false;
   for(const [idx,qty] of cart.entries()){
     const p = produtos[idx];
@@ -1493,14 +1493,12 @@ function setQty(idx, qty){
   else cart.set(idx, qty);
   syncCartUI();
 
-  // atualiza qty no card
   const qtyEl = document.querySelector(`[data-qty="${idx}"]`);
   if(qtyEl) qtyEl.textContent = String(cart.get(idx) || 0);
 }
 function inc(idx){
   setQty(idx, (cart.get(idx)||0)+1);
 
-  // micro feedback (profissional)
   const badge = (window.innerWidth<=980) ? cartCountMobile : cartCountEl;
   badge.style.transform = "scale(1.2)";
   setTimeout(()=>badge.style.transform="scale(1)",120);
@@ -1653,7 +1651,6 @@ function render(){
     grid.appendChild(card);
   });
 
-  // bind steppers
   document.querySelectorAll("[data-inc]").forEach(b=>{
     b.onclick=()=>inc(Number(b.getAttribute("data-inc")));
   });
@@ -1750,7 +1747,6 @@ document.getElementById("goInfo").onclick=()=>{document.getElementById("infoBox"
 
 /* ==========================
    WHATSAPP PROFISSIONAL
-   - gera resumo + total estimado
    ========================== */
 function buildWhatsMessage(){
   const count = cartCountTotal();
@@ -1762,7 +1758,6 @@ function buildWhatsMessage(){
   lines.push(`Olá! Quero fazer um pedido (estimado):`);
   lines.push(``);
 
-  // ordena por categoria e nome pra ficar bonito
   const items = Array.from(cart.entries())
     .map(([idx,qty])=>({idx,qty,p:produtos[idx]}))
     .filter(x=>x.p && x.qty>0)
@@ -1786,13 +1781,11 @@ function buildWhatsLink(){
   return `https://wa.me/${WHATS_NUMBER}?text=${text}`;
 }
 
-/* clique no WhatsApp flutuante sempre manda resumo */
 whatsFloat.onclick = (e)=>{
   e.preventDefault();
   window.open(buildWhatsLink(), "_blank");
 };
 
-/* sidebar Whats */
 document.getElementById("goWhatsappSide").onclick=()=>{
   window.open(buildWhatsLink(), "_blank");
 };
@@ -1817,7 +1810,6 @@ function renderCartModal(){
   const lines = [];
   let total = 0;
 
-  // mantém ordem bonita
   const items = Array.from(cart.entries())
     .map(([idx,qty])=>({idx,qty,p:produtos[idx]}))
     .filter(x=>x.p && x.qty>0)
@@ -1908,8 +1900,6 @@ restartAuto();
 
 /* ==========================
    MOBILE “APP FEEL”
-   - header compacto no scroll
-   - Whats some descendo, aparece subindo
    ========================== */
 let lastY = window.scrollY;
 let ticking = false;
@@ -1953,6 +1943,15 @@ renderSubmenu();
 render();
 syncCartUI();
 onScroll();
+
+/* ==========================
+   PWA: Service Worker (GitHub Pages)
+   ========================== */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Mercadinho-Espera-a/service-worker.js").catch(console.error);
+  });
+}
 </script>
 
 </body>
