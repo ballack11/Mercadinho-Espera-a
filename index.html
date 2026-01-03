@@ -38,6 +38,7 @@
   @keyframes up{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
   @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes shine{0%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
 
   .wrap{max-width:1400px;margin:0 auto;padding:0 14px}
 
@@ -98,6 +99,15 @@
     border-radius:14px;
     font-size:12px;
     white-space:nowrap;
+    position:relative;
+    overflow:hidden;
+  }
+  .pill::after{
+    content:"";
+    position:absolute;top:0;left:0;height:100%;width:35%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+    transform:translateX(-120%);
+    animation: shine 5s linear infinite;
   }
   .status{
     font-weight:bold;
@@ -108,6 +118,36 @@
   .open{color:#bbf7d0;border-color:rgba(34,197,94,.45)}
   .closed{color:#fee2e2;border-color:rgba(239,68,68,.45)}
   .tiny{font-size:11px;color:#ffe7e7;opacity:.95;margin-top:2px}
+
+  /* ===== CARRINHO VISUAL ===== */
+  .cart{
+    position:relative;
+    display:flex;align-items:center;gap:10px;
+    padding:10px 12px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.25);
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+  }
+  .cart:hover{transform:translateY(-2px)}
+  .cart-ic{
+    width:34px;height:34px;border-radius:12px;
+    display:grid;place-items:center;
+    background: rgba(34,197,94,.22);
+    border:1px solid rgba(255,255,255,.14);
+    font-size:18px;
+  }
+  .badge{
+    position:absolute;top:-7px;right:-7px;
+    background: var(--green);
+    color:#022c22;
+    font-weight:bold;
+    border-radius:999px;
+    padding:4px 8px;
+    font-size:11px;
+    border:2px solid rgba(0,0,0,.25);
+  }
 
   /* ===== MENU DEPARTAMENTOS + SUBMENU ===== */
   .menu{
@@ -180,7 +220,7 @@
     align-items:start;
   }
 
-  /* SIDEBAR estilo varejo */
+  /* SIDEBAR */
   .sidebar{
     background: rgba(15,23,42,.75);
     border:1px solid rgba(255,255,255,.10);
@@ -217,37 +257,54 @@
   /* CONTEÚDO */
   .content{display:flex;flex-direction:column;gap:16px;animation: up .45s ease}
 
-  /* BANNERS estilo vitrine */
-  .hero{
-    display:grid;
-    grid-template-columns: 1.25fr .75fr;
-    gap:16px;
-  }
-  .banner{
+  /* ===== CARROSSEL ===== */
+  .carousel{
     border-radius:18px;
     border:1px solid rgba(255,255,255,.10);
     overflow:hidden;
-    min-height:170px;
-    position:relative;
-    background:
-      radial-gradient(650px 220px at 18% 28%, rgba(34,197,94,.22), transparent 60%),
-      radial-gradient(550px 240px at 80% 0%, rgba(216,31,38,.25), transparent 60%),
-      linear-gradient(135deg, rgba(15,23,42,.88), rgba(2,44,34,.55));
+    background: rgba(15,23,42,.70);
     box-shadow:0 12px 30px rgba(0,0,0,.35);
-    transition:.25s;
+    position:relative;
+    min-height:190px;
   }
-  .banner:hover{transform:translateY(-3px)}
+  .slides{
+    display:flex;
+    transition:transform .55s ease;
+    width:100%;
+  }
+  .slide{
+    min-width:100%;
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .slide::before{
+    content:"";
+    position:absolute;inset:-60px;
+    background:
+      radial-gradient(700px 260px at 18% 28%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(650px 280px at 80% 0%, rgba(216,31,38,.25), transparent 60%),
+      linear-gradient(135deg, rgba(15,23,42,.88), rgba(2,44,34,.55));
+    filter:saturate(1.15);
+    transform:rotate(-2deg);
+  }
+  .slide .inner{
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:18px;
+    min-height:160px;
+  }
   .tag{
-    position:absolute;top:14px;left:14px;
+    display:inline-flex;align-items:center;gap:8px;
     background: rgba(216,31,38,.92);
-    color:#fff;
     padding:7px 10px;border-radius:999px;
     font-size:12px;font-weight:bold;
   }
   .tag.green{background: rgba(34,197,94,.95); color:#022c22;}
-  .banner .txt{position:absolute;left:14px;right:14px;bottom:14px}
-  .banner h2{margin:0 0 6px;font-size:20px}
-  .banner p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+  .slide h2{margin:10px 0 6px;font-size:22px}
+  .slide p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
   .cta{
     margin-top:10px;
     display:inline-flex;align-items:center;gap:8px;
@@ -257,6 +314,39 @@
     padding:10px 12px;border-radius:14px;
     font-weight:bold;font-size:13px;
     cursor:pointer;
+    user-select:none;
+  }
+  .nav{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:space-between;
+    pointer-events:none;
+    padding:0 10px;
+  }
+  .nav button{
+    pointer-events:auto;
+    border:none;
+    width:44px;height:44px;border-radius:14px;
+    background: rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.14);
+    color:#fff;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .nav button:hover{transform:translateY(-2px);background: rgba(0,0,0,.50)}
+  .dots{
+    position:absolute;left:0;right:0;bottom:10px;
+    display:flex;gap:8px;justify-content:center;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:999px;
+    background: rgba(255,255,255,.25);
+    border:1px solid rgba(255,255,255,.18);
+    cursor:pointer;
+    transition:.2s;
+  }
+  .dot.active{
+    background: rgba(34,197,94,.95);
+    border-color: rgba(34,197,94,.65);
   }
 
   /* CONTROLES */
@@ -346,7 +436,61 @@
     border-color: rgba(34,197,94,.35);
   }
 
-  /* WHATS */
+  /* MODAL carrinho */
+  .modal{
+    position:fixed;inset:0;
+    background: rgba(0,0,0,.55);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:200;
+    padding:14px;
+  }
+  .modal.show{display:flex}
+  .modal-card{
+    width:min(720px, 100%);
+    background: rgba(15,23,42,.92);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.55);
+    animation: up .25s ease;
+  }
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px;
+    background: linear-gradient(135deg, rgba(216,31,38,.25), rgba(34,197,94,.16));
+    border-bottom:1px solid rgba(255,255,255,.10);
+  }
+  .modal-head b{font-size:14px}
+  .close{
+    width:40px;height:40px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.30);
+    color:#fff;cursor:pointer;
+  }
+  .modal-body{padding:14px;color:var(--muted);line-height:1.6}
+  .modal-body ul{margin:10px 0 0;padding-left:18px}
+  .modal-foot{
+    padding:14px;
+    border-top:1px solid rgba(255,255,255,.10);
+    display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;
+  }
+  .btn{
+    border:none;
+    background:#111827;
+    color:#fff;
+    padding:10px 12px;border-radius:14px;
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .btn.green{
+    background: rgba(34,197,94,.95);
+    color:#022c22;
+    border-color: rgba(34,197,94,.55);
+    font-weight:bold;
+  }
+
+  /* WHATS flutuante */
   .whatsapp{
     position:fixed;
     right:18px;bottom:18px;
@@ -367,7 +511,6 @@
     .brand{min-width:auto}
     .top-actions{display:none}
     .main{grid-template-columns: 1fr}
-    .hero{grid-template-columns: 1fr}
   }
 </style>
 </head>
@@ -410,12 +553,15 @@
             <div class="tiny">Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</div>
           </div>
         </div>
-        <div class="pill">
-          <span>📞</span>
+
+        <!-- CARRINHO VISUAL -->
+        <div class="cart" id="cartBtn" title="Carrinho (visual)">
+          <div class="cart-ic">🛒</div>
           <div>
-            <div><b>WhatsApp</b></div>
-            <div class="tiny">(81) 8317-3613</div>
+            <div style="font-weight:bold;font-size:12px;">Carrinho</div>
+            <div class="tiny">Visual / demonstração</div>
           </div>
+          <div class="badge" id="cartCount">0</div>
         </div>
       </div>
     </div>
@@ -479,24 +625,66 @@
     <!-- CONTEÚDO -->
     <section class="content">
 
-      <!-- BANNERS -->
-      <div class="hero">
-        <div class="banner">
-          <div class="tag">Mercadinho Esperança</div>
-          <div class="txt">
-            <h2>Interface estilo grande mercado</h2>
-            <p>Menu de departamentos com submenu, busca rápida e produtos organizados.</p>
-            <div class="cta" onclick="window.scrollTo({top:0,behavior:'smooth'})">🔎 Use a busca para achar rápido</div>
+      <!-- CARROSSEL -->
+      <div class="carousel" id="carousel">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <div class="inner">
+              <div>
+                <div class="tag">Mercadinho Esperança</div>
+                <h2>Variedade para o dia a dia</h2>
+                <p>Alimentos, carnes, hortifruti, bebidas, limpeza e higiene — tudo organizado por departamentos.</p>
+                <div class="cta" onclick="window.scrollTo({top:320,behavior:'smooth'})">🔎 Ver produtos</div>
+              </div>
+              <div style="text-align:right">
+                <div class="tag green">Atendimento</div>
+                <h2 style="margin-top:10px">WhatsApp</h2>
+                <p>(81) 8317-3613</p>
+                <div class="cta" onclick="window.open('https://wa.me/558183173613','_blank')">💬 Abrir WhatsApp</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="inner">
+              <div>
+                <div class="tag">Interface estilo grande mercado</div>
+                <h2>Menu com submenu + busca rápida</h2>
+                <p>Clique em um departamento e depois em uma subcategoria para filtrar melhor.</p>
+                <div class="cta" onclick="document.getElementById('deptRow').scrollIntoView({behavior:'smooth'})">🧭 Escolher departamento</div>
+              </div>
+              <div style="text-align:right">
+                <div class="tag green">Dica</div>
+                <h2 style="margin-top:10px">Use “Enter”</h2>
+                <p>Digite e aperte Enter para buscar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="inner">
+              <div>
+                <div class="tag">Horário</div>
+                <h2>Aberto/Fechado automático</h2>
+                <p>Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</p>
+                <div class="cta" onclick="document.getElementById('infoBox').scrollIntoView({behavior:'smooth'})">📍 Ver informações</div>
+              </div>
+              <div style="text-align:right">
+                <div class="tag green">Pagamento</div>
+                <h2 style="margin-top:10px">Pix e Cartões</h2>
+                <p>Dinheiro • Crédito • Débito • Pix • Vale</p>
+                <div class="cta" onclick="document.getElementById('payBox').scrollIntoView({behavior:'smooth'})">💳 Ver pagamentos</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="banner">
-          <div class="tag green">Contato</div>
-          <div class="txt">
-            <h2>WhatsApp: (81) 8317-3613</h2>
-            <p>Chame agora para tirar dúvidas e pedir informações.</p>
-            <div class="cta" onclick="window.open('https://wa.me/558183173613','_blank')">💬 Abrir WhatsApp</div>
-          </div>
+
+        <div class="nav">
+          <button id="prev" aria-label="Anterior">‹</button>
+          <button id="next" aria-label="Próximo">›</button>
         </div>
+
+        <div class="dots" id="dots"></div>
       </div>
 
       <!-- CONTROLES -->
@@ -544,6 +732,28 @@
   <footer>Mercadinho Esperança • Layout estilo grande varejo • Produtos organizados por categoria</footer>
 </div>
 
+<!-- MODAL CARRINHO (VISUAL) -->
+<div class="modal" id="cartModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <b>🛒 Carrinho (visual)</b>
+      <button class="close" id="closeCart" aria-label="Fechar">✕</button>
+    </div>
+    <div class="modal-body">
+      Este carrinho é <b>visual/demonstração</b> para parecer com grandes supermercados.
+      <br>Você pode clicar em “Adicionar” em alguns produtos para ver o número subir.
+      <ul>
+        <li>Não finaliza compra de verdade</li>
+        <li>Serve só para visual do site</li>
+      </ul>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" id="clearCart">Zerar</button>
+      <button class="btn green" id="goWhatsapp">Falar no WhatsApp</button>
+    </div>
+  </div>
+</div>
+
 <a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
 
 <script>
@@ -562,7 +772,7 @@ function verificarHorario(){
 verificarHorario();
 setInterval(verificarHorario,60000);
 
-/* ===== DADOS: departamentos + submenus ===== */
+/* ===== DEPARTAMENTOS + SUBMENU ===== */
 const departamentos = [
   {key:"Todos", icon:"🛒", subs:["Tudo"]},
   {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos"]},
@@ -575,7 +785,7 @@ const departamentos = [
   {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
 ];
 
-/* ===== PRODUTOS (TUDO + MAIS) ===== */
+/* ===== PRODUTOS (TUDO QUE VOCÊ PEDIU + MAIS) ===== */
 const produtos = [
   // BÁSICOS
   {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
@@ -593,7 +803,7 @@ const produtos = [
   {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
   {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
 
-  // MERCEARIA (inclui biscoitos)
+  // MERCEARIA (biscoitos etc.)
   {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
   {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
@@ -635,7 +845,7 @@ const produtos = [
   {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
   {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
 
-  // AÇOUGUE (carnes)
+  // AÇOUGUE
   {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
   {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
@@ -655,7 +865,7 @@ const produtos = [
   {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
   {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
 
-  // HORTIFRUTI (frutas e verduras)
+  // HORTIFRUTI
   {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
   {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
@@ -717,7 +927,7 @@ const produtos = [
   {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
 ];
 
-/* ===== UI ===== */
+/* ===== ELEMENTOS ===== */
 const grid = document.getElementById("grid");
 const deptRow = document.getElementById("deptRow");
 const submenu = document.getElementById("submenu");
@@ -726,6 +936,7 @@ const search = document.getElementById("search");
 const btnSearch = document.getElementById("btnSearch");
 const order = document.getElementById("order");
 
+/* ===== FILTROS ===== */
 let filtroDept = "Todos";
 let filtroSub = "Tudo";
 
@@ -741,6 +952,7 @@ function renderDept(){
       renderDept();
       renderSubmenu();
       render();
+      window.scrollTo({top:240,behavior:"smooth"});
     };
     deptRow.appendChild(el);
   });
@@ -795,23 +1007,40 @@ function render(){
   if(order.value==="relevancia" && q) list.sort((a,b)=>relScore(b.nome,q)-relScore(a.nome,q));
 
   grid.innerHTML="";
-  list.forEach(p=>{
+  list.forEach((p,idx)=>{
     const card=document.createElement("div");
     card.className="card";
     card.innerHTML=`
       <div class="meta">
-        <span class="chip">${p.cat}</span>
+        <span class="chip">${p.cat}${p.sub ? " • "+p.sub : ""}</span>
         <span class="unit">${p.un || "unid."}</span>
       </div>
       <h3>${p.nome}</h3>
       <div class="price">R$ ${Number(p.preco).toFixed(2)}</div>
       ${p.obs?`<div class="note">${p.obs}</div>`:""}
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn green" data-add="${idx}" style="flex:1;min-width:140px">Adicionar</button>
+        <button class="btn" data-viewcart="1" style="min-width:140px">Ver carrinho</button>
+      </div>
     `;
     grid.appendChild(card);
   });
+
+  // bind botoes
+  document.querySelectorAll("[data-add]").forEach(b=>{
+    b.onclick=()=>{ addToCart(); };
+  });
+  document.querySelectorAll("[data-viewcart]").forEach(b=>{
+    b.onclick=()=>openCart();
+  });
 }
 
-/* SIDEBAR atalhos */
+/* ===== BUSCA / ORDENAR ===== */
+btnSearch.onclick=render;
+search.addEventListener("keydown",(e)=>{if(e.key==="Enter") render();});
+order.onchange=render;
+
+/* ===== SIDEBAR ===== */
 document.getElementById("goAll").onclick=()=>{filtroDept="Todos";filtroSub="Tudo";renderDept();renderSubmenu();render();window.scrollTo({top:0,behavior:"smooth"});};
 document.getElementById("goBasics").onclick=()=>{filtroDept="Básicos";filtroSub="Tudo";renderDept();renderSubmenu();render();};
 document.getElementById("goMeat").onclick=()=>{filtroDept="Açougue";filtroSub="Tudo";renderDept();renderSubmenu();render();};
@@ -819,17 +1048,75 @@ document.getElementById("goHorti").onclick=()=>{filtroDept="Hortifruti";filtroSu
 document.getElementById("goPay").onclick=()=>{document.getElementById("payBox").scrollIntoView({behavior:"smooth"});};
 document.getElementById("goInfo").onclick=()=>{document.getElementById("infoBox").scrollIntoView({behavior:"smooth"});};
 
-/* eventos */
-btnSearch.onclick=render;
-search.addEventListener("keydown",(e)=>{if(e.key==="Enter") render();});
-order.onchange=render;
+/* ===== CARRINHO (VISUAL) ===== */
+let cartCount = 0;
+const cartCountEl = document.getElementById("cartCount");
+const cartBtn = document.getElementById("cartBtn");
+const cartModal = document.getElementById("cartModal");
+const closeCart = document.getElementById("closeCart");
+const clearCart = document.getElementById("clearCart");
+const goWhatsapp = document.getElementById("goWhatsapp");
 
-/* init */
+function addToCart(){
+  cartCount++;
+  cartCountEl.textContent = cartCount;
+  // animação rápida no badge
+  cartCountEl.style.transform = "scale(1.2)";
+  setTimeout(()=>cartCountEl.style.transform="scale(1)",120);
+}
+function openCart(){
+  cartModal.classList.add("show");
+  cartModal.setAttribute("aria-hidden","false");
+}
+function closeCartFn(){
+  cartModal.classList.remove("show");
+  cartModal.setAttribute("aria-hidden","true");
+}
+cartBtn.onclick=openCart;
+closeCart.onclick=closeCartFn;
+cartModal.onclick=(e)=>{ if(e.target===cartModal) closeCartFn(); };
+clearCart.onclick=()=>{ cartCount=0; cartCountEl.textContent="0"; };
+goWhatsapp.onclick=()=>window.open("https://wa.me/558183173613","_blank");
+
+/* ===== CARROSSEL ===== */
+const slidesEl = document.getElementById("slides");
+const dotsEl = document.getElementById("dots");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const totalSlides = slidesEl.children.length;
+let current = 0;
+let timer = null;
+
+function renderDots(){
+  dotsEl.innerHTML="";
+  for(let i=0;i<totalSlides;i++){
+    const d=document.createElement("div");
+    d.className="dot"+(i===current?" active":"");
+    d.onclick=()=>{goTo(i,true);};
+    dotsEl.appendChild(d);
+  }
+}
+function goTo(i, reset=false){
+  current = (i + totalSlides) % totalSlides;
+  slidesEl.style.transform = `translateX(-${current*100}%)`;
+  renderDots();
+  if(reset) restartAuto();
+}
+function restartAuto(){
+  if(timer) clearInterval(timer);
+  timer = setInterval(()=>goTo(current+1,false), 4500);
+}
+prev.onclick=()=>goTo(current-1,true);
+next.onclick=()=>goTo(current+1,true);
+
+renderDots();
+restartAuto();
+
+/* ===== INIT ===== */
 renderDept();
 renderSubmenu();
 render();
 </script>
 
-<a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
 </body>
 </html>
