@@ -1947,12 +1947,21 @@ onScroll();
 /* ==========================
    PWA: Service Worker (GitHub Pages)
    ========================== */
+<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/Mercadinho-Espera-a/service-worker.js").catch(console.error);
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .then(() => console.log("Service Worker registrado"))
+      .catch((err) => console.log("Erro no Service Worker:", err));
+  });
+}
+</script>
+
   });
 }
 </script>
 
 </body>
 </html>
+
