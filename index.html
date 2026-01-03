@@ -1,96 +1,384 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mercadinho Esperança</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+  --verde-escuro:#064e3b;
+  --verde:#16a34a;
+  --verde-claro:#22c55e;
+  --verde-mais-escuro:#022c22;
+}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(180deg,var(--verde-escuro),var(--verde-mais-escuro));
+  color:#fff;
+}
+header{
+  background:linear-gradient(135deg,var(--verde),var(--verde-claro));
+  padding:22px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+}
+.container{max-width:1350px;margin:auto;padding:15px}
+.top{display:flex;align-items:center;gap:18px}
+h1{margin:0;font-size:26px}
+.subtitle{font-size:14px;color:#ecfdf5}
+
+.status{
+  margin-top:8px;
+  padding:6px 14px;
+  border-radius:14px;
+  font-size:12px;
+  font-weight:bold;
+  display:inline-block;
+}
+.open{background:#052e16;color:#bbf7d0}
+.closed{background:#7f1d1d;color:#fee2e2}
+
+.search{display:flex;gap:12px;margin:22px 0}
+input,select{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.chip{
+  background:#065f46;
+  padding:10px 16px;
+  border-radius:22px;
+  cursor:pointer;
+  font-size:13px;
+  color:#ecfdf5;
+}
+.chip.active{background:#22c55e;color:#022c22}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+.card{
+  background:linear-gradient(180deg,#064e3b,#022c22);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.08);
+}
+.card h3{margin:0 0 6px;font-size:16px}
+.cat{font-size:12px;color:#bbf7d0}
+.price{
+  margin-top:10px;
+  font-weight:bold;
+  background:#22c55e;
+  color:#022c22;
+  padding:8px 14px;
+  border-radius:14px;
+  display:inline-block;
+}
+.note{margin-top:10px;font-size:12px;color:#d1fae5;opacity:.9}
+
+.info{
+  background:#064e3b;
+  margin-top:30px;
+  padding:22px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);
+}
+footer{text-align:center;font-size:12px;color:#bbf7d0;margin:30px 0}
+.whatsapp{
+  position:fixed;right:18px;bottom:18px;
+  background:#22c55e;color:#022c22;
+  padding:15px 20px;border-radius:20px;
+  text-decoration:none;font-weight:bold;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+.small{font-size:12px;color:#d1fae5}
+</style>
 </head>
 
 <body>
 
 <header>
-<img src="logo.png" class="logo">
-<h1>🛒 Mercadinho Esperança</h1>
-<p>Confira nossos produtos e preços</p>
-<p class="aviso">⚠️ Não realizamos entregas. Preços válidos somente na loja física.</p>
+  <div class="container">
+    <div class="top">
+
+      <!-- LOGO -->
+      <svg width="110" height="110" viewBox="0 0 200 200" aria-label="Logo Mercadinho Esperança">
+        <defs>
+          <radialGradient id="grad" cx="30%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="#bbf7d0"/>
+            <stop offset="100%" stop-color="#16a34a"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="96" fill="url(#grad)"/>
+        <circle cx="100" cy="100" r="86" fill="#052e16"/>
+        <rect x="25" y="90" width="150" height="55" rx="22" fill="#16a34a"/>
+        <text x="100" y="70" text-anchor="middle" font-size="24" fill="#ecfdf5" font-weight="bold">
+          MERCADINHO
+        </text>
+        <text x="100" y="125" text-anchor="middle" font-size="28" fill="#052e16" font-weight="bold">
+          ESPERANÇA
+        </text>
+      </svg>
+
+      <div>
+        <h1>Mercadinho Esperança</h1>
+        <div class="subtitle">Qualidade, variedade e preço justo</div>
+        <div id="status" class="status">Verificando horário...</div>
+        <div class="small">Preços sujeitos a alteração • Válidos na loja física</div>
+      </div>
+
+    </div>
+  </div>
 </header>
 
 <div class="container">
 
-<input type="text" id="pesquisa" placeholder="Pesquisar produto..." onkeyup="filtrarProdutos()">
+  <div class="search">
+    <input id="search" placeholder="Buscar produto... (ex: arroz, frango, sabonete)" />
+    <select id="order">
+      <option value="relevancia">Relevância</option>
+      <option value="menor">Menor preço</option>
+      <option value="maior">Maior preço</option>
+      <option value="az">Nome (A–Z)</option>
+    </select>
+  </div>
 
-<!-- ================= ALIMENTOS ================= -->
-<h2 class="categoria">🍚 Alimentos</h2>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
 
-<div class="produto" data-name="arroz"><img src="imagens/arroz.webp"><h2>Arroz 5kg</h2><p>R$ 25,00</p></div>
-<div class="produto" data-name="feijao"><img src="imagens/feijao.jpg"><h2>Feijão 1kg</h2><p>R$ 8,50</p></div>
-<div class="produto" data-name="macarrao"><img src="imagens/macarrao.jpg"><h2>Macarrão 500g</h2><p>R$ 3,80</p></div>
-<div class="produto" data-name="acucar"><img src="imagens/acucar.jpg"><h2>Açúcar 1kg</h2><p>R$ 4,20</p></div>
-<div class="produto" data-name="sal"><img src="imagens/sal.jpg"><h2>Sal 1kg</h2><p>R$ 2,00</p></div>
-<div class="produto" data-name="oleo"><img src="imagens/oleo.jpg"><h2>Óleo 900ml</h2><p>R$ 6,90</p></div>
-<div class="produto" data-name="farinha"><img src="imagens/farinha.jpg"><h2>Farinha de Trigo</h2><p>R$ 4,80</p></div>
-<div class="produto" data-name="cafe"><img src="imagens/cafe.jpg"><h2>Café 500g</h2><p>R$ 14,90</p></div>
-<div class="produto" data-name="leite"><img src="imagens/leite.jpg"><h2>Leite 1L</h2><p>R$ 4,70</p></div>
-<div class="produto" data-name="ovos"><img src="imagens/ovos.jpg"><h2>Dúzia de Ovos</h2><p>R$ 11,90</p></div>
-
-<!-- ================= BEBIDAS ================= -->
-<h2 class="categoria">🥤 Bebidas</h2>
-
-<div class="produto" data-name="refrigerante"><img src="imagens/refrigerante.jpg"><h2>Refrigerante 2L</h2><p>R$ 7,99</p></div>
-<div class="produto" data-name="agua"><img src="imagens/agua-mineral.jpg"><h2>Água Mineral</h2><p>R$ 2,50</p></div>
-<div class="produto" data-name="suco"><img src="imagens/suco.jpg"><h2>Suco 1L</h2><p>R$ 5,20</p></div>
-<div class="produto" data-name="cerveja"><img src="imagens/cerveja.jpg"><h2>Cerveja Lata</h2><p>R$ 3,50</p></div>
-<div class="produto" data-name="energetico"><img src="imagens/energetico.jpg"><h2>Energético</h2><p>R$ 9,90</p></div>
-<div class="produto" data-name="cha"><img src="imagens/cha.jpg"><h2>Chá Gelado</h2><p>R$ 4,80</p></div>
-
-<!-- ================= LIMPEZA ================= -->
-<h2 class="categoria">🧼 Limpeza</h2>
-
-<div class="produto" data-name="detergente"><img src="imagens/detergente.jpg"><h2>Detergente</h2><p>R$ 2,80</p></div>
-<div class="produto" data-name="sabao"><img src="imagens/sabao.jpg"><h2>Sabão em Pó</h2><p>R$ 12,90</p></div>
-<div class="produto" data-name="agua-sanitaria"><img src="imagens/agua-sanitaria.jpg"><h2>Água Sanitária</h2><p>R$ 3,40</p></div>
-<div class="produto" data-name="desinfetante"><img src="imagens/desinfetante.jpg"><h2>Desinfetante</h2><p>R$ 4,90</p></div>
-<div class="produto" data-name="esponja"><img src="imagens/esponja.jpg"><h2>Esponja</h2><p>R$ 1,80</p></div>
-<div class="produto" data-name="limpa-vidro"><img src="imagens/limpa-vidro.jpg"><h2>Limpa Vidro</h2><p>R$ 7,20</p></div>
-
-<!-- ================= HIGIENE ================= -->
-<h2 class="categoria">🧴 Higiene</h2>
-
-<div class="produto" data-name="sabonete"><img src="imagens/sabonete.jpg"><h2>Sabonete</h2><p>R$ 2,20</p></div>
-<div class="produto" data-name="shampoo"><img src="imagens/shampoo.jpg"><h2>Shampoo</h2><p>R$ 14,50</p></div>
-<div class="produto" data-name="condicionador"><img src="imagens/condicionador.jpg"><h2>Condicionador</h2><p>R$ 14,50</p></div>
-<div class="produto" data-name="creme-dental"><img src="imagens/creme-dental.jpg"><h2>Creme Dental</h2><p>R$ 4,90</p></div>
-<div class="produto" data-name="papel-higienico"><img src="imagens/papel-higienico.jpg"><h2>Papel Higiênico</h2><p>R$ 15,90</p></div>
-
-<!-- ================= AÇOUGUE ================= -->
-<h2 class="categoria">🥩 Açougue</h2>
-
-<div class="produto" data-name="carne-bovina"><img src="imagens/carne-bovina.jpg"><h2>Carne Bovina kg</h2><p>R$ 34,90</p></div>
-<div class="produto" data-name="frango"><img src="imagens/frango.jpg"><h2>Frango kg</h2><p>R$ 14,90</p></div>
-<div class="produto" data-name="linguica"><img src="imagens/linguica.jpg"><h2>Linguiça kg</h2><p>R$ 18,90</p></div>
-<div class="produto" data-name="peixe"><img src="imagens/peixe.jpg"><h2>Peixe kg</h2><p>R$ 29,90</p></div>
-
-<!-- ================= HORTIFRUTI ================= -->
-<h2 class="categoria">🍌 Hortifruti</h2>
-
-<div class="produto" data-name="banana"><img src="imagens/banana.jpg"><h2>Banana kg</h2><p>R$ 4,60</p></div>
-<div class="produto" data-name="tomate"><img src="imagens/tomate.jpg"><h2>Tomate kg</h2><p>R$ 5,90</p></div>
-<div class="produto" data-name="batata"><img src="imagens/batata.jpg"><h2>Batata kg</h2><p>R$ 4,30</p></div>
-<div class="produto" data-name="cebola"><img src="imagens/cebola.jpg"><h2>Cebola kg</h2><p>R$ 4,80</p></div>
-<div class="produto" data-name="maca"><img src="imagens/maca.jpg"><h2>Maçã kg</h2><p>R$ 6,20</p></div>
-<div class="produto" data-name="laranja"><img src="imagens/laranja.jpg"><h2>Laranja kg</h2><p>R$ 3,90</p></div>
-
-<!-- ================= RODAPÉ ================= -->
-<h2 class="categoria">📍 Informações</h2>
-
-<footer>
-<p><strong>Endereço:</strong> Rua Exemplo, 123 – Centro</p>
-<p><strong>Horário:</strong> Seg a Sáb 08h às 20h | Dom 08h às 12h</p>
-<p><strong>Telefone:</strong> (11) 99999-9999</p>
-</footer>
+  <div class="info">
+    <h3>📍 Informações</h3>
+    <p>
+      <strong>Horário:</strong><br>
+      Segunda: 07h às 12h<br>
+      Terça a Sábado: 07h às 19h<br>
+      Domingo: 07h às 12h
+    </p>
+    <p><strong>WhatsApp:</strong> (81) 8317-3613</p>
+  </div>
 
 </div>
 
-<script src="script.js"></script>
+<footer>Mercadinho Esperança • Tudo que você precisa no dia a dia</footer>
+<a class="whatsapp" href="https://wa.me/558183173613" target="_blank">💬 WhatsApp</a>
+
+<script>
+/* -------- ABERTO / FECHADO -------- */
+function verificarHorario(){
+  const d=new Date(),dia=d.getDay(),h=d.getHours()+d.getMinutes()/60;
+  let aberto=false;
+  if(dia===1) aberto=h>=7&&h<12;          // Segunda
+  else if(dia>=2&&dia<=6) aberto=h>=7&&h<19; // Terça a Sábado
+  else if(dia===0) aberto=h>=7&&h<12;     // Domingo
+
+  const s=document.getElementById("status");
+  if(aberto){
+    s.textContent="🟢 ABERTO AGORA";
+    s.className="status open";
+  }else{
+    s.textContent="🔴 FECHADO AGORA";
+    s.className="status closed";
+  }
+}
+verificarHorario();
+setInterval(verificarHorario,60000);
+
+/* -------- PRODUTOS (com categorias melhores) -------- */
+const produtos=[
+
+  // 🧺 BÁSICOS
+  {nome:"Arroz 5kg",preco:25.00,cat:"Básicos"},
+  {nome:"Arroz 1kg",preco:5.80,cat:"Básicos"},
+  {nome:"Feijão Carioca 1kg",preco:8.50,cat:"Básicos"},
+  {nome:"Feijão Preto 1kg",preco:9.20,cat:"Básicos"},
+  {nome:"Açúcar 1kg",preco:4.20,cat:"Básicos"},
+  {nome:"Sal 1kg",preco:2.00,cat:"Básicos"},
+  {nome:"Óleo de Soja 900ml",preco:6.90,cat:"Básicos"},
+  {nome:"Café 500g",preco:14.90,cat:"Básicos"},
+  {nome:"Leite 1L",preco:4.70,cat:"Básicos"},
+  {nome:"Ovos (dúzia)",preco:11.90,cat:"Básicos"},
+  {nome:"Farinha de Trigo 1kg",preco:4.80,cat:"Básicos"},
+  {nome:"Farinha de Milho 500g",preco:3.90,cat:"Básicos"},
+
+  // 🍞 MERCEARIA
+  {nome:"Macarrão Espaguete 500g",preco:3.80,cat:"Mercearia"},
+  {nome:"Macarrão Parafuso 500g",preco:4.10,cat:"Mercearia"},
+  {nome:"Extrato de Tomate",preco:3.50,cat:"Mercearia"},
+  {nome:"Molho de Tomate",preco:2.90,cat:"Mercearia"},
+  {nome:"Milho Verde (lata)",preco:4.20,cat:"Mercearia"},
+  {nome:"Ervilha (lata)",preco:4.10,cat:"Mercearia"},
+  {nome:"Sardinha (lata)",preco:6.50,cat:"Mercearia"},
+  {nome:"Atum (lata)",preco:7.90,cat:"Mercearia"},
+  {nome:"Achocolatado",preco:6.80,cat:"Mercearia"},
+  {nome:"Biscoito Cream Cracker",preco:4.50,cat:"Mercearia"},
+  {nome:"Biscoito Recheado",preco:3.90,cat:"Mercearia"},
+  {nome:"Margarina",preco:5.50,cat:"Mercearia"},
+  {nome:"Maionese",preco:6.20,cat:"Mercearia"},
+  {nome:"Ketchup",preco:6.00,cat:"Mercearia"},
+  {nome:"Mostarda",preco:5.80,cat:"Mercearia"},
+  {nome:"Tempero completo",preco:3.50,cat:"Mercearia"},
+  {nome:"Caldo de galinha",preco:2.50,cat:"Mercearia"},
+  {nome:"Arroz parboilizado 1kg",preco:6.40,cat:"Mercearia"},
+  {nome:"Cuscuz (flocão) 500g",preco:3.60,cat:"Mercearia"},
+  {nome:"Pão de forma",preco:7.50,cat:"Mercearia"},
+  {nome:"Bolo pronto",preco:6.90,cat:"Mercearia"},
+  {nome:"Gelatina",preco:2.20,cat:"Mercearia"},
+  {nome:"Pipoca (milho) 500g",preco:4.20,cat:"Mercearia"},
+  {nome:"Fermento químico",preco:4.90,cat:"Mercearia"},
+
+  // 🧀 FRIOS & LATICÍNIOS
+  {nome:"Mortadela kg",preco:12.90,cat:"Frios & Laticínios"},
+  {nome:"Presunto kg",preco:28.90,cat:"Frios & Laticínios"},
+  {nome:"Queijo Mussarela kg",preco:39.90,cat:"Frios & Laticínios"},
+  {nome:"Queijo coalho kg",preco:44.90,cat:"Frios & Laticínios"},
+  {nome:"Iogurte (unidade)",preco:3.50,cat:"Frios & Laticínios"},
+  {nome:"Manteiga",preco:9.90,cat:"Frios & Laticínios"},
+  {nome:"Requeijão",preco:8.90,cat:"Frios & Laticínios"},
+  {nome:"Creme de leite",preco:4.80,cat:"Frios & Laticínios"},
+  {nome:"Leite condensado",preco:6.90,cat:"Frios & Laticínios"},
+
+  // 🥩 AÇOUGUE
+  {nome:"Carne Bovina 1ª kg",preco:39.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Carne Bovina 2ª kg",preco:32.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Acém kg",preco:29.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Patinho kg",preco:36.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Costela Bovina kg",preco:27.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Carne moída kg",preco:33.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Fígado bovino kg",preco:17.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Frango Inteiro kg",preco:12.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Peito de Frango kg",preco:18.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Coxa e Sobrecoxa kg",preco:14.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Asa de frango kg",preco:15.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Linguiça Toscana kg",preco:19.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Linguiça calabresa kg",preco:23.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Carne Suína kg",preco:22.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Costela Suína kg",preco:24.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Bisteca suína kg",preco:23.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Bacon kg",preco:34.90,cat:"Açougue",obs:"Preço por kg"},
+  {nome:"Peixe kg",preco:29.90,cat:"Açougue",obs:"Preço por kg"},
+
+  // 🥬 HORTIFRUTI
+  {nome:"Banana kg",preco:4.60,cat:"Hortifruti"},
+  {nome:"Tomate kg",preco:5.90,cat:"Hortifruti"},
+  {nome:"Batata kg",preco:4.30,cat:"Hortifruti"},
+  {nome:"Cebola kg",preco:4.80,cat:"Hortifruti"},
+  {nome:"Maçã kg",preco:6.20,cat:"Hortifruti"},
+  {nome:"Laranja kg",preco:3.90,cat:"Hortifruti"},
+  {nome:"Cenoura kg",preco:4.40,cat:"Hortifruti"},
+  {nome:"Alface (unidade)",preco:3.50,cat:"Hortifruti"},
+  {nome:"Coentro (maço)",preco:2.00,cat:"Hortifruti"},
+  {nome:"Cebolinha (maço)",preco:2.00,cat:"Hortifruti"},
+  {nome:"Alho (100g)",preco:3.50,cat:"Hortifruti"},
+  {nome:"Limão kg",preco:4.50,cat:"Hortifruti"},
+  {nome:"Mamão (unidade)",preco:6.00,cat:"Hortifruti"},
+  {nome:"Uva (bandeja)",preco:8.90,cat:"Hortifruti"},
+  {nome:"Repolho (unidade)",preco:5.50,cat:"Hortifruti"},
+  {nome:"Beterraba kg",preco:4.90,cat:"Hortifruti"},
+
+  // 🥤 BEBIDAS
+  {nome:"Água Mineral 500ml",preco:2.50,cat:"Bebidas"},
+  {nome:"Água Mineral 1,5L",preco:4.50,cat:"Bebidas"},
+  {nome:"Refrigerante 2L",preco:7.99,cat:"Bebidas"},
+  {nome:"Refrigerante 1L",preco:5.99,cat:"Bebidas"},
+  {nome:"Refrigerante Lata",preco:4.50,cat:"Bebidas"},
+  {nome:"Suco 1L",preco:5.20,cat:"Bebidas"},
+  {nome:"Suco (caixinha)",preco:3.90,cat:"Bebidas"},
+  {nome:"Cerveja Lata",preco:3.50,cat:"Bebidas"},
+  {nome:"Cerveja 600ml",preco:7.90,cat:"Bebidas"},
+  {nome:"Energético",preco:9.90,cat:"Bebidas"},
+  {nome:"Chá gelado",preco:4.80,cat:"Bebidas"},
+  {nome:"Água de coco",preco:6.50,cat:"Bebidas"},
+
+  // 🧼 LIMPEZA
+  {nome:"Detergente",preco:2.80,cat:"Limpeza"},
+  {nome:"Sabão em Pó",preco:12.90,cat:"Limpeza"},
+  {nome:"Água Sanitária",preco:3.40,cat:"Limpeza"},
+  {nome:"Desinfetante",preco:4.90,cat:"Limpeza"},
+  {nome:"Esponja",preco:1.80,cat:"Limpeza"},
+  {nome:"Limpa Vidro",preco:7.20,cat:"Limpeza"},
+  {nome:"Pano de Chão",preco:4.00,cat:"Limpeza"},
+  {nome:"Saco de lixo 30L",preco:8.90,cat:"Limpeza"},
+  {nome:"Saco de lixo 50L",preco:12.90,cat:"Limpeza"},
+  {nome:"Sabão em barra",preco:6.90,cat:"Limpeza"},
+  {nome:"Amaciante",preco:12.50,cat:"Limpeza"},
+  {nome:"Álcool 70%",preco:9.90,cat:"Limpeza"},
+  {nome:"Lustra móveis",preco:10.90,cat:"Limpeza"},
+  {nome:"Papel toalha",preco:7.50,cat:"Limpeza"},
+
+  // 🪥 HIGIENE & CUIDADOS
+  {nome:"Sabonete",preco:2.20,cat:"Higiene & Cuidados"},
+  {nome:"Shampoo",preco:14.50,cat:"Higiene & Cuidados"},
+  {nome:"Condicionador",preco:14.50,cat:"Higiene & Cuidados"},
+  {nome:"Creme Dental",preco:4.90,cat:"Higiene & Cuidados"},
+  {nome:"Papel Higiênico",preco:15.90,cat:"Higiene & Cuidados"},
+  {nome:"Desodorante",preco:11.90,cat:"Higiene & Cuidados"},
+  {nome:"Escova de Dente",preco:5.50,cat:"Higiene & Cuidados"},
+  {nome:"Fio dental",preco:6.90,cat:"Higiene & Cuidados"},
+  {nome:"Absorvente",preco:9.90,cat:"Higiene & Cuidados"},
+  {nome:"Sabonete líquido",preco:12.90,cat:"Higiene & Cuidados"},
+  {nome:"Papel lenço",preco:6.50,cat:"Higiene & Cuidados"}
+];
+
+/* -------- UI -------- */
+const grid=document.getElementById("grid"),
+chips=document.getElementById("chips"),
+search=document.getElementById("search"),
+order=document.getElementById("order");
+
+let categoria="Todas";
+const categorias=["Todas",...new Set(produtos.map(p=>p.cat))];
+
+function renderChips(){
+  chips.innerHTML="";
+  categorias.forEach(c=>{
+    const b=document.createElement("div");
+    b.className="chip"+(c===categoria?" active":"");
+    b.textContent=c;
+    b.onclick=()=>{categoria=c;render()};
+    chips.appendChild(b);
+  });
+}
+
+function render(){
+  const q=(search.value||"").toLowerCase().trim();
+  let lista=produtos.filter(p=>{
+    const okCat=(categoria==="Todas"||p.cat===categoria);
+    const okQ=!q || p.nome.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q);
+    return okCat && okQ;
+  });
+
+  if(order.value==="menor") lista.sort((a,b)=>a.preco-b.preco);
+  if(order.value==="maior") lista.sort((a,b)=>b.preco-a.preco);
+  if(order.value==="az") lista.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+
+  grid.innerHTML="";
+  lista.forEach(p=>{
+    grid.innerHTML += `
+      <div class="card">
+        <h3>${p.nome}</h3>
+        <div class="cat">${p.cat}</div>
+        <div class="price">R$ ${p.preco.toFixed(2)}</div>
+        ${p.obs ? `<div class="note">${p.obs}</div>` : ``}
+      </div>`;
+  });
+}
+
+search.oninput=render;
+order.onchange=render;
+renderChips();
+render();
+</script>
+
 </body>
 </html>
