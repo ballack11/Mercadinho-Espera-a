@@ -483,3 +483,134 @@ body{
   .wrap{ padding: 0 12px; }
   .dept{ padding: 8px 10px; }
 }
+
+/* =========================
+   IMAGENS NOS PRODUTOS
+========================= */
+.pimg{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  margin:10px 0 12px;
+}
+
+/* deixa o card mais “profissional” */
+.card{
+  overflow:hidden;
+}
+.card h3{
+  line-height:1.2;
+}
+
+/* =========================
+   AJUSTES MOBILE (CONFORTO)
+========================= */
+@media (max-width: 980px){
+  /* topo mais organizado no celular */
+  .top-row{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    padding:12px 0 14px;
+  }
+
+  .brand{
+    width:100%;
+    justify-content:flex-start;
+    gap:10px;
+  }
+  .logo{
+    width:48px;height:48px;
+  }
+  .brand h1{font-size:16px}
+  .brand small{font-size:11px}
+
+  /* busca ocupa tudo */
+  .search{
+    width:100%;
+    gap:10px;
+  }
+  .search input{
+    border-radius:14px;
+    padding:12px 12px;
+    font-size:14px;
+  }
+  .search button{
+    padding:12px 14px;
+    border-radius:14px;
+    font-size:13px;
+    white-space:nowrap;
+  }
+
+  /* menu departamentos: rolagem horizontal (fica top no celular) */
+  .menu-row{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px;
+  }
+  .menu-row::-webkit-scrollbar{height:6px}
+  .menu-row::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.15);
+    border-radius:999px;
+  }
+  .dept{
+    flex:0 0 auto;
+    min-width:140px;
+    justify-content:center;
+  }
+
+  /* submenu também rola pro lado */
+  .subrow{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:6px;
+  }
+  .subrow::-webkit-scrollbar{height:6px}
+  .subrow::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.15);
+    border-radius:999px;
+  }
+  .sub{
+    flex:0 0 auto;
+  }
+
+  /* some a sidebar no celular (deixa mais leve) */
+  .sidebar{display:none}
+
+  /* carrossel mais confortável */
+  .carousel{min-height:220px}
+  .slide h2{font-size:18px}
+  .slide p{font-size:12px}
+
+  /* cards: 2 colunas no celular */
+  .grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+  }
+  .pimg{height:110px}
+
+  /* botões cabem melhor */
+  .card .btn{
+    min-width:unset !important;
+    flex:1;
+  }
+
+  /* whatsapp não atrapalha */
+  .whatsapp{
+    right:12px;
+    bottom:12px;
+    padding:12px 14px;
+    border-radius:16px;
+  }
+}
+
+/* celular bem pequeno: 1 coluna */
+@media (max-width: 420px){
+  .grid{grid-template-columns:1fr}
+  .pimg{height:150px}
+}
