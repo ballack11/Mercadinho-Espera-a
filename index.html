@@ -1439,6 +1439,28 @@ let modoSimples = false;
    CARRINHO (quantidades reais)
    ========================== */
 const cart = new Map(); // idx -> qty
+const CART_KEY = "mercadinho_cart_v1";
+
+function saveCart(){
+  const arr = Array.from(cart.entries());
+  localStorage.setItem(CART_KEY, JSON.stringify(arr));
+}
+
+function loadCart(){
+  try{
+    const raw = localStorage.getItem(CART_KEY);
+    if(!raw) return;
+    const arr = JSON.parse(raw);
+    if(Array.isArray(arr)){
+      cart.clear();
+      arr.forEach(([idx,qty])=>{
+        if(qty > 0) cart.set(Number(idx), Number(qty));
+      });
+    }
+  }catch(e){
+    console.log("Erro ao carregar carrinho:", e);
+  }
+}
 
 function money(v){
   return "R$ " + v.toFixed(2).replace(".",",");
@@ -1492,6 +1514,7 @@ function setQty(idx, qty){
   if(qty<=0) cart.delete(idx);
   else cart.set(idx, qty);
   syncCartUI();
+  saveCart();
 
   const qtyEl = document.querySelector(`[data-qty="${idx}"]`);
   if(qtyEl) qtyEl.textContent = String(cart.get(idx) || 0);
@@ -1947,21 +1970,12 @@ onScroll();
 /* ==========================
    PWA: Service Worker (GitHub Pages)
    ========================== */
-<script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("./service-worker.js")
-      .then(() => console.log("Service Worker registrado"))
-      .catch((err) => console.log("Erro no Service Worker:", err));
-  });
-}
-</script>
-
+    navigator.serviceWorker.register("/Mercadinho-Espera-a/service-worker.js").catch(console.error);
   });
 }
 </script>
 
 </body>
 </html>
-
