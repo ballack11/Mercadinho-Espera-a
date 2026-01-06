@@ -1,1983 +1,1627 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mercadinho Esperança | Catálogo</title>
+  <meta name="description" content="Catálogo do Mercadinho Esperança. Monte sua lista e envie no WhatsApp."/>
 
-<title>Mercadinho Esperança</title>
+  <style>
+    :root{
+      --bg0:#050812;
+      --bg1:#070c1a;
+      --bg2:#0a1022;
 
-<!-- PWA (GitHub Pages: precisa do nome do repo no caminho) -->
-<link rel="manifest" href="/Mercadinho-Espera-a/manifest.webmanifest">
-<meta name="theme-color" content="#16a34a">
+      --panel:#0b1220;
+      --panel2:#0f172a;
+      --card:#0c1528;
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Mercadinho Esperança">
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:rgba(148,163,184,.12);
 
-<link rel="icon" href="/Mercadinho-Espera-a/icons/icon-192.png">
-<link rel="apple-touch-icon" href="/Mercadinho-Espera-a/icons/icon-192.png">
+      --green:#22c55e;
+      --green2:#16a34a;
 
-<!-- Fonte moderna (mais profissional) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+      --red:#dc2626;
+      --red2:#b91c1c;
 
-<style>
-  :root{
-    --bg:#050814;
-    --panel: rgba(15,23,42,.78);
-    --panel2: rgba(15,23,42,.92);
-    --border:rgba(255,255,255,.10);
-    --muted:#cbd5e1;
+      --amber:#f59e0b;
 
-    --red:#d81f26;
-    --red2:#b30d13;
+      --shadow:0 22px 60px rgba(0,0,0,.55);
+      --shadow2:0 14px 34px rgba(0,0,0,.40);
 
-    --green:#22c55e;
-    --green2:#16a34a;
+      --r16:16px;
+      --r18:18px;
+      --r22:22px;
+      --r26:26px;
+    }
 
-    --text:#f3f4f6;
-    --ink:#0b1220;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 50% 8%, rgba(34,197,94,.10), transparent 60%),
+        radial-gradient(900px 520px at 10% 0%, rgba(220,38,38,.22), transparent 55%),
+        radial-gradient(900px 520px at 90% 0%, rgba(220,38,38,.22), transparent 55%),
+        linear-gradient(180deg, var(--bg2), var(--bg0));
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block}
+    .container{max-width:1180px;margin:0 auto;padding:0 16px}
 
-    /* padronização (mais profissional) */
-    --r-lg:18px;
-    --r-md:14px;
+    /* ===== Header (Top vermelho) ===== */
+    header{
+      position:sticky; top:0; z-index:80;
+      background:linear-gradient(90deg, rgba(220,38,38,.98), rgba(185,28,28,.96));
+      border-bottom:1px solid rgba(255,255,255,.10);
+      box-shadow:0 14px 34px rgba(0,0,0,.25);
+    }
+    .hrow{
+      display:grid;
+      grid-template-columns: 280px 1fr 300px;
+      gap:12px;
+      align-items:center;
+      padding:12px 0 10px;
+    }
+    @media(max-width:980px){
+      .hrow{grid-template-columns:1fr;gap:10px}
+    }
 
-    --shadow-card: 0 12px 26px rgba(0,0,0,.30);
-    --shadow-strong: 0 18px 50px rgba(0,0,0,.55);
-  }
+    .brand{display:flex;align-items:center;gap:10px}
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(900px 500px at 10% -10%, rgba(216,31,38,.35), transparent 60%),
-      radial-gradient(900px 500px at 90% -10%, rgba(34,197,94,.22), transparent 60%),
-      linear-gradient(180deg, var(--bg), #071024 40%, var(--bg));
-    -webkit-tap-highlight-color: transparent;
-    padding-bottom: 12px; /* desktop */
-  }
+    /* ✅ LOGO NOVA (SVG) */
+    .logo{
+      width:42px;height:42px;border-radius:999px;
+      display:grid;place-items:center;
+      background:transparent;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 12px 26px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+    .logo svg{width:42px;height:42px;display:block}
 
-  @keyframes drop{from{transform:translateY(-18px);opacity:0}to{transform:translateY(0);opacity:1}}
-  @keyframes up{from{transform:translateY(14px);opacity:0}to{transform:translateY(0);opacity:1}}
-  @keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
-  @keyframes shine{0%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
+    .btxt{line-height:1.05}
+    .btxt b{display:block}
+    .btxt small{display:block;color:rgba(255,255,255,.85);font-weight:700;font-size:12px}
 
-  .wrap{max-width:1400px;margin:0 auto;padding:0 14px}
+    /* busca topo estilo “pill” */
+    .topSearch{
+      display:flex;gap:10px;align-items:center;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:999px;
+      padding:8px;
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    .topSearch input{
+      flex:1;
+      border:none; outline:none;
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:#0b1220;
+      font-weight:800;
+    }
+    .topSearch button{
+      border:none;
+      background:#0b1220;
+      color:#fff;
+      font-weight:1000;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .topSearch button:hover{transform:translateY(-1px);filter:brightness(1.06)}
 
-  /* ===== TOPBAR ===== */
-  .topbar{
-    background: linear-gradient(135deg, var(--red), var(--red2));
-    box-shadow:0 12px 35px rgba(0,0,0,.45);
-    position:sticky; top:0; z-index:100;
-    animation: drop .45s ease;
-    padding-top: env(safe-area-inset-top);
-  }
-  .top-row{
-    display:flex;gap:14px;align-items:center;
-    padding:12px 0;
-  }
+    /* widgets topo */
+    .topWidgets{display:flex;gap:10px;justify-content:flex-end}
+    @media(max-width:980px){.topWidgets{justify-content:flex-start;flex-wrap:wrap}}
+    .w{
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      padding:10px 12px;
+      min-width:140px;
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    .tag{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:5px 10px;border-radius:999px;
+      font-size:11px;font-weight:1000;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .dot{width:7px;height:7px;border-radius:999px;background:#fff}
+    .dot.red{background:var(--red)}
+    .dot.green{background:var(--green)}
+    .w b{display:block;margin-top:6px;font-size:13px}
+    .w small{display:block;margin-top:4px;color:rgba(255,255,255,.80);font-weight:700;font-size:11px}
 
-  .brand{
-    display:flex;gap:12px;align-items:center;
-    min-width:280px;
-  }
-  .logo{
-    width:58px;height:58px;
-    filter: drop-shadow(0 12px 18px rgba(0,0,0,.35));
-    animation: pop 3s ease-in-out infinite;
-  }
-  .brand h1{margin:0;font-size:18px;line-height:1.1;font-weight:900;letter-spacing:-.2px}
-  .brand small{display:block;color:#ffe7e7;font-size:12px;margin-top:2px;opacity:.95}
+    /* ===== Chips de categoria (barra) ===== */
+    .chipBar{
+      padding:10px 0 12px;
+      background:linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.06));
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+    .chipRow{
+      display:flex;gap:10px;overflow:auto;padding-bottom:4px;
+      scrollbar-width:thin;
+    }
+    .chipRow::-webkit-scrollbar{height:8px}
+    .chipRow::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:999px}
 
-  .search{
-    flex:1;
-    display:flex;gap:10px;align-items:center;
-  }
-  .search input{
-    width:100%;
-    border:none;
-    padding:12px 14px;
-    border-radius:var(--r-md);
-    outline:none;
-    font-size:16px; /* mobile-friendly */
-  }
-  .search button{
-    border:none;
-    cursor:pointer;
-    padding:12px 16px;
-    border-radius:var(--r-md);
-    font-weight:900;
-    background:#111827;
-    color:#fff;
-    transition:.2s;
-    font-size:14px;
-    white-space:nowrap;
-  }
-  .search button:hover{transform:translateY(-2px)}
+    .chipBtn{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.20);
+      color:#fff;
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:900;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:.12s transform,.12s background,.12s border;
+      box-shadow:0 10px 18px rgba(0,0,0,.18) inset;
+    }
+    .chipBtn:hover{transform:translateY(-1px);background:rgba(0,0,0,.26)}
+    .chipBtn.active{
+      background:rgba(34,197,94,.18);
+      border-color:rgba(34,197,94,.35);
+    }
+    .chipIco{
+      width:22px;height:22px;border-radius:9px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:13px;
+    }
 
-  .top-actions{display:flex;gap:10px;align-items:center}
-  .pill{
-    display:flex;gap:10px;align-items:flex-start;
-    background: rgba(0,0,0,.25);
-    border:1px solid rgba(255,255,255,.18);
-    padding:10px 12px;
-    border-radius:var(--r-md);
-    font-size:12px;
-    white-space:nowrap;
-    position:relative;
-    overflow:hidden;
-  }
-  .pill::after{
-    content:"";
-    position:absolute;top:0;left:0;height:100%;width:35%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
-    transform:translateX(-120%);
-    animation: shine 5s linear infinite;
-  }
-  .status{
-    font-weight:900;
-    padding:7px 10px;border-radius:999px;
-    background: rgba(0,0,0,.3);
-    border:1px solid rgba(255,255,255,.18);
-  }
-  .open{color:#bbf7d0;border-color:rgba(34,197,94,.45)}
-  .closed{color:#fee2e2;border-color:rgba(239,68,68,.45)}
-  .tiny{font-size:11px;color:#ffe7e7;opacity:.95;margin-top:2px}
-  .updated{
-    margin-top:6px;
-    font-size:11px;
-    color:#ffe7e7;
-    opacity:.85;
-  }
+    /* ===== Layout ===== */
+    .layout{
+      display:grid;
+      grid-template-columns: 290px 1fr 330px;
+      gap:14px;
+      padding:14px 0 22px;
+      align-items:start;
+    }
+    @media(max-width:1140px){
+      .layout{grid-template-columns: 290px 1fr}
+    }
+    @media(max-width:980px){
+      .layout{grid-template-columns: 1fr}
+    }
 
-  /* ===== CART (badges) ===== */
-  .cart{
-    position:relative;
-    display:flex;align-items:center;gap:10px;
-    padding:10px 12px;border-radius:var(--r-md);
-    border:1px solid rgba(255,255,255,.18);
-    background: rgba(0,0,0,.25);
-    cursor:pointer;
-    transition:.2s;
-    user-select:none;
-  }
-  .cart:hover{transform:translateY(-2px)}
-  .cart-ic{
-    width:34px;height:34px;border-radius:12px;
-    display:grid;place-items:center;
-    background: rgba(34,197,94,.22);
-    border:1px solid rgba(255,255,255,.14);
-    font-size:18px;
-  }
-  .badge{
-    position:absolute;top:-7px;right:-7px;
-    background: var(--green);
-    color:#022c22;
-    font-weight:900;
-    border-radius:999px;
-    padding:4px 8px;
-    font-size:11px;
-    border:2px solid rgba(0,0,0,.25);
-  }
+    /* ===== Sidebar esquerda ===== */
+    .sidebar{
+      position:sticky; top:148px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(11,18,32,.92));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    @media(max-width:980px){.sidebar{position:static}}
 
-  /* ===== MENU DEPARTAMENTOS + SUBMENU ===== */
-  .menu{
-    background: rgba(17,24,39,.35);
-    border-top:1px solid rgba(255,255,255,.10);
-    border-bottom:1px solid rgba(255,255,255,.10);
-  }
-  .menu-row{
-    display:flex;gap:10px;flex-wrap:wrap;
-    padding:10px 0;
-    align-items:center;
-  }
-  .dept{
-    display:flex;gap:10px;align-items:center;
-    padding:10px 12px;border-radius:var(--r-md);
-    border:1px solid rgba(255,255,255,.10);
-    background: rgba(15,23,42,.60);
-    cursor:pointer;
-    transition:.2s;
-    user-select:none;
-    white-space:nowrap;
-  }
-  .dept:hover{transform:translateY(-2px);border-color:rgba(34,197,94,.35)}
-  .dept.active{
-    background: rgba(34,197,94,.14);
-    border-color: rgba(34,197,94,.55);
-  }
-  .dept .ic{
-    width:28px;height:28px;border-radius:10px;
-    display:grid;place-items:center;
-    background: rgba(216,31,38,.20);
-    border:1px solid rgba(255,255,255,.10);
-    font-size:16px;
-  }
-  .dept span{font-size:13px;font-weight:800}
+    .sideHead{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      display:flex;justify-content:space-between;align-items:center;
+    }
+    .sideHead b{font-size:13px}
+    .sideHead small{color:var(--muted);font-weight:800;font-size:12px}
 
-  .submenu{
-    display:none;
-    padding:10px 0 14px;
-    border-top:1px solid rgba(255,255,255,.08);
-    animation: up .25s ease;
-  }
-  .submenu.show{display:block}
-  .subrow{
-    display:flex;gap:10px;flex-wrap:wrap;
-  }
-  .sub{
-    padding:9px 12px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.10);
-    background: rgba(15,23,42,.65);
-    cursor:pointer;
-    transition:.2s;
-    font-size:12px;
-    color:var(--text);
-    user-select:none;
-    white-space:nowrap;
-    font-weight:700;
-  }
-  .sub:hover{transform:translateY(-2px);border-color:rgba(34,197,94,.35)}
-  .sub.active{
-    background: rgba(34,197,94,.18);
-    border-color: rgba(34,197,94,.50);
-    color:#eafff2;
-  }
+    .catList{padding:12px;display:grid;gap:10px}
 
-  /* ===== LAYOUT PRINCIPAL ===== */
-  .main{
-    display:grid;
-    grid-template-columns: 260px 1fr;
-    gap:16px;
-    margin-top:16px;
-    align-items:start;
-  }
+    /* ✅ ITEM DE CATEGORIA COM FOTO (igual seu print) */
+    .catItem{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:.12s transform,.12s box-shadow,.12s border;
+      position:relative;
+      min-height:84px;
+    }
+    .catItem:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+      border-color:rgba(34,197,94,.22);
+    }
 
-  /* SIDEBAR */
-  .sidebar{
-    background: rgba(15,23,42,.75);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-lg);
-    overflow:hidden;
-    animation: up .45s ease;
-  }
-  .side-header{
-    padding:14px;
-    font-weight:900;
-    background: linear-gradient(135deg, rgba(216,31,38,.32), rgba(34,197,94,.18));
-    border-bottom:1px solid rgba(255,255,255,.10);
-  }
-  .side-block{padding:12px 12px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
-  .side-block:last-child{border-bottom:none}
-  .side-title{font-weight:900;margin:0 0 10px;font-size:13px}
-  .side-item{
-    display:flex;gap:10px;align-items:center;
-    padding:10px;border-radius:var(--r-md);
-    border:1px solid transparent;
-    cursor:pointer;
-    transition:.2s;
-  }
-  .side-item:hover{background:rgba(255,255,255,.05);border-color:rgba(34,197,94,.25);transform:translateY(-2px)}
-  .side-ic{
-    width:34px;height:34px;border-radius:12px;
-    display:grid;place-items:center;
-    background: rgba(216,31,38,.18);
-    border:1px solid rgba(255,255,255,.10);
-  }
-  .side-item b{font-size:13px;font-weight:900}
-  .side-item small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+    .catCover{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      filter:saturate(1.05);
+    }
 
-  /* CONTEÚDO */
-  .content{display:flex;flex-direction:column;gap:16px;animation: up .45s ease}
+    .catOverlay{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.18)),
+        radial-gradient(240px 120px at 75% 50%, rgba(34,197,94,.18), transparent 60%);
+    }
 
-  /* ===== ESSENCIAIS DO DIA (profissional: ajuda quem tem pressa) ===== */
-  .essentials{
-    background: rgba(15,23,42,.75);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-lg);
-    padding:12px;
-  }
-  .essentials .row{
-    display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  }
-  .essentials h4{margin:0;font-size:14px;font-weight:900}
-  .essentials p{margin:6px 0 0;color:var(--muted);font-size:12px}
-  .ess-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-  .ess-chip{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:9px 12px;border-radius:999px;
-    border:1px solid rgba(255,255,255,.10);
-    background: rgba(11,18,32,.55);
-    cursor:pointer;
-    user-select:none;
-    font-size:12px;
-    font-weight:800;
-    transition:.15s;
-  }
-  .ess-chip:hover{border-color: rgba(34,197,94,.35); transform: translateY(-1px)}
-  .ess-chip .i{
-    width:26px;height:26px;border-radius:10px;
-    display:grid;place-items:center;
-    background: rgba(34,197,94,.16);
-    border:1px solid rgba(255,255,255,.10);
-  }
-
-  /* ===== CARROSSEL ===== */
-  .carousel{
-    border-radius:var(--r-lg);
-    border:1px solid rgba(255,255,255,.10);
-    overflow:hidden;
-    background: rgba(15,23,42,.70);
-    box-shadow:0 12px 30px rgba(0,0,0,.35);
-    position:relative;
-    min-height:190px;
-  }
-  .slides{display:flex;transition:transform .55s ease;width:100%}
-  .slide{min-width:100%;padding:18px;position:relative;overflow:hidden}
-  .slide::before{
-    content:"";
-    position:absolute;inset:-60px;
-    background:
-      radial-gradient(700px 260px at 18% 28%, rgba(34,197,94,.22), transparent 60%),
-      radial-gradient(650px 280px at 80% 0%, rgba(216,31,38,.25), transparent 60%),
-      linear-gradient(135deg, rgba(15,23,42,.88), rgba(2,44,34,.55));
-    filter:saturate(1.15);
-    transform:rotate(-2deg);
-  }
-  .slide .inner{
-    position:relative;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:18px;
-    min-height:160px;
-  }
-  .tag{
-    display:inline-flex;align-items:center;gap:8px;
-    background: rgba(216,31,38,.92);
-    padding:7px 10px;border-radius:999px;
-    font-size:12px;font-weight:900;
-  }
-  .tag.green{background: rgba(34,197,94,.95); color:#022c22;}
-  .slide h2{margin:10px 0 6px;font-size:22px;font-weight:900;letter-spacing:-.2px}
-  .slide p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
-  .cta{
-    margin-top:10px;
-    display:inline-flex;align-items:center;gap:8px;
-    background:#111827;
-    border:1px solid rgba(255,255,255,.12);
-    color:#fff;
-    padding:10px 12px;border-radius:var(--r-md);
-    font-weight:900;font-size:13px;
-    cursor:pointer;
-    user-select:none;
-  }
-  .nav{
-    position:absolute;inset:0;
-    display:flex;align-items:center;justify-content:space-between;
-    pointer-events:none;
-    padding:0 10px;
-  }
-  .nav button{
-    pointer-events:auto;
-    border:none;
-    width:44px;height:44px;border-radius:var(--r-md);
-    background: rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.14);
-    color:#fff;
-    cursor:pointer;
-    transition:.2s;
-  }
-  .nav button:hover{transform:translateY(-2px);background: rgba(0,0,0,.50)}
-  .dots{
-    position:absolute;left:0;right:0;bottom:10px;
-    display:flex;gap:8px;justify-content:center;
-  }
-  .dot{
-    width:10px;height:10px;border-radius:999px;
-    background: rgba(255,255,255,.25);
-    border:1px solid rgba(255,255,255,.18);
-    cursor:pointer;
-    transition:.2s;
-  }
-  .dot.active{
-    background: rgba(34,197,94,.95);
-    border-color: rgba(34,197,94,.65);
-  }
-
-  /* CONTROLES */
-  .controls{
-    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-    background: rgba(15,23,42,.75);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-lg);
-    padding:12px;
-  }
-  .controls select{
-    border:none;outline:none;
-    padding:10px 12px;border-radius:var(--r-md);
-    background:#0b1220;color:var(--text);
-    border:1px solid rgba(255,255,255,.10);
-    font-size:16px;
-    font-weight:700;
-  }
-  .hint{color:var(--muted);font-size:12px}
-
-  /* PRODUTOS */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-    gap:14px;
-  }
-  .card{
-    background: var(--panel);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-lg);
-    padding:14px;
-    box-shadow:var(--shadow-card);
-    transition:.18s;
-    animation: up .30s ease;
-  }
-  .card:hover{
-    transform: translateY(-4px);
-    border-color: rgba(34,197,94,.30);
-    box-shadow:0 18px 40px rgba(0,0,0,.45);
-  }
-
-  .meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
-  .chip{
-    font-size:11px;color:#bbf7d0;
-    background: rgba(34,197,94,.10);
-    border:1px solid rgba(34,197,94,.18);
-    padding:6px 10px;border-radius:999px;
-    max-width: 75%;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-    font-weight:800;
-  }
-  .unit{
-    font-size:11px;color:var(--muted);
-    background: rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.10);
-    padding:6px 10px;border-radius:999px;
-    white-space:nowrap;
-    font-weight:800;
-  }
-
-  /* mini “thumb” (dá cara profissional mesmo sem foto real) */
-  .thumb{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:8px;
-  }
-  .thumb .pic{
-    width:42px;height:42px;border-radius:16px;
-    display:grid;place-items:center;
-    background: rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.10);
-    font-size:20px;
-  }
-  .thumb .name{
-    flex:1;
-    font-weight:900;
-    font-size:15px;
-    line-height:1.15;
-    letter-spacing:-.2px;
-  }
-
-  /* Preço (profissional: maior destaque) */
-  .price-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-  }
-  .price{
-    display:inline-flex;
-    align-items:baseline;
-    gap:8px;
-    font-weight:900;
-    background: rgba(34,197,94,.95);
-    color:#022c22;
-    padding:9px 12px;border-radius:var(--r-md);
-    font-size:16px;
-  }
-  .price small{
-    font-weight:900;
-    opacity:.9;
-    font-size:12px;
-  }
-
-  .kg-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:6px 9px;
-    border-radius:999px;
-    background: rgba(251,191,36,.16);
-    border:1px solid rgba(251,191,36,.22);
-    color:#fde68a;
-    font-size:11px;
-    font-weight:900;
-  }
-
-  .note{margin-top:8px;color:var(--muted);font-size:12px;line-height:1.35}
-
-  /* Stepper (– 0 +) = UX de app */
-  .buyrow{
-    margin-top:12px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-  }
-  .stepper{
-    display:flex;align-items:center;gap:8px;
-    background: rgba(0,0,0,.22);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:var(--r-md);
-    padding:8px;
-    flex:1;
-    min-width: 170px;
-  }
-  .stepper button{
-    width:40px;height:40px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.25);
-    color:#fff;
-    cursor:pointer;
-    font-size:18px;
-    font-weight:900;
-  }
-  .stepper button:active{transform:scale(.98)}
-  .stepper .qty{
-    min-width:36px;
-    text-align:center;
-    font-weight:900;
-    font-size:14px;
-  }
-  .mini{
-    padding:10px 12px;
-    border-radius:var(--r-md);
-    border:1px solid rgba(255,255,255,.12);
-    background:#111827;
-    color:#fff;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:900;
-    white-space:nowrap;
-  }
-  .mini:active{transform:scale(.99)}
-
-  /* INFO + PAGAMENTOS */
-  .info{
-    background: rgba(15,23,42,.75);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-lg);
-    padding:14px;
-  }
-  .info h4{margin:0 0 10px;font-weight:900}
-  .paygrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
-    gap:12px;
-    margin-top:10px;
-  }
-  .pay{
-    background: rgba(2,44,34,.55);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:16px;
-    padding:12px;
-    text-align:center;
-    transition:.18s;
-    font-weight:800;
-  }
-  .pay:hover{
-    transform: translateY(-3px);
-    background: rgba(34,197,94,.18);
-    border-color: rgba(34,197,94,.30);
-  }
-
-  /* MODAL carrinho */
-  .modal{
-    position:fixed;inset:0;
-    background: rgba(0,0,0,.55);
-    display:none;
-    align-items:center;justify-content:center;
-    z-index:200;
-    padding:14px;
-  }
-  .modal.show{display:flex}
-  .modal-card{
-    width:min(760px, 100%);
-    background: var(--panel2);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:var(--r-lg);
-    overflow:hidden;
-    box-shadow:var(--shadow-strong);
-    animation: up .25s ease;
-  }
-  .modal-head{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px;
-    background: linear-gradient(135deg, rgba(216,31,38,.25), rgba(34,197,94,.16));
-    border-bottom:1px solid rgba(255,255,255,.10);
-  }
-  .modal-head b{font-size:14px;font-weight:900}
-  .close{
-    width:40px;height:40px;border-radius:var(--r-md);
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.30);
-    color:#fff;cursor:pointer;
-    font-weight:900;
-  }
-  .modal-body{padding:14px;color:var(--muted);line-height:1.6}
-  .modal-foot{
-    padding:14px;
-    border-top:1px solid rgba(255,255,255,.10);
-    display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;
-  }
-  .btn{
-    border:none;
-    background:#111827;
-    color:#fff;
-    padding:10px 12px;border-radius:var(--r-md);
-    cursor:pointer;
-    border:1px solid rgba(255,255,255,.12);
-    font-size:16px;
-    font-weight:900;
-  }
-  .btn.green{
-    background: rgba(34,197,94,.95);
-    color:#022c22;
-    border-color: rgba(34,197,94,.55);
-  }
-
-  /* Carrinho detalhado (profissional) */
-  .cart-list{
-    margin-top:12px;
-    background: rgba(0,0,0,.22);
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:var(--r-md);
-    padding:12px;
-  }
-  .cart-line{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:10px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    font-size:13px;
-  }
-  .cart-line:last-child{border-bottom:none}
-  .cart-line b{color:#fff}
-  .cart-total{
-    margin-top:10px;
-    display:flex;
-    justify-content:space-between;
-    font-weight:900;
-    color:#fff;
-  }
-  .cart-hint{
-    margin-top:8px;
-    font-size:12px;
-    color:var(--muted);
-  }
-
-  /* WHATS (inteligente) */
-  .whatsapp{
-    position:fixed;
-    right:18px;bottom:18px;
-    background: var(--green);
-    color:#022c22;
-    padding:14px 18px;
-    border-radius:var(--r-lg);
-    text-decoration:none;
-    font-weight:900;
-    box-shadow:0 16px 34px rgba(0,0,0,.45);
-    z-index:120;
-    transition: transform .2s, opacity .2s;
-  }
-  .whatsapp.hide{
-    opacity:0;
-    transform: translateY(10px);
-    pointer-events:none;
-  }
-
-  footer{padding:26px 0 50px;color:var(--muted);font-size:12px;text-align:center}
-
-  /* ===== MOBILE ACTIONS (menu + carrinho) ===== */
-  .hamb, .mobile-actions, .side-backdrop{ display:none; }
-  .hamb{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 12px;
-    border-radius:var(--r-md);
-    border:1px solid rgba(255,255,255,.18);
-    background: rgba(0,0,0,.25);
-    color:#fff;
-    cursor:pointer;
-    user-select:none;
-    font-weight:900;
-  }
-  .hamb .ic{
-    width:34px;height:34px;border-radius:12px;
-    display:grid;place-items:center;
-    background: rgba(34,197,94,.22);
-    border:1px solid rgba(255,255,255,.14);
-    font-size:18px;
-  }
-
-  /* ===== BARRA FIXA DO CARRINHO (mobile) ===== */
-  .cartbar{
-    display:none;
-    position:fixed;
-    left:0; right:0;
-    bottom:0;
-    padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-    background: rgba(15,23,42,.94);
-    border-top:1px solid rgba(255,255,255,.10);
-    z-index:220;
-    backdrop-filter: blur(8px);
-  }
-  .cartbar .inner{
-    max-width:1400px;
-    margin:0 auto;
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .cartbar .left{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    min-width: 0;
-  }
-  .cartbar .bubble{
-    width:42px;height:42px;border-radius:var(--r-md);
-    display:grid;place-items:center;
-    background: rgba(34,197,94,.20);
-    border:1px solid rgba(255,255,255,.12);
-    font-size:18px;
-    flex:0 0 auto;
-  }
-  .cartbar .meta{
-    display:flex;flex-direction:column;gap:2px;
-    min-width:0;
-  }
-  .cartbar .meta b{
-    font-size:13px;color:#fff;font-weight:900;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  }
-  .cartbar .meta small{font-size:12px;color:var(--muted);font-weight:700}
-  .cartbar .go{
-    border:none;
-    cursor:pointer;
-    padding:12px 14px;
-    border-radius:var(--r-md);
-    font-weight:900;
-    background: rgba(34,197,94,.95);
-    color:#022c22;
-    border:1px solid rgba(34,197,94,.55);
-    white-space:nowrap;
-  }
-
-  /* ===== “HEADER COMPACTO” quando rolar (mobile) ===== */
-  .topbar.compact .brand{display:none}
-  .topbar.compact .menu{display:none}
-  .topbar.compact .mobile-actions{display:none}
-  .topbar.compact .top-row{padding:10px 0}
-  .topbar.compact .search{margin-top:0}
-
-  /* ===== RESPONSIVO ===== */
-  @media (max-width: 980px){
-    body{ padding-bottom: 92px; } /* espaço pra cartbar */
-
-    /* reduz animações pesadas no mobile (performance) */
-    .logo{animation:none}
-    .pill::after{animation:none}
-
-    .brand{min-width:auto}
-    .top-actions{display:none}
-    .main{grid-template-columns: 1fr}
-
-    .top-row{flex-wrap:wrap; gap:10px; padding:10px 0}
-    .brand{width:100%}
-    .logo{width:46px;height:46px}
-    .brand h1{font-size:16px}
-    .brand small{font-size:11px}
-
-    .search{width:100%; flex: 0 0 100%; gap:8px}
-    .search input{height:44px;padding:10px 12px;border-radius:var(--r-md)}
-    .search button{height:44px;padding:10px 14px;border-radius:var(--r-md)}
-
-    /* actions mobile */
-    .mobile-actions{
+    .catContent{
+      position:relative;
+      z-index:2;
+      height:100%;
       display:flex;
-      width:100%;
-      gap:10px;
       align-items:center;
       justify-content:space-between;
-    }
-    #cartBtnMobile{flex:1; justify-content:center; height:48px}
-    .hamb{height:48px}
-
-    /* menu departamentos vira faixa rolável */
-    .menu-row{
-      flex-wrap:nowrap;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width:none;
-      padding:8px 0 10px;
-      gap:10px;
-    }
-    .menu-row::-webkit-scrollbar{display:none}
-    .dept{flex:0 0 auto; padding:9px 10px;border-radius:var(--r-md)}
-    .dept .ic{width:26px;height:26px;border-radius:10px;font-size:15px}
-    .dept span{font-size:12px}
-
-    /* submenu rolável */
-    .submenu{padding:8px 0 12px}
-    .subrow{
-      flex-wrap:nowrap;
-      overflow:auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width:none;
-      gap:10px;
-    }
-    .subrow::-webkit-scrollbar{display:none}
-    .sub{flex:0 0 auto; padding:8px 10px}
-
-    /* sidebar off-canvas */
-    .sidebar{
-      position:fixed;
-      top:0; left:0;
-      height:100dvh;
-      width:min(360px, 88vw);
-      z-index:260;
-      transform:translateX(-110%);
-      transition: transform .25s ease;
-      border-radius:0 var(--r-lg) var(--r-lg) 0;
-      box-shadow: 20px 0 60px rgba(0,0,0,.55);
-    }
-    .sidebar.open{ transform:translateX(0) }
-    .side-backdrop{
-      display:none;
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      z-index:250;
-    }
-    .side-backdrop.show{ display:block; }
-
-    /* carrossel menor e mais “app” */
-    .carousel{min-height:0}
-    .slide{padding:14px}
-    .slide .inner{
-      flex-direction:column;
-      align-items:flex-start;
-      gap:12px;
-      min-height:0;
-    }
-    .tag{font-size:11px;padding:6px 9px}
-    .slide h2{font-size:17px;line-height:1.15}
-    .slide p{font-size:12px}
-    .nav button{width:42px;height:42px;border-radius:var(--r-md)}
-
-    /* cards: 2 colunas */
-    .grid{
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding:14px 14px;
       gap:12px;
     }
-    .card{padding:12px;border-radius:var(--r-lg)}
-    .thumb .name{font-size:14px}
-    .price{font-size:16px}
 
-    /* WhatsApp não cobre conteúdo + aparece mais inteligente via JS */
-    .whatsapp{
-      right:12px;
-      bottom:98px; /* acima da cartbar */
+    .catLeft{
+      display:flex; align-items:center; gap:10px;
+      font-weight:1000; color:#fff;
+      text-shadow:0 10px 22px rgba(0,0,0,.35);
+      font-size:13px;
+    }
+
+    .catIco{
+      width:30px;height:30px;border-radius:12px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .catCount{
+      padding:8px 12px;border-radius:999px;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.25);
+      font-size:12px;
+      color:#d1fae5;
+      font-weight:1000;
+      box-shadow:0 10px 22px rgba(0,0,0,.25);
+    }
+
+    .sideActions{
       padding:12px 14px;
-      border-radius:16px;
-      font-size:14px;
+      border-top:1px solid var(--line);
+      display:grid;gap:10px;
+    }
+    .sideActions .btnSide{
+      width:100%;
+      padding:11px 12px;
+      border-radius:14px;
+      font-weight:1000;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .sideActions .btnSide:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .sideActions .btnSide.red{background:rgba(220,38,38,.20);border-color:rgba(220,38,38,.26)}
+    .sideActions .btnSide.green{background:rgba(34,197,94,.18);border-color:rgba(34,197,94,.26)}
+
+    /* ===== Main (centro) ===== */
+    .main{display:grid;gap:12px;min-width:0}
+
+    /* ===== Banner / Carrossel ===== */
+    .banner{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(11,18,32,.92));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .bannerTop{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .bannerTop b{font-size:13px}
+    .bannerTop small{color:var(--muted);font-weight:800;font-size:12px}
+    .modeBtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:900;
+      cursor:pointer;
     }
 
-    /* cartbar aparece */
-    .cartbar{display:block}
-    footer{padding-bottom:120px}
-  }
+    .quickRow{padding:10px 14px;display:flex;gap:10px;flex-wrap:wrap}
+    .qchip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      font-weight:900;font-size:12px;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .qchip:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .qico{
+      width:20px;height:20px;border-radius:8px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      font-size:12px;
+    }
 
-  @media (max-width: 420px){
-    .wrap{padding:0 12px}
-    .grid{grid-template-columns:1fr}
-  }
-</style>
+    .slides{position:relative;height:120px}
+    @media(max-width:720px){.slides{height:165px}}
+    .slide{
+      position:absolute; inset:0;
+      padding:12px 14px 18px;
+      display:grid;
+      grid-template-columns: 1fr 220px;
+      gap:12px;
+      align-items:center;
+      opacity:0;
+      transform:translateX(18px);
+      transition:opacity .45s ease, transform .45s ease;
+    }
+    @media(max-width:720px){.slide{grid-template-columns:1fr}}
+    .slide.active{opacity:1;transform:translateX(0)}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      width:max-content;
+      padding:6px 10px;border-radius:999px;
+      font-size:11px;font-weight:1000;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+    }
+    .badge.red{border-color:rgba(220,38,38,.30);background:rgba(220,38,38,.14)}
+    .badge.green{border-color:rgba(34,197,94,.30);background:rgba(34,197,94,.14)}
+    .badge.amber{border-color:rgba(245,158,11,.30);background:rgba(245,158,11,.14)}
+    .sTitle{font-size:16px;font-weight:1000;line-height:1.1;margin-top:8px}
+    .sDesc{color:var(--muted);font-weight:800;font-size:12px;margin-top:6px;max-width:70ch}
+    .sCtas{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .sBtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      padding:9px 12px;
+      border-radius:999px;
+      font-weight:1000;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .sBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .sBtn.green{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.26)}
+    .sBtn.red{background:rgba(220,38,38,.16);border-color:rgba(220,38,38,.26)}
+
+    .sRight{
+      height:100%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      display:grid;
+      place-items:end;
+      overflow:hidden;
+      position:relative;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .sRight::before{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(0,0,0,.55), rgba(0,0,0,.18));
+    }
+    .sRight::after{
+      content:"";
+      position:absolute; inset:-45%;
+      background:conic-gradient(from 180deg,
+        rgba(34,197,94,.00),
+        rgba(34,197,94,.22),
+        rgba(220,38,38,.22),
+        rgba(34,197,94,.00)
+      );
+      animation:spin 6s linear infinite;
+      mix-blend-mode:screen;
+      opacity:.55;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ✅ FRASES CURTAS SOBRE A IMAGEM (LADO DIREITO) */
+    .sPhrase{
+      position:relative;
+      z-index:2;
+      width:100%;
+      padding:12px;
+      display:flex;
+      justify-content:flex-end;
+    }
+    .sPhrase .pill{
+      max-width:180px;
+      text-align:right;
+      padding:10px 12px;
+      border-radius:16px;
+      background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      box-shadow:0 16px 30px rgba(0,0,0,.35);
+    }
+    .sPhrase .pill b{display:block;font-size:12px;line-height:1.1}
+    .sPhrase .pill small{display:block;margin-top:6px;font-size:11px;color:rgba(229,231,235,.86);font-weight:800}
+
+    .dots{
+      position:absolute; left:0; right:0; bottom:10px;
+      display:flex;gap:8px;justify-content:center;
+      pointer-events:none;
+    }
+    .dot2{width:8px;height:8px;border-radius:999px;background:rgba(255,255,255,.20)}
+    .dot2.on{background:rgba(34,197,94,.85)}
+    .navArrows{
+      position:absolute; top:50%; left:10px; right:10px;
+      display:flex;justify-content:space-between;
+      transform:translateY(-50%);
+      pointer-events:none;
+    }
+    .arr{
+      width:36px;height:36px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.28);
+      color:#fff;
+      display:grid;place-items:center;
+      font-weight:1000;
+      cursor:pointer;
+      pointer-events:auto;
+    }
+
+    /* ===== Filtros ===== */
+    .filters{
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(11,18,32,.92));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+      padding:12px 14px;
+      display:grid;
+      grid-template-columns: 1fr 230px 1fr;
+      gap:12px;
+      align-items:end;
+    }
+    @media(max-width:980px){.filters{grid-template-columns:1fr}}
+    label{font-size:12px;color:var(--muted);font-weight:900}
+    input,select,textarea{
+      width:100%;
+      margin-top:6px;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      outline:none;
+      background:rgba(255,255,255,.92);
+      color:#0b1220;
+      font-weight:800;
+    }
+    textarea{min-height:86px}
+    .actions{display:flex;gap:10px}
+    .btn{
+      width:100%;
+      padding:11px 12px;
+      border-radius:16px;
+      font-weight:1000;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+      box-shadow:0 10px 22px rgba(0,0,0,.18) inset;
+    }
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .btn.red{background:rgba(220,38,38,.18);border-color:rgba(220,38,38,.26)}
+    .btn.green{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.26)}
+
+    /* ===== Grid cards ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:12px;
+    }
+    @media(max-width:1180px){.grid{grid-template-columns: repeat(3, minmax(0, 1fr));}}
+    @media(max-width:820px){.grid{grid-template-columns: repeat(2, minmax(0, 1fr));}}
+    @media(max-width:520px){.grid{grid-template-columns: 1fr;}}
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.18));
+      box-shadow:0 16px 36px rgba(0,0,0,.30);
+      transition:.12s transform,.12s box-shadow,.12s border;
+      position:relative;
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(34,197,94,.22);
+      box-shadow:0 22px 48px rgba(0,0,0,.40);
+    }
+    .card img{
+      width:100%;height:150px;object-fit:cover;background:#0b1220;
+    }
+
+    .stockPill{
+      position:absolute;left:10px;top:10px;
+      padding:6px 10px;border-radius:999px;
+      font-size:11px;font-weight:1000;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.30);
+      backdrop-filter: blur(8px);
+      box-shadow:0 8px 18px rgba(0,0,0,.28);
+    }
+    .stockHigh{color:#bbf7d0;border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.12)}
+    .stockLow{color:#fde68a;border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.12)}
+    .stockOut{color:#fecaca;border-color:rgba(220,38,38,.25);background:rgba(220,38,38,.12)}
+
+    .quickAdd{
+      position:absolute;right:10px;top:10px;
+      width:38px;height:38px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(34,197,94,.18);
+      color:#d1fae5;font-weight:1000;font-size:20px;
+      display:grid;place-items:center;
+      box-shadow:0 10px 22px rgba(0,0,0,.28);
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .quickAdd:hover{transform:translateY(-1px);filter:brightness(1.06)}
+    .quickAdd[disabled]{background:rgba(148,163,184,.14);color:#cbd5e1;cursor:not-allowed}
+
+    .p{padding:12px}
+    .muted{color:var(--muted);font-size:12px;font-weight:800}
+    .title{font-weight:1000;margin-top:6px;line-height:1.2;font-size:13px;min-height:34px}
+
+    /* ✅ SKU sempre visível */
+    .skuPill{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-top:8px;
+      padding:6px 10px;border-radius:999px;
+      font-size:11px;font-weight:1000;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#e5e7eb;
+      width:max-content;
+    }
+    .skuPill b{color:#bbf7d0}
+
+    .priceRow{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin-top:10px;
+    }
+    .old{
+      font-weight:900;font-size:11px;color:#a1a1aa;text-decoration:line-through;
+      display:block;line-height:1;
+    }
+    .promo{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(34,197,94,.16);
+      border:1px solid rgba(34,197,94,.22);
+      padding:6px 10px;border-radius:999px;
+      color:#d1fae5;
+      font-weight:1000;font-size:12px;
+      line-height:1;
+    }
+    .sku{font-weight:900;color:#cbd5e1;opacity:.85;font-size:11px;text-align:right}
+
+    .qtyRow{
+      margin-top:10px;
+      display:flex;align-items:center;justify-content:space-between;gap:8px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;
+      padding:8px;
+    }
+    .circle{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.28);
+      color:#fff;font-weight:1000;cursor:pointer;
+    }
+    .circlePlus{background:rgba(34,197,94,.20);border-color:rgba(34,197,94,.25)}
+    .qty{text-align:center;min-width:62px}
+    .qty b{display:block;color:#bbf7d0;font-size:14px}
+
+    .empty{
+      display:none;
+      padding:16px;
+      color:var(--muted);
+      text-align:center;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;
+    }
+
+    /* ===== Carrinho (direita) ===== */
+    aside.cart{
+      position:sticky; top:148px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(15,23,42,.92), rgba(11,18,32,.92));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+      padding:14px;
+      height:fit-content;
+    }
+    @media(max-width:1140px){aside.cart{grid-column:1/-1; position:static}}
+    .cartTop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .cartTop h3{margin:0;font-size:14px}
+    .badgeCount{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      font-size:12px;font-weight:1000;
+      border:1px solid rgba(34,197,94,.25);
+      background:rgba(34,197,94,.12);
+      color:#bbf7d0;
+    }
+
+    .listItem{
+      display:flex;justify-content:space-between;gap:10px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:10px;margin-top:10px
+    }
+
+    .totalBox{
+      margin-top:12px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:10px;
+    }
+    .totalRow{display:flex;justify-content:space-between;gap:10px}
+    .totalRow b{font-size:14px;color:#bbf7d0}
+
+    .waBtn{
+      width:100%;
+      border-radius:16px;
+      margin-top:12px;
+      background:rgba(34,197,94,.22);
+      border:1px solid rgba(34,197,94,.30);
+      color:#eafff1;
+      font-weight:1000;
+      padding:12px 14px;
+      cursor:pointer;
+      transition:.12s transform,.12s filter;
+    }
+    .waBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+
+    .footer{
+      margin:18px 0 40px;
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      padding:16px;
+    }
+    .footer p{color:var(--muted);font-weight:800}
+
+    /* WhatsApp flutuante */
+    .floatWA{
+      position:fixed;right:18px;bottom:18px;
+      background:linear-gradient(135deg, rgba(34,197,94,.95), rgba(34,197,94,.80));
+      border:1px solid rgba(255,255,255,.14);
+      color:#062010;
+      font-weight:1000;
+      padding:12px 14px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      display:flex;align-items:center;gap:10px;
+      cursor:pointer;
+    }
+    .floatWA span{
+      width:10px;height:10px;border-radius:999px;background:#fff;
+      box-shadow:0 0 0 6px rgba(255,255,255,.10);
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- TOPO -->
-<div class="topbar" id="topbar">
-  <div class="wrap">
-    <div class="top-row">
-
+<header>
+  <div class="container">
+    <div class="hrow">
       <div class="brand">
-        <svg class="logo" viewBox="0 0 200 200" aria-label="Logo Mercadinho Esperança">
-          <defs>
-            <radialGradient id="g" cx="30%" cy="30%" r="70%">
-              <stop offset="0%" stop-color="#bbf7d0"/>
-              <stop offset="100%" stop-color="#16a34a"/>
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="96" fill="url(#g)"/>
-          <circle cx="100" cy="100" r="86" fill="#052e16"/>
-          <rect x="25" y="92" width="150" height="52" rx="22" fill="#16a34a"/>
-          <text x="100" y="70" text-anchor="middle" font-size="22" fill="#ecfdf5" font-weight="bold">MERCADINHO</text>
-          <text x="100" y="126" text-anchor="middle" font-size="26" fill="#052e16" font-weight="bold">ESPERANÇA</text>
-        </svg>
-        <div>
-          <h1>Mercadinho Esperança</h1>
+
+        <!-- ✅ LOGO NOVA (Mercadinho Esperança) -->
+        <div class="logo" aria-label="Mercadinho Esperança">
+          <svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Mercadinho Esperança">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#22c55e"/>
+                <stop offset="100%" stop-color="#16a34a"/>
+              </linearGradient>
+            </defs>
+
+            <circle cx="50" cy="50" r="48" fill="url(#g1)" />
+
+            <!-- carrinho -->
+            <path d="M28 35h6l4 22h28l4-14H38"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+            <!-- rodas -->
+            <circle cx="42" cy="64" r="3.5" fill="#ffffff"/>
+            <circle cx="62" cy="64" r="3.5" fill="#ffffff"/>
+
+            <!-- folha (esperança) -->
+            <path d="M55 28c6-8 14-8 14-8s0 10-10 14c-4 2-7 0-7 0s-1-3 3-6z"
+                  fill="#dc2626"/>
+          </svg>
+        </div>
+
+        <div class="btxt">
+          <b>Mercadinho Esperança</b>
           <small>Produtos • preços • atendimento rápido</small>
         </div>
       </div>
 
-      <div class="search">
-        <input id="search" placeholder="Pesquisar: carne, banana, biscoito, detergente..." />
-        <button id="btnSearch">PESQUISAR</button>
+      <div class="topSearch" role="search">
+        <input id="topSearch" placeholder="Pesquisar: carne, banana, biscoito, detergente..." />
+        <button id="topSearchBtn">PESQUISAR</button>
       </div>
 
-      <!-- AÇÕES MOBILE -->
-      <div class="mobile-actions">
-        <div class="hamb" id="hambBtn" aria-label="Abrir navegação">
-          <div class="ic">☰</div>
-          <div style="font-size:12px;line-height:1.1">
-            <b style="font-weight:900">Menu</b><br>
-            <span style="font-weight:700;opacity:.9;font-size:11px">Info e atalhos</span>
-          </div>
+      <div class="topWidgets">
+        <div class="w">
+          <span class="tag"><span class="dot red" id="statusDot"></span><span id="statusTxt">FECHADO AGORA</span></span>
+          <b id="statusTitle">Volta em breve</b>
+          <small id="statusSub">Seg–Sáb: 07–19 • Dom: 07–12</small>
         </div>
-
-        <div class="cart" id="cartBtnMobile" title="Seu pedido">
-          <div class="cart-ic">🛒</div>
-          <div style="font-weight:900;font-size:12px;">Seu pedido</div>
-          <div class="badge" id="cartCountMobile">0</div>
+        <div class="w">
+          <span class="tag"><span class="dot green"></span> Seu pedido</span>
+          <b>Total estimado</b>
+          <small id="topTotal">R$ 0,00</small>
         </div>
-      </div>
-
-      <!-- AÇÕES DESKTOP -->
-      <div class="top-actions">
-        <div class="pill">
-          <span>🕒</span>
-          <div>
-            <div id="status" class="status">Verificando…</div>
-            <div class="tiny">Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</div>
-            <div class="updated" id="updatedAt">Atualizado hoje</div>
-          </div>
-        </div>
-
-        <div class="cart" id="cartBtn" title="Seu pedido">
-          <div class="cart-ic">🛒</div>
-          <div>
-            <div style="font-weight:900;font-size:12px;">Seu pedido</div>
-            <div class="tiny">Total estimado</div>
-          </div>
-          <div class="badge" id="cartCount">0</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- MENU DEPARTAMENTOS -->
-  <div class="menu" id="menuBar">
-    <div class="wrap">
-      <div class="menu-row" id="deptRow"></div>
-      <div class="submenu" id="submenu">
-        <div class="subrow" id="subRow"></div>
       </div>
     </div>
+
+    <div class="chipBar">
+      <div class="chipRow" id="chipRow"></div>
+    </div>
   </div>
-</div>
+</header>
 
-<div class="wrap">
-  <div class="main">
+<main class="container">
+  <div class="layout">
 
-    <!-- Backdrop sidebar (mobile) -->
-    <div class="side-backdrop" id="sideBackdrop"></div>
-
-    <!-- SIDEBAR (no mobile vira gaveta) -->
-    <aside class="sidebar" id="sidebar">
-      <div class="side-header">Atalhos & Informações</div>
-
-      <div class="side-block">
-        <div class="side-title">Listas prontas</div>
-        <div class="side-item" id="goAll">
-          <div class="side-ic">🛒</div>
-          <div><b>Todos os produtos</b><small>Ver lista completa</small></div>
-        </div>
-        <div class="side-item" id="goBasics">
-          <div class="side-ic">🧺</div>
-          <div><b>Básicos do dia a dia</b><small>Arroz, feijão, óleo, café…</small></div>
-        </div>
-        <div class="side-item" id="goMeat">
-          <div class="side-ic">🥩</div>
-          <div><b>Açougue</b><small>Várias carnes (kg)</small></div>
-        </div>
-        <div class="side-item" id="goHorti">
-          <div class="side-ic">🥬</div>
-          <div><b>Hortifruti</b><small>Frutas e verduras</small></div>
-        </div>
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Atalhos e categorias">
+      <div class="sideHead">
+        <b>Atalhos & Informações</b>
+        <small>Listas prontas</small>
       </div>
-
-      <div class="side-block">
-        <div class="side-title">Serviços</div>
-        <div class="side-item" id="goPay">
-          <div class="side-ic">💳</div>
-          <div><b>Formas de pagamento</b><small>Pix • cartões • dinheiro</small></div>
-        </div>
-        <div class="side-item" id="goInfo">
-          <div class="side-ic">📍</div>
-          <div><b>Informações</b><small>Horário e contato</small></div>
-        </div>
-        <div class="side-item" id="goWhatsappSide">
-          <div class="side-ic">💬</div>
-          <div><b>Chamar no WhatsApp</b><small>Enviar pedido (resumo)</small></div>
-        </div>
+      <div class="catList" id="catList"></div>
+      <div class="sideActions">
+        <button class="btnSide green" id="btnZapSide">Chamar no WhatsApp</button>
+        <button class="btnSide red" id="btnCopySide">Copiar lista</button>
       </div>
     </aside>
 
-    <!-- CONTEÚDO -->
-    <section class="content">
-
-      <!-- ESSENCIAIS -->
-      <div class="essentials" id="essentials">
-        <div class="row">
+    <!-- Centro -->
+    <section class="main">
+      <!-- Banner animado -->
+      <div class="banner">
+        <div class="bannerTop">
           <div>
-            <h4>🧺 Essenciais de hoje</h4>
-            <p>Toque em um item para filtrar rápido.</p>
+            <b>Essenciais do dia</b>
+            <small>Toque num item para filtrar rápido.</small>
           </div>
-          <button class="mini" id="modeSimpleBtn" title="Alternar modo simples">Modo simples</button>
+          <button class="modeBtn" id="modeBtn">Modo simples</button>
         </div>
-        <div class="ess-chips">
-          <div class="ess-chip" data-ess="Arroz"><span class="i">🍚</span>Arroz</div>
-          <div class="ess-chip" data-ess="Feijão"><span class="i">🫘</span>Feijão</div>
-          <div class="ess-chip" data-ess="Óleo"><span class="i">🫗</span>Óleo</div>
-          <div class="ess-chip" data-ess="Café"><span class="i">☕</span>Café</div>
-          <div class="ess-chip" data-ess="Leite"><span class="i">🥛</span>Leite</div>
-          <div class="ess-chip" data-ess="Ovos"><span class="i">🥚</span>Ovos</div>
-          <div class="ess-chip" data-ess="Detergente"><span class="i">🧼</span>Detergente</div>
-        </div>
-      </div>
 
-      <!-- CARROSSEL -->
-      <div class="carousel" id="carousel">
+        <div class="quickRow">
+          <button class="qchip" data-fast="Arroz"><span class="qico">🍚</span> Arroz</button>
+          <button class="qchip" data-fast="Feijão"><span class="qico">🫘</span> Feijão</button>
+          <button class="qchip" data-fast="Óleo"><span class="qico">🫗</span> Óleo</button>
+          <button class="qchip" data-fast="Café"><span class="qico">☕</span> Café</button>
+          <button class="qchip" data-fast="Leite"><span class="qico">🥛</span> Leite</button>
+          <button class="qchip" data-fast="Detergente"><span class="qico">🧼</span> Detergente</button>
+        </div>
+
         <div class="slides" id="slides">
-          <div class="slide">
-            <div class="inner">
-              <div>
-                <div class="tag">Mercadinho Esperança</div>
-                <h2>Pesquise rápido e veja preços</h2>
-                <p>Organizado por departamentos. Preços sujeitos a alteração.</p>
-                <div class="cta" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">🔎 Ver produtos</div>
+          <div class="slide active">
+            <div>
+              <span class="badge green"><span class="dot green"></span> Bem-vindo</span>
+              <div class="sTitle">Seja bem-vindo!</div>
+              <div class="sDesc">Aqui você compra com calma, preço justo e envia tudo pelo WhatsApp.</div>
+              <div class="sCtas">
+                <button class="sBtn green" id="goCatalog">Ver produtos</button>
+                <button class="sBtn red" id="goWhats">Enviar pedido</button>
               </div>
-              <div style="text-align:right">
-                <div class="tag green">Atendimento</div>
-                <h2 style="margin-top:10px">WhatsApp</h2>
-                <p>(81) 8317-3613</p>
-                <div class="cta" id="ctaWhats">💬 Enviar pedido</div>
+            </div>
+            <div class="sRight" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=70')">
+              <div class="sPhrase">
+                <div class="pill">
+                  <b>Preço bom todo dia</b>
+                  <small>Escolha • adicione • envie</small>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="slide">
-            <div class="inner">
-              <div>
-                <div class="tag">Interface profissional</div>
-                <h2>Filtro por categoria + busca</h2>
-                <p>Toque em um departamento e uma subcategoria para filtrar melhor.</p>
-                <div class="cta" onclick="document.getElementById('deptRow').scrollIntoView({behavior:'smooth'})">🧭 Escolher departamento</div>
+            <div>
+              <span class="badge green"><span class="dot green"></span> Mercado do dia a dia</span>
+              <div class="sTitle">Tudo o que não pode faltar</div>
+              <div class="sDesc">Mercearia, hortifruti, carnes, higiene e limpeza.</div>
+              <div class="sCtas">
+                <button class="sBtn green" id="copyPattern">Copiar padrão</button>
               </div>
-              <div style="text-align:right">
-                <div class="tag green">Dica</div>
-                <h2 style="margin-top:10px">Use “Enter”</h2>
-                <p>Digite e aperte Enter para buscar.</p>
+            </div>
+            <div class="sRight" style="background-image:url('https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=1200&q=70')">
+              <div class="sPhrase">
+                <div class="pill">
+                  <b>Compra rápida</b>
+                  <small>Sem complicação</small>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="slide">
-            <div class="inner">
-              <div>
-                <div class="tag">Horário</div>
-                <h2>Aberto/Fechado automático</h2>
-                <p>Seg: 07–12 • Ter–Sáb: 07–19 • Dom: 07–12</p>
-                <div class="cta" onclick="document.getElementById('infoBox').scrollIntoView({behavior:'smooth'})">📍 Ver informações</div>
+            <div>
+              <span class="badge amber"><span class="dot" style="background:var(--amber)"></span> Praticidade</span>
+              <div class="sTitle">Monte seu pedido sem pressa</div>
+              <div class="sDesc">Adicione os produtos e finalize quando quiser.</div>
+              <div class="sCtas">
+                <button class="sBtn green" id="scrollGrid">Ir para vitrine</button>
               </div>
-              <div style="text-align:right">
-                <div class="tag green">Pagamento</div>
-                <h2 style="margin-top:10px">Pix e Cartões</h2>
-                <p>Dinheiro • Crédito • Débito • Pix • Vale</p>
-                <div class="cta" onclick="document.getElementById('payBox').scrollIntoView({behavior:'smooth'})">💳 Ver pagamentos</div>
+            </div>
+            <div class="sRight" style="background-image:url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=70')">
+              <div class="sPhrase">
+                <div class="pill">
+                  <b>Seu carrinho</b>
+                  <small>em poucos cliques</small>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="nav">
-          <button id="prev" aria-label="Anterior">‹</button>
-          <button id="next" aria-label="Próximo">›</button>
-        </div>
+          <div class="navArrows">
+            <button class="arr" id="prevSlide">‹</button>
+            <button class="arr" id="nextSlide">›</button>
+          </div>
 
-        <div class="dots" id="dots"></div>
-      </div>
-
-      <!-- CONTROLES -->
-      <div class="controls">
-        <label class="hint"><b>Ordenar:</b></label>
-        <select id="order">
-          <option value="relevancia">Relevância</option>
-          <option value="menor">Menor preço</option>
-          <option value="maior">Maior preço</option>
-          <option value="az">Nome (A–Z)</option>
-        </select>
-        <span class="hint">Preços sujeitos a alteração • Itens por kg são estimados</span>
-      </div>
-
-      <!-- PRODUTOS -->
-      <div class="grid" id="grid"></div>
-
-      <!-- PAGAMENTOS -->
-      <div class="info" id="payBox">
-        <h4>💳 Formas de Pagamento</h4>
-        <div class="paygrid">
-          <div class="pay">💰<br><b>Dinheiro</b></div>
-          <div class="pay">💳<br><b>Crédito</b></div>
-          <div class="pay">💳<br><b>Débito</b></div>
-          <div class="pay">📱<br><b>Pix</b></div>
-          <div class="pay">🧾<br><b>Vale Alimentação</b></div>
+          <div class="dots" id="dots"></div>
         </div>
       </div>
 
-      <!-- INFORMAÇÕES -->
-      <div class="info" id="infoBox">
-        <h4>📍 Informações</h4>
-        <div style="color:var(--muted);line-height:1.6;font-weight:600">
-          <b style="color:#fff">Horário:</b><br>
-          Segunda: 07h às 12h<br>
-          Terça a Sábado: 07h às 19h<br>
-          Domingo: 07h às 12h<br><br>
-          <b style="color:#fff">WhatsApp:</b> (81) 8317-3613
+      <!-- filtros -->
+      <div class="filters" id="catalogo">
+        <div>
+          <label>Buscar produto</label>
+          <input id="search" placeholder="Ex: carne, arroz, queijo, macarrão..." />
+        </div>
+
+        <div>
+          <label>Categoria</label>
+          <select id="categoria"></select>
+        </div>
+
+        <div class="actions">
+          <button id="btnClear" class="btn">Limpar lista</button>
+          <button id="btnCopy" class="btn red">Copiar lista</button>
         </div>
       </div>
 
+      <!-- vitrine -->
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty">Nenhum produto encontrado.</div>
+
+      <div class="footer" id="contato">
+        <h3 style="margin:0">Contato</h3>
+        <p>Faça seu pedido no WhatsApp do Mercadinho Esperança.</p>
+        <button class="btn red" id="btnZapFooter" style="max-width:280px">Chamar no WhatsApp</button>
+      </div>
     </section>
+
+    <!-- carrinho -->
+    <aside class="cart">
+      <div class="cartTop">
+        <h3>Seu pedido</h3>
+        <span class="badgeCount" id="badgeCount">0 itens</span>
+      </div>
+
+      <div class="muted" style="margin-top:10px">Itens adicionados:</div>
+      <div id="lista"></div>
+
+      <div class="totalBox">
+        <div class="totalRow">
+          <span class="muted">Total estimado</span>
+          <b id="totalEstimado">R$ 0,00</b>
+        </div>
+        <div class="muted" style="margin-top:6px">* Total estimado (vitrine).</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label>Observações (opcional)</label>
+        <textarea id="obs" placeholder="Ex: trocar por similar se faltar..."></textarea>
+      </div>
+
+      <button id="btnWhats" class="waBtn">Enviar no WhatsApp</button>
+
+      <div class="muted" style="margin-top:10px">
+        WhatsApp: <b style="color:#bbf7d0">+55 81 8317-3613</b>
+      </div>
+    </aside>
+
   </div>
+</main>
 
-  <footer>Mercadinho Esperança • Produtos organizados por categoria • Preços sujeitos a alteração</footer>
-</div>
-
-<!-- BARRA FIXA DO CARRINHO (mobile) -->
-<div class="cartbar" id="cartbar" aria-hidden="false">
-  <div class="inner">
-    <div class="left">
-      <div class="bubble">🛒</div>
-      <div class="meta">
-        <b id="cartbarTitle">Seu pedido</b>
-        <small id="cartbarSub">0 itens • R$ 0,00</small>
-      </div>
-    </div>
-    <button class="go" id="cartbarBtn">Ver pedido</button>
-  </div>
-</div>
-
-<!-- MODAL CARRINHO -->
-<div class="modal" id="cartModal" aria-hidden="true">
-  <div class="modal-card">
-    <div class="modal-head">
-      <b>🛒 Seu pedido (estimado)</b>
-      <button class="close" id="closeCart" aria-label="Fechar">✕</button>
-    </div>
-    <div class="modal-body">
-      <div style="color:#fff;font-weight:900">Resumo do pedido</div>
-      <div class="cart-list" id="cartList">
-        <div style="color:var(--muted);font-size:13px">Seu pedido está vazio.</div>
-      </div>
-
-      <div class="cart-total">
-        <span>Total estimado</span>
-        <span id="cartTotal">R$ 0,00</span>
-      </div>
-
-      <div class="cart-hint" id="cartHint">
-        * Itens por kg são estimados. Confirme no balcão/atendimento.
-      </div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn" id="clearCart">Zerar</button>
-      <button class="btn green" id="goWhatsapp">Enviar no WhatsApp</button>
-    </div>
-  </div>
-</div>
-
-<a class="whatsapp" id="whatsFloat" href="#" target="_blank">💬 WhatsApp</a>
+<a id="floatZap" class="floatWA" target="_blank" href="#" aria-label="WhatsApp">
+  <span></span> WhatsApp
+</a>
 
 <script>
-/* ==========================
-   CONFIG
-   ========================== */
-const WHATS_NUMBER = "558183173613"; // (81) 8317-3613 no formato internacional
+  // ============================
+  // CONFIG
+  // ============================
+  const WHATSAPP_NUMBER = "558183173613";
+  const FALLBACK_IMG = "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=1200&q=70";
 
-/* ==========================
-   HORÁRIO ABERTO/FECHADO
-   ========================== */
-function verificarHorario(){
-  const d=new Date(), dia=d.getDay(), h=d.getHours()+d.getMinutes()/60;
-  let aberto=false;
-  if(dia===1) aberto=h>=7 && h<12;                 // segunda
-  else if(dia>=2 && dia<=6) aberto=h>=7 && h<19;   // terça-sábado
-  else if(dia===0) aberto=h>=7 && h<12;            // domingo
+  const HOURS = {
+    weekday: { open: 7, close: 19 },
+    sunday: { open: 7, close: 12 }
+  };
 
-  const el=document.getElementById("status");
-  el.textContent = aberto ? "🟢 ABERTO AGORA" : "🔴 FECHADO AGORA";
-  el.className = "status " + (aberto ? "open" : "closed");
-}
-verificarHorario();
-setInterval(verificarHorario,60000);
+  // ============================
+  // Imagens por SKU (assets/images/)
+  // ============================
+  const slugify = (s) => (s || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
-/* ==========================
-   "ATUALIZADO EM" (confiança)
-   ========================== */
-function pad2(n){ return String(n).padStart(2,"0"); }
-function setUpdatedNow(){
-  const d=new Date();
-  const txt = `Atualizado hoje às ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-  const el = document.getElementById("updatedAt");
-  if(el) el.textContent = txt;
-}
-setUpdatedNow();
+  const imgBySkuAndName = (sku, nome) => `assets/images/${sku}_${slugify(nome)}.jpg`;
+  const imgBySkuSimple = (sku) => `assets/images/${sku}.jpg`;
 
-/* ==========================
-   DEPARTAMENTOS + SUBMENU
-   ========================== */
-const departamentos = [
-  {key:"Todos", icon:"🛒", subs:["Tudo"]},
-  {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos"]},
-  {key:"Mercearia", icon:"🍪", subs:["Biscoitos","Enlatados","Massas","Molhos","Temperos","Doces"]},
-  {key:"Frios & Laticínios", icon:"🧀", subs:["Queijos","Presunto","Mortadela","Iogurte","Manteiga","Requeijão"]},
-  {key:"Açougue", icon:"🥩", subs:["Bovina","Frango","Suína","Linguiças","Peixes"]},
-  {key:"Hortifruti", icon:"🥬", subs:["Frutas","Verduras","Legumes","Temperos"]},
-  {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos"]},
-  {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo"]},
-  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]}
-];
-
-/* ==========================
-   PRODUTOS (SUA LISTA)
-   ========================== */
-const produtos = [
-  {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Arroz 1kg", preco:5.80, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Arroz parboilizado 1kg", preco:6.40, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Feijão Carioca 1kg", preco:8.50, cat:"Básicos", sub:"Feijão", un:"pacote"},
-  {nome:"Feijão Preto 1kg", preco:9.20, cat:"Básicos", sub:"Feijão", un:"pacote"},
-  {nome:"Açúcar 1kg", preco:4.20, cat:"Básicos", sub:"Açúcar", un:"pacote"},
-  {nome:"Sal 1kg", preco:2.00, cat:"Básicos", sub:"Sal", un:"pacote"},
-  {nome:"Óleo de Soja 900ml", preco:6.90, cat:"Básicos", sub:"Óleo", un:"unid."},
-  {nome:"Café 500g", preco:14.90, cat:"Básicos", sub:"Café", un:"pacote"},
-  {nome:"Leite 1L", preco:4.70, cat:"Básicos", sub:"Leite", un:"unid."},
-  {nome:"Ovos (dúzia)", preco:11.90, cat:"Básicos", sub:"Ovos", un:"dúzia"},
-  {nome:"Farinha de Trigo 1kg", preco:4.80, cat:"Básicos", sub:"Farinha", un:"pacote"},
-  {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
-  {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
-
-  {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
-  {nome:"Macarrão Parafuso 500g", preco:4.10, cat:"Mercearia", sub:"Massas", un:"pacote"},
-  {nome:"Macarrão instantâneo", preco:2.50, cat:"Mercearia", sub:"Massas", un:"unid."},
-  {nome:"Extrato de Tomate", preco:3.50, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Molho de Tomate", preco:2.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Milho Verde (lata)", preco:4.20, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Ervilha (lata)", preco:4.10, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Sardinha (lata)", preco:6.50, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Atum (lata)", preco:7.90, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Achocolatado", preco:6.80, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Chocolate (barra)", preco:6.50, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Gelatina", preco:2.20, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Adoçante", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Margarina", preco:5.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Maionese", preco:6.20, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Ketchup", preco:6.00, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Mostarda", preco:5.80, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Tempero completo", preco:3.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Caldo de galinha", preco:2.50, cat:"Mercearia", sub:"Temperos", un:"cx"},
-  {nome:"Pipoca (milho) 500g", preco:4.20, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Fermento químico", preco:4.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Canjica", preco:5.50, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Arroz doce (mistura)", preco:4.90, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Pão de forma", preco:7.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Bolo pronto", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-
-  {nome:"Mortadela (kg)", preco:12.90, cat:"Frios & Laticínios", sub:"Mortadela", un:"kg", obs:"Preço por kg"},
-  {nome:"Presunto (kg)", preco:28.90, cat:"Frios & Laticínios", sub:"Presunto", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Mussarela (kg)", preco:39.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Prato (kg)", preco:42.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Coalho (kg)", preco:44.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Iogurte (unidade)", preco:3.50, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Manteiga", preco:9.90, cat:"Frios & Laticínios", sub:"Manteiga", un:"unid."},
-  {nome:"Requeijão", preco:8.90, cat:"Frios & Laticínios", sub:"Requeijão", un:"unid."},
-  {nome:"Creme de leite", preco:4.80, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
-
-  {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Patinho (kg)", preco:36.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Costela Bovina (kg)", preco:27.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne moída (kg)", preco:33.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Fígado bovino (kg)", preco:17.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Frango inteiro (kg)", preco:12.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Peito de frango (kg)", preco:18.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Coxa e sobrecoxa (kg)", preco:14.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Asa de frango (kg)", preco:15.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Linguiça Toscana (kg)", preco:19.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
-  {nome:"Linguiça Calabresa (kg)", preco:23.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne suína (kg)", preco:22.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Costela suína (kg)", preco:24.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Bisteca suína (kg)", preco:23.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
-
-  {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Mamão (unidade)", preco:6.00, cat:"Hortifruti", sub:"Frutas", un:"unid."},
-  {nome:"Uva (bandeja)", preco:8.90, cat:"Hortifruti", sub:"Frutas", un:"bandeja"},
-  {nome:"Limão (kg)", preco:4.50, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Tomate (kg)", preco:5.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Batata (kg)", preco:4.30, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Cebola (kg)", preco:4.80, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Cenoura (kg)", preco:4.40, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Beterraba (kg)", preco:4.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Repolho (unidade)", preco:5.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Alface (unidade)", preco:3.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Coentro (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
-  {nome:"Cebolinha (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
-  {nome:"Alho (100g)", preco:3.50, cat:"Hortifruti", sub:"Temperos", un:"100g"},
-
-  {nome:"Água mineral 500ml", preco:2.50, cat:"Bebidas", sub:"Água", un:"unid."},
-  {nome:"Água mineral 1,5L", preco:4.50, cat:"Bebidas", sub:"Água", un:"unid."},
-  {nome:"Refrigerante 2L", preco:7.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Refrigerante 1L", preco:5.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Refrigerante (lata)", preco:4.50, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Suco 1L", preco:5.20, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Suco (caixinha)", preco:3.90, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Cerveja (lata)", preco:3.50, cat:"Bebidas", sub:"Cervejas", un:"unid."},
-  {nome:"Cerveja 600ml", preco:7.90, cat:"Bebidas", sub:"Cervejas", un:"unid."},
-  {nome:"Energético", preco:9.90, cat:"Bebidas", sub:"Energéticos", un:"unid."},
-  {nome:"Chá gelado", preco:4.80, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Água de coco", preco:6.50, cat:"Bebidas", sub:"Sucos", un:"unid."},
-
-  {nome:"Detergente", preco:2.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Sabão em pó", preco:12.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Água sanitária", preco:3.40, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Desinfetante", preco:4.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Esponja", preco:1.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Limpa vidro", preco:7.20, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Pano de chão", preco:4.00, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Saco de lixo 30L", preco:8.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
-  {nome:"Saco de lixo 50L", preco:12.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
-  {nome:"Sabão em barra", preco:6.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Amaciante", preco:12.50, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Álcool 70%", preco:9.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Lustra móveis", preco:10.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Papel toalha", preco:7.50, cat:"Limpeza", sub:"Cozinha", un:"pacote"},
-
-  {nome:"Sabonete", preco:2.20, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Shampoo", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
-  {nome:"Condicionador", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
-  {nome:"Creme dental", preco:4.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Escova de dente", preco:5.50, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Fio dental", preco:6.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Papel higiênico", preco:15.90, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
-  {nome:"Papel lenço", preco:6.50, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
-  {nome:"Desodorante", preco:11.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Absorvente", preco:9.90, cat:"Higiene & Cuidados", sub:"Feminino", un:"pacote"},
-  {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."}
-];
-
-/* ==========================
-   ELEMENTOS
-   ========================== */
-const grid = document.getElementById("grid");
-const deptRow = document.getElementById("deptRow");
-const submenu = document.getElementById("submenu");
-const subRow = document.getElementById("subRow");
-const search = document.getElementById("search");
-const btnSearch = document.getElementById("btnSearch");
-const order = document.getElementById("order");
-
-const topbar = document.getElementById("topbar");
-const whatsFloat = document.getElementById("whatsFloat");
-
-/* ==========================
-   FILTROS / MODO
-   ========================== */
-let filtroDept = "Todos";
-let filtroSub = "Tudo";
-let modoSimples = false;
-
-/* ==========================
-   CARRINHO (quantidades reais)
-   ========================== */
-const cart = new Map(); // idx -> qty
-const CART_KEY = "mercadinho_cart_v1";
-
-function saveCart(){
-  const arr = Array.from(cart.entries());
-  localStorage.setItem(CART_KEY, JSON.stringify(arr));
-}
-
-function loadCart(){
-  try{
-    const raw = localStorage.getItem(CART_KEY);
-    if(!raw) return;
-    const arr = JSON.parse(raw);
-    if(Array.isArray(arr)){
-      cart.clear();
-      arr.forEach(([idx,qty])=>{
-        if(qty > 0) cart.set(Number(idx), Number(qty));
-      });
+  function onImgError(imgEl, sku){
+    const tried = imgEl.getAttribute("data-tried") || "0";
+    if (tried === "0"){
+      imgEl.setAttribute("data-tried","1");
+      imgEl.src = imgBySkuSimple(sku);
+      return;
     }
-  }catch(e){
-    console.log("Erro ao carregar carrinho:", e);
+    imgEl.onerror = null;
+    imgEl.src = FALLBACK_IMG;
   }
-}
+  window.onImgError = onImgError;
 
-function money(v){
-  return "R$ " + v.toFixed(2).replace(".",",");
-}
-function cartCountTotal(){
-  let n=0;
-  for(const q of cart.values()) n+=q;
-  return n;
-}
-function cartTotalValue(){
-  let total=0;
-  for(const [idx,qty] of cart.entries()){
-    total += (produtos[idx]?.preco || 0) * qty;
+  // ============================
+  // Ícones + IMAGENS DE CATEGORIA
+  // ============================
+  const CAT_ICONS = {
+    "Mercearia":"🛒","Massas":"🍝","Enlatados":"🥫","Temperos":"🧂","Biscoitos":"🍪",
+    "Hortifruti":"🥬","Laticínios":"🥛","Carnes":"🥩","Congelados":"🧊",
+    "Limpeza":"🧼","Higiene":"🧴","Bebidas":"🍺"
+  };
+
+  const CAT_IMAGES = {
+    "Mercearia":"https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=1200&q=70",
+    "Massas":"https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?auto=format&fit=crop&w=1200&q=70",
+    "Enlatados":"https://images.unsplash.com/photo-1581006852262-e4307cf6283a?auto=format&fit=crop&w=1200&q=70",
+    "Biscoitos":"https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=1200&q=70",
+    "Temperos":"https://images.unsplash.com/photo-1604908554027-3a741b93d7c6?auto=format&fit=crop&w=1200&q=70",
+    "Hortifruti":"https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=70",
+    "Laticínios":"https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=1200&q=70",
+    "Carnes":"https://images.unsplash.com/photo-1603048297172-c92544798d35?auto=format&fit=crop&w=1200&q=70",
+    "Congelados":"https://images.unsplash.com/photo-1585238342028-4a7f0fe6cb10?auto=format&fit=crop&w=1200&q=70",
+    "Limpeza":"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=1200&q=70",
+    "Higiene":"https://images.unsplash.com/photo-1584305574647-0d9b4e6f8b12?auto=format&fit=crop&w=1200&q=70",
+    "Bebidas":"https://images.unsplash.com/photo-1514361892635-eae31f5f53d3?auto=format&fit=crop&w=1200&q=70"
+  };
+
+  // ============================
+  // Preço / Promo / Estoque (determinístico)
+  // ============================
+  function hashInt(str){
+    let h = 2166136261;
+    for (let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return (h >>> 0);
   }
-  return total;
-}
 
-const cartCountEl = document.getElementById("cartCount");
-const cartCountMobile = document.getElementById("cartCountMobile");
-const cartbarSub = document.getElementById("cartbarSub");
-const cartTotalEl = document.getElementById("cartTotal");
-const cartListEl = document.getElementById("cartList");
-const cartHintEl = document.getElementById("cartHint");
+  const PRICE_RANGES = {
+    "Mercearia":[4,18],
+    "Massas":[4,14],
+    "Enlatados":[6,20],
+    "Temperos":[3,12],
+    "Biscoitos":[4,16],
+    "Hortifruti":[3,15],
+    "Laticínios":[6,26],
+    "Carnes":[18,75],
+    "Congelados":[10,38],
+    "Limpeza":[6,28],
+    "Higiene":[6,30],
+    "Bebidas":[4,9],
+  };
 
-function syncCartUI(){
-  const count = cartCountTotal();
-  const total = cartTotalValue();
-
-  cartCountEl.textContent = String(count);
-  cartCountMobile.textContent = String(count);
-  cartbarSub.textContent = `${count} item${count===1?"":"s"} • ${money(total)}`;
-  cartTotalEl.textContent = money(total);
-
-  const link = buildWhatsLink();
-  whatsFloat.href = link;
-
-  const cta = document.getElementById("ctaWhats");
-  if(cta) cta.onclick = ()=> window.open(link,"_blank");
-
-  let temKg = false;
-  for(const [idx,qty] of cart.entries()){
-    const p = produtos[idx];
-    if(!p) continue;
-    const isKg = (String(p.un||"").toLowerCase()==="kg") || (String(p.obs||"").toLowerCase().includes("kg"));
-    if(isKg && qty>0){ temKg=true; break; }
+  function precoFixoPorSku(sku, categoria){
+    const [min,max] = PRICE_RANGES[categoria] || [5,20];
+    const h = hashInt(String(sku));
+    const frac = (h % 10000) / 10000;
+    const v = min + frac * (max - min);
+    return Math.round(v * 100) / 100;
   }
-  cartHintEl.style.display = temKg ? "block" : "none";
-}
 
-function setQty(idx, qty){
-  if(qty<=0) cart.delete(idx);
-  else cart.set(idx, qty);
-  syncCartUI();
-  saveCart();
-
-  const qtyEl = document.querySelector(`[data-qty="${idx}"]`);
-  if(qtyEl) qtyEl.textContent = String(cart.get(idx) || 0);
-}
-function inc(idx){
-  setQty(idx, (cart.get(idx)||0)+1);
-
-  const badge = (window.innerWidth<=980) ? cartCountMobile : cartCountEl;
-  badge.style.transform = "scale(1.2)";
-  setTimeout(()=>badge.style.transform="scale(1)",120);
-
-  setUpdatedNow();
-}
-function dec(idx){
-  setQty(idx, (cart.get(idx)||0)-1);
-  setUpdatedNow();
-}
-
-/* ==========================
-   ÍCONE/THUMB por categoria (sem foto real)
-   ========================== */
-function iconForProduct(p){
-  const cat = (p.cat||"").toLowerCase();
-  const sub = (p.sub||"").toLowerCase();
-  if(cat.includes("açougue")) return "🥩";
-  if(cat.includes("horti")) return "🥬";
-  if(cat.includes("bebidas")) return "🥤";
-  if(cat.includes("limpeza")) return "🧼";
-  if(cat.includes("higiene")) return "🪥";
-  if(cat.includes("frios")) return "🧀";
-  if(cat.includes("mercearia")) return "🍪";
-  if(cat.includes("básicos")) {
-    if(sub.includes("café")) return "☕";
-    if(sub.includes("arroz")) return "🍚";
-    if(sub.includes("feijão")) return "🫘";
-    if(sub.includes("leite")) return "🥛";
-    if(sub.includes("ovos")) return "🥚";
-    return "🧺";
+  function promoFromPrice(price, sku){
+    const h = hashInt("promo:"+String(sku));
+    const pct = 0.08 + ((h % 2000) / 10000) * 0.20;
+    const old = Math.round((price / (1 - pct)) * 100) / 100;
+    return { old, pct };
   }
-  return "🛒";
-}
 
-/* ==========================
-   RENDER DEPTS
-   ========================== */
-function renderDept(){
-  deptRow.innerHTML="";
-  departamentos.forEach(d=>{
-    const el=document.createElement("div");
-    el.className="dept"+(d.key===filtroDept?" active":"");
-    el.innerHTML=`<div class="ic">${d.icon}</div><span>${d.key}</span>`;
-    el.onclick=()=>{
-      filtroDept=d.key;
-      filtroSub="Tudo";
-      renderDept();
-      renderSubmenu();
-      render();
-      document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-    };
-    deptRow.appendChild(el);
-  });
-}
-
-function renderSubmenu(){
-  const dept = departamentos.find(x=>x.key===filtroDept);
-  if(!dept || dept.key==="Todos"){
-    submenu.classList.remove("show");
-    subRow.innerHTML="";
-    return;
+  function stockLevel(sku){
+    const h = hashInt("stock:"+String(sku)) % 100;
+    if (h < 10) return "out";
+    if (h < 28) return "low";
+    return "high";
   }
-  submenu.classList.add("show");
-  subRow.innerHTML="";
 
-  const all = ["Tudo", ...dept.subs];
-  all.forEach(s=>{
-    const el=document.createElement("div");
-    el.className="sub"+(s===filtroSub?" active":"");
-    el.textContent=s;
-    el.onclick=()=>{
-      filtroSub=s;
-      renderSubmenu();
-      render();
-      document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-    };
-    subRow.appendChild(el);
-  });
-}
+  function stockText(level){
+    if(level==="high") return { text:"Em estoque", cls:"stockPill stockHigh" };
+    if(level==="low") return { text:"Últimas unidades", cls:"stockPill stockLow" };
+    return { text:"Esgotado", cls:"stockPill stockOut" };
+  }
 
-function relScore(nome,q){
-  if(!q) return 0;
-  nome=nome.toLowerCase();
-  if(nome===q) return 100;
-  if(nome.startsWith(q)) return 60;
-  if(nome.includes(q)) return 30;
-  return 0;
-}
+  function formatBRL(v){
+    return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  }
 
-/* ==========================
-   RENDER PRODUTOS (profissional)
-   ========================== */
-function render(){
-  const q=(search.value||"").trim().toLowerCase();
+  // ============================
+  // PRODUTOS (todos com SKU)
+  // ============================
+  const PRODUTOS = [
+    { sku:"1001", nome:"Arroz Tipo 1 1kg", categoria:"Mercearia" },
+    { sku:"1002", nome:"Feijão Carioca 1kg", categoria:"Mercearia" },
+    { sku:"1003", nome:"Feijão Preto 1kg", categoria:"Mercearia" },
+    { sku:"1004", nome:"Macarrão Espaguete 500g", categoria:"Massas" },
+    { sku:"1005", nome:"Macarrão Parafuso 500g", categoria:"Massas" },
+    { sku:"1006", nome:"Farinha de Trigo 1kg", categoria:"Mercearia" },
+    { sku:"1007", nome:"Farinha de Mandioca 1kg", categoria:"Mercearia" },
+    { sku:"1008", nome:"Açúcar Cristal 1kg", categoria:"Mercearia" },
+    { sku:"1009", nome:"Açúcar Refinado 1kg", categoria:"Mercearia" },
+    { sku:"1010", nome:"Café Torrado e Moído 250g", categoria:"Mercearia" },
+    { sku:"1011", nome:"Sal Refinado 1kg", categoria:"Mercearia" },
+    { sku:"1012", nome:"Óleo de Soja 900ml", categoria:"Mercearia" },
+    { sku:"1013", nome:"Vinagre 750ml", categoria:"Mercearia" },
+    { sku:"1014", nome:"Molho de Tomate 300g", categoria:"Enlatados" },
+    { sku:"1015", nome:"Extrato de Tomate 140g", categoria:"Enlatados" },
+    { sku:"1016", nome:"Milho Verde Lata 170g", categoria:"Enlatados" },
+    { sku:"1017", nome:"Ervilha Lata 170g", categoria:"Enlatados" },
+    { sku:"1018", nome:"Atum Lata 170g", categoria:"Enlatados" },
+    { sku:"1019", nome:"Sardinha Lata 125g", categoria:"Enlatados" },
+    { sku:"1020", nome:"Biscoito Cream Cracker 200g", categoria:"Biscoitos" },
+    { sku:"1021", nome:"Biscoito Maisena 200g", categoria:"Biscoitos" },
+    { sku:"1022", nome:"Biscoito Recheado Chocolate", categoria:"Biscoitos" },
+    { sku:"1023", nome:"Biscoito Recheado Morango", categoria:"Biscoitos" },
+    { sku:"1024", nome:"Achocolatado 400g", categoria:"Mercearia" },
+    { sku:"1025", nome:"Leite em Pó 200g", categoria:"Mercearia" },
+    { sku:"1026", nome:"Cereal Matinal 200g", categoria:"Mercearia" },
+    { sku:"1027", nome:"Aveia em Flocos 200g", categoria:"Mercearia" },
+    { sku:"1028", nome:"Gelatina 25g", categoria:"Mercearia" },
+    { sku:"1029", nome:"Fermento Químico 100g", categoria:"Mercearia" },
+    { sku:"1030", nome:"Maionese 500g", categoria:"Mercearia" },
+    { sku:"1031", nome:"Ketchup 400g", categoria:"Mercearia" },
+    { sku:"1032", nome:"Mostarda 200g", categoria:"Mercearia" },
+    { sku:"1033", nome:"Margarina 500g", categoria:"Mercearia" },
+    { sku:"1034", nome:"Macarrão Instantâneo", categoria:"Massas" },
+    { sku:"1035", nome:"Arroz Parboilizado 1kg", categoria:"Mercearia" },
+    { sku:"1036", nome:"Arroz Integral 1kg", categoria:"Mercearia" },
+    { sku:"1037", nome:"Feijão Fradinho 1kg", categoria:"Mercearia" },
+    { sku:"1038", nome:"Feijão Verde 1kg", categoria:"Mercearia" },
+    { sku:"1039", nome:"Fubá 500g", categoria:"Mercearia" },
+    { sku:"1040", nome:"Canjica 500g", categoria:"Mercearia" },
+    { sku:"1041", nome:"Cuscuz Flocão 500g", categoria:"Mercearia" },
+    { sku:"1042", nome:"Grão-de-bico 500g", categoria:"Mercearia" },
+    { sku:"1043", nome:"Lentilha 500g", categoria:"Mercearia" },
+    { sku:"1044", nome:"Tempero Completo", categoria:"Temperos" },
+    { sku:"1045", nome:"Pimenta-do-reino 50g", categoria:"Temperos" },
+    { sku:"1046", nome:"Cominho 50g", categoria:"Temperos" },
+    { sku:"1047", nome:"Colorau 50g", categoria:"Temperos" },
+    { sku:"1048", nome:"Orégano 10g", categoria:"Temperos" },
+    { sku:"1049", nome:"Caldo de Carne (tabletes)", categoria:"Temperos" },
+    { sku:"1050", nome:"Caldo de Galinha (tabletes)", categoria:"Temperos" },
+    { sku:"1051", nome:"Macarrão Penne 500g", categoria:"Massas" },
+    { sku:"1052", nome:"Macarrão Ninho 500g", categoria:"Massas" },
+    { sku:"1053", nome:"Molho Shoyu 150ml", categoria:"Mercearia" },
+    { sku:"1054", nome:"Farofa Pronta 250g", categoria:"Mercearia" },
+    { sku:"1055", nome:"Pipoca Milho 500g", categoria:"Mercearia" },
+    { sku:"1056", nome:"Pipoca de Micro-ondas", categoria:"Mercearia" },
+    { sku:"1057", nome:"Arroz para Risoto 1kg", categoria:"Mercearia" },
+    { sku:"1058", nome:"Sal Grosso 1kg", categoria:"Mercearia" },
+    { sku:"1059", nome:"Azeite 500ml", categoria:"Mercearia" },
 
-  let list = produtos
-    .map((p,idx)=>({...p, idx}))
-    .filter(p=>{
-      const okDept = (filtroDept==="Todos") || (p.cat===filtroDept);
-      const okSub  = (filtroDept==="Todos") || (filtroSub==="Tudo") || (p.sub===filtroSub);
-      const okQ    = !q || p.nome.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || (p.sub||"").toLowerCase().includes(q);
-      return okDept && okSub && okQ;
+    { sku:"2001", nome:"Banana Prata 1kg", categoria:"Hortifruti" },
+    { sku:"2002", nome:"Banana Nanica 1kg", categoria:"Hortifruti" },
+    { sku:"2003", nome:"Maçã 1kg", categoria:"Hortifruti" },
+    { sku:"2004", nome:"Laranja 1kg", categoria:"Hortifruti" },
+    { sku:"2005", nome:"Limão 500g", categoria:"Hortifruti" },
+    { sku:"2006", nome:"Tomate 1kg", categoria:"Hortifruti" },
+    { sku:"2007", nome:"Cebola 1kg", categoria:"Hortifruti" },
+    { sku:"2008", nome:"Batata 1kg", categoria:"Hortifruti" },
+    { sku:"2009", nome:"Cenoura 1kg", categoria:"Hortifruti" },
+    { sku:"2010", nome:"Alho 200g", categoria:"Hortifruti" },
+    { sku:"2011", nome:"Coentro (maço)", categoria:"Hortifruti" },
+    { sku:"2012", nome:"Cebolinha (maço)", categoria:"Hortifruti" },
+    { sku:"2013", nome:"Pimentão 500g", categoria:"Hortifruti" },
+    { sku:"2014", nome:"Repolho 1 un", categoria:"Hortifruti" },
+    { sku:"2015", nome:"Alface 1 un", categoria:"Hortifruti" },
+
+    { sku:"5001", nome:"Leite UHT 1L", categoria:"Laticínios" },
+    { sku:"5002", nome:"Iogurte Natural 170g", categoria:"Laticínios" },
+    { sku:"5003", nome:"Queijo Mussarela 200g", categoria:"Laticínios" },
+    { sku:"5004", nome:"Requeijão 200g", categoria:"Laticínios" },
+    { sku:"5005", nome:"Creme de Leite 200g", categoria:"Laticínios" },
+    { sku:"5006", nome:"Leite Condensado 395g", categoria:"Laticínios" },
+    { sku:"5007", nome:"Manteiga 200g", categoria:"Laticínios" },
+
+    { sku:"6101", nome:"Carne Moída 1kg", categoria:"Carnes" },
+    { sku:"6102", nome:"Patinho 1kg", categoria:"Carnes" },
+    { sku:"6103", nome:"Acém 1kg", categoria:"Carnes" },
+    { sku:"6104", nome:"Coxão Mole 1kg", categoria:"Carnes" },
+    { sku:"6105", nome:"Coxão Duro 1kg", categoria:"Carnes" },
+    { sku:"6106", nome:"Alcatra 1kg", categoria:"Carnes" },
+    { sku:"6107", nome:"Contra-filé 1kg", categoria:"Carnes" },
+    { sku:"6108", nome:"Picanha 1kg", categoria:"Carnes" },
+    { sku:"6109", nome:"Fraldinha 1kg", categoria:"Carnes" },
+    { sku:"6110", nome:"Músculo 1kg", categoria:"Carnes" },
+    { sku:"6111", nome:"Costela Bovina 1kg", categoria:"Carnes" },
+    { sku:"6112", nome:"Carne de Sol 1kg", categoria:"Carnes" },
+
+    { sku:"6201", nome:"Frango Inteiro 1kg", categoria:"Carnes" },
+    { sku:"6202", nome:"Peito de Frango 1kg", categoria:"Carnes" },
+    { sku:"6203", nome:"Coxa e Sobrecoxa 1kg", categoria:"Carnes" },
+    { sku:"6204", nome:"Asa de Frango 1kg", categoria:"Carnes" },
+    { sku:"6205", nome:"Filezinho de Frango 1kg", categoria:"Carnes" },
+    { sku:"6206", nome:"Miúdos de Frango 1kg", categoria:"Carnes" },
+
+    { sku:"6301", nome:"Costelinha Suína 1kg", categoria:"Carnes" },
+    { sku:"6302", nome:"Bisteca Suína 1kg", categoria:"Carnes" },
+    { sku:"6303", nome:"Lombo Suíno 1kg", categoria:"Carnes" },
+    { sku:"6304", nome:"Pernil Suíno 1kg", categoria:"Carnes" },
+    { sku:"6305", nome:"Bacon 500g", categoria:"Carnes" },
+
+    { sku:"6401", nome:"Linguiça Calabresa 500g", categoria:"Carnes" },
+    { sku:"6402", nome:"Linguiça Toscana 1kg", categoria:"Carnes" },
+    { sku:"6403", nome:"Salsicha 500g", categoria:"Carnes" },
+
+    { sku:"7001", nome:"Hambúrguer Congelado", categoria:"Congelados" },
+    { sku:"7002", nome:"Batata Frita Congelada 1kg", categoria:"Congelados" },
+    { sku:"7003", nome:"Nuggets 300g", categoria:"Congelados" },
+    { sku:"7004", nome:"Pizza Congelada", categoria:"Congelados" },
+    { sku:"7005", nome:"Lasanha Congelada", categoria:"Congelados" },
+
+    { sku:"3001", nome:"Detergente Neutro 500ml", categoria:"Limpeza" },
+    { sku:"3002", nome:"Água Sanitária 1L", categoria:"Limpeza" },
+    { sku:"3003", nome:"Desinfetante 1L", categoria:"Limpeza" },
+    { sku:"3004", nome:"Sabão em Pó 1kg", categoria:"Limpeza" },
+    { sku:"3005", nome:"Sabão em Barra", categoria:"Limpeza" },
+    { sku:"3006", nome:"Esponja", categoria:"Limpeza" },
+
+    { sku:"4001", nome:"Papel Higiênico 4 rolos", categoria:"Higiene" },
+    { sku:"4002", nome:"Creme Dental 90g", categoria:"Higiene" },
+    { sku:"4003", nome:"Escova de Dentes", categoria:"Higiene" },
+    { sku:"4004", nome:"Sabonete em Barra", categoria:"Higiene" },
+    { sku:"4005", nome:"Shampoo 350ml", categoria:"Higiene" },
+    { sku:"4006", nome:"Condicionador 350ml", categoria:"Higiene" },
+
+    { sku:"8001", nome:"Cerveja Itaipava Lata 350ml", categoria:"Bebidas" },
+    { sku:"8002", nome:"Cerveja Brahma Lata 350ml", categoria:"Bebidas" },
+  ];
+
+  for (const p of PRODUTOS){
+    p.preco = precoFixoPorSku(p.sku, p.categoria);
+    p.promo = promoFromPrice(p.preco, p.sku);
+    p.stock = stockLevel(p.sku);
+  }
+
+  // ============================
+  // DOM
+  // ============================
+  const $grid = document.getElementById("grid");
+  const $lista = document.getElementById("lista");
+  const $categoria = document.getElementById("categoria");
+  const $search = document.getElementById("search");
+  const $obs = document.getElementById("obs");
+  const $btnWhats = document.getElementById("btnWhats");
+  const $btnClear = document.getElementById("btnClear");
+  const $btnCopy = document.getElementById("btnCopy");
+  const $empty = document.getElementById("empty");
+  const $badgeCount = document.getElementById("badgeCount");
+  const $totalEstimado = document.getElementById("totalEstimado");
+  const $catList = document.getElementById("catList");
+  const $chipRow = document.getElementById("chipRow");
+
+  const $topTotal = document.getElementById("topTotal");
+  const $topSearch = document.getElementById("topSearch");
+  const $topSearchBtn = document.getElementById("topSearchBtn");
+
+  const $btnZapSide = document.getElementById("btnZapSide");
+  const $btnZapFooter = document.getElementById("btnZapFooter");
+  const $btnCopySide = document.getElementById("btnCopySide");
+  const $floatZap = document.getElementById("floatZap");
+
+  const $statusDot = document.getElementById("statusDot");
+  const $statusTxt = document.getElementById("statusTxt");
+  const $statusTitle = document.getElementById("statusTitle");
+
+  const $slides = Array.from(document.querySelectorAll(".slide"));
+  const $dots = document.getElementById("dots");
+  const $prevSlide = document.getElementById("prevSlide");
+  const $nextSlide = document.getElementById("nextSlide");
+  const $goCatalog = document.getElementById("goCatalog");
+  const $goWhats = document.getElementById("goWhats");
+  const $copyPattern = document.getElementById("copyPattern");
+  const $scrollGrid = document.getElementById("scrollGrid");
+
+  const carrinho = new Map();
+  let activeChip = "Todas";
+
+  // ============================
+  // WhatsApp
+  // ============================
+  function waLink(texto){
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
+  }
+  function setZap(){
+    const link = waLink("Olá! Quero fazer um pedido no Mercadinho Esperança.");
+    $floatZap.href = link;
+    $btnZapSide.onclick = ()=> window.open(link, "_blank");
+    $btnZapFooter.onclick = ()=> window.open(link, "_blank");
+  }
+
+  // ============================
+  // Categorias
+  // ============================
+  function categorias(){
+    return ["Todas", ...Array.from(new Set(PRODUTOS.map(p => p.categoria)))];
+  }
+  function countByCategory(){
+    const map = new Map();
+    for (const p of PRODUTOS){
+      map.set(p.categoria, (map.get(p.categoria)||0) + 1);
+    }
+    return map;
+  }
+
+  function renderSelectCategorias(){
+    $categoria.innerHTML = categorias().map(c => `<option value="${c}">${c}</option>`).join("");
+  }
+
+  function renderChipBar(){
+    const cats = categorias();
+    $chipRow.innerHTML = cats.map(cat => `
+      <button class="chipBtn ${cat===activeChip ? "active" : ""}" data-cat="${cat}">
+        <span class="chipIco">${CAT_ICONS[cat] || "🏷️"}</span>
+        ${cat}
+      </button>
+    `).join("");
+
+    $chipRow.querySelectorAll(".chipBtn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        activeChip = btn.dataset.cat;
+        $categoria.value = activeChip;
+        $chipRow.querySelectorAll(".chipBtn").forEach(b=>b.classList.toggle("active", b.dataset.cat===activeChip));
+        render();
+        document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+      });
+    });
+  }
+
+  function renderSidebarCategorias(){
+    const counts = countByCategory();
+    const cats = categorias().filter(c => c !== "Todas");
+
+    $catList.innerHTML = cats.map(cat => `
+      <div class="catItem" data-cat="${cat}">
+        <div class="catCover" style="background-image:url('${CAT_IMAGES[cat] || FALLBACK_IMG}')"></div>
+        <div class="catOverlay"></div>
+        <div class="catContent">
+          <div class="catLeft">
+            <span class="catIco">${CAT_ICONS[cat] || "🏷️"}</span>
+            <span>${cat}</span>
+          </div>
+          <span class="catCount">${counts.get(cat) || 0}</span>
+        </div>
+      </div>
+    `).join("");
+
+    $catList.querySelectorAll(".catItem").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        const cat = el.getAttribute("data-cat");
+        activeChip = cat;
+        $categoria.value = cat;
+        renderChipBar();
+        render();
+        document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+      });
+    });
+  }
+
+  // ============================
+  // Filtragem / render
+  // ============================
+  function filtrados(){
+    const termo = ($search.value || "").trim().toLowerCase();
+    const cat = $categoria.value;
+
+    return PRODUTOS.filter(p=>{
+      const okCat = (cat==="Todas") || (p.categoria===cat);
+      const okTermo = !termo || p.nome.toLowerCase().includes(termo) || String(p.sku).includes(termo);
+      return okCat && okTermo;
+    });
+  }
+
+  function totalCarrinho(){
+    let total = 0;
+    for (const {produto, qtd} of carrinho.values()){
+      total += (produto.preco || 0) * qtd;
+    }
+    return Math.round(total * 100) / 100;
+  }
+
+  function renderGrid(){
+    const prods = filtrados();
+    if(!prods.length){
+      $grid.innerHTML = "";
+      $empty.style.display = "block";
+      return;
+    }
+    $empty.style.display = "none";
+
+    $grid.innerHTML = prods.map(p=>{
+      const qtd = carrinho.get(p.sku)?.qtd || 0;
+      const img1 = imgBySkuAndName(p.sku, p.nome);
+      const st = stockText(p.stock);
+      const disabledQuick = p.stock === "out";
+
+      return `
+        <div class="card">
+          <div class="${st.cls}">${st.text}</div>
+          <button class="quickAdd" data-sku="${p.sku}" ${disabledQuick ? "disabled" : ""} title="Quick Add">+</button>
+
+          <img src="${img1}" alt="${p.nome}" data-tried="0" onerror="onImgError(this,'${p.sku}')" />
+
+          <div class="p">
+            <div class="muted">${p.categoria}</div>
+            <div class="title">${p.nome}</div>
+
+            <div class="skuPill">SKU: <b>${p.sku}</b></div>
+
+            <div class="priceRow">
+              <div>
+                <span class="old">${formatBRL(p.promo.old)}</span>
+                <span class="promo">${formatBRL(p.preco)}</span>
+              </div>
+              <div class="sku">SKU<br>${p.sku}</div>
+            </div>
+
+            <div class="qtyRow">
+              <button class="circle btnMinus" data-sku="${p.sku}" aria-label="Diminuir">−</button>
+              <div class="qty">
+                <div class="muted">Qtd</div>
+                <b>${qtd}</b>
+              </div>
+              <button class="circle circlePlus btnPlus" data-sku="${p.sku}" aria-label="Aumentar">+</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    $grid.querySelectorAll(".btnPlus").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const sku = btn.dataset.sku;
+        const prod = PRODUTOS.find(x=>x.sku===sku);
+        const atual = carrinho.get(sku)?.qtd || 0;
+        carrinho.set(sku,{produto:prod,qtd:atual+1});
+        renderLista(); renderGrid();
+      });
     });
 
-  if(order.value==="menor") list.sort((a,b)=>a.preco-b.preco);
-  if(order.value==="maior") list.sort((a,b)=>b.preco-a.preco);
-  if(order.value==="az") list.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
-  if(order.value==="relevancia" && q) list.sort((a,b)=>relScore(b.nome,q)-relScore(a.nome,q));
+    $grid.querySelectorAll(".btnMinus").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const sku = btn.dataset.sku;
+        const atual = carrinho.get(sku)?.qtd || 0;
+        if(atual<=1) carrinho.delete(sku);
+        else carrinho.set(sku,{produto:carrinho.get(sku).produto,qtd:atual-1});
+        renderLista(); renderGrid();
+      });
+    });
 
-  grid.innerHTML="";
-
-  list.forEach((p)=>{
-    const isKg = (String(p.un||"").toLowerCase()==="kg") || (String(p.obs||"").toLowerCase().includes("kg"));
-    const qty = cart.get(p.idx) || 0;
-    const ic = iconForProduct(p);
-
-    const card=document.createElement("div");
-    card.className="card";
-    card.innerHTML=`
-      <div class="meta">
-        <span class="chip">${p.cat}${p.sub ? " • "+p.sub : ""}</span>
-        <span class="unit">${p.un || "unid."}</span>
-      </div>
-
-      <div class="thumb">
-        <div class="pic" aria-hidden="true">${ic}</div>
-        <div class="name">${p.nome}</div>
-      </div>
-
-      <div class="price-row">
-        <div class="price">
-          ${money(Number(p.preco))}
-          <small>${(p.un||"") ? p.un : "unid."}</small>
-        </div>
-        ${isKg ? `<span class="kg-badge">⚠️ Preço por kg (estimado)</span>` : ``}
-      </div>
-
-      ${(!modoSimples && p.obs)?`<div class="note">${p.obs}</div>`:""}
-
-      <div class="buyrow">
-        <div class="stepper" aria-label="Adicionar/remover">
-          <button type="button" data-dec="${p.idx}" aria-label="Diminuir">–</button>
-          <div class="qty" data-qty="${p.idx}">${qty}</div>
-          <button type="button" data-inc="${p.idx}" aria-label="Aumentar">+</button>
-        </div>
-        <button class="mini" type="button" data-viewcart="1">Ver pedido</button>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-
-  document.querySelectorAll("[data-inc]").forEach(b=>{
-    b.onclick=()=>inc(Number(b.getAttribute("data-inc")));
-  });
-  document.querySelectorAll("[data-dec]").forEach(b=>{
-    b.onclick=()=>dec(Number(b.getAttribute("data-dec")));
-  });
-  document.querySelectorAll("[data-viewcart]").forEach(b=>{
-    b.onclick=()=>openCart();
-  });
-
-  syncCartUI();
-}
-
-/* ==========================
-   BUSCA / ORDENAR
-   ========================== */
-btnSearch.onclick=render;
-search.addEventListener("keydown",(e)=>{if(e.key==="Enter") render();});
-order.onchange=render;
-
-/* ==========================
-   ESSENCIAIS
-   ========================== */
-document.querySelectorAll("[data-ess]").forEach(el=>{
-  el.addEventListener("click", ()=>{
-    const term = el.getAttribute("data-ess");
-    search.value = term;
-    filtroDept = "Todos";
-    filtroSub = "Tudo";
-    renderDept(); renderSubmenu(); render();
-    document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-  });
-});
-
-/* ==========================
-   MODO SIMPLES (conforto)
-   ========================== */
-document.getElementById("modeSimpleBtn").onclick=()=>{
-  modoSimples = !modoSimples;
-  document.getElementById("modeSimpleBtn").textContent = modoSimples ? "Modo completo" : "Modo simples";
-  render();
-};
-
-/* ==========================
-   SIDEBAR (gaveta mobile)
-   ========================== */
-const sidebar = document.getElementById("sidebar");
-const hambBtn = document.getElementById("hambBtn");
-const sideBackdrop = document.getElementById("sideBackdrop");
-
-function openSidebar(){
-  sidebar.classList.add("open");
-  sideBackdrop.classList.add("show");
-  document.body.style.overflow="hidden";
-}
-function closeSidebar(){
-  sidebar.classList.remove("open");
-  sideBackdrop.classList.remove("show");
-  document.body.style.overflow="";
-}
-hambBtn.onclick=openSidebar;
-sideBackdrop.onclick=closeSidebar;
-document.querySelectorAll(".sidebar .side-item").forEach(el=>{
-  el.addEventListener("click", ()=>{
-    if(window.innerWidth <= 980) closeSidebar();
-  });
-});
-
-/* ==========================
-   ATALHOS SIDEBAR
-   ========================== */
-document.getElementById("goAll").onclick=()=>{
-  filtroDept="Todos";filtroSub="Tudo";
-  renderDept();renderSubmenu();render();
-  window.scrollTo({top:0,behavior:"smooth"});
-};
-document.getElementById("goBasics").onclick=()=>{
-  filtroDept="Básicos";filtroSub="Tudo";
-  renderDept();renderSubmenu();render();
-  document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-};
-document.getElementById("goMeat").onclick=()=>{
-  filtroDept="Açougue";filtroSub="Tudo";
-  renderDept();renderSubmenu();render();
-  document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-};
-document.getElementById("goHorti").onclick=()=>{
-  filtroDept="Hortifruti";filtroSub="Tudo";
-  renderDept();renderSubmenu();render();
-  document.getElementById("grid").scrollIntoView({behavior:"smooth"});
-};
-document.getElementById("goPay").onclick=()=>{document.getElementById("payBox").scrollIntoView({behavior:"smooth"});};
-document.getElementById("goInfo").onclick=()=>{document.getElementById("infoBox").scrollIntoView({behavior:"smooth"});};
-
-/* ==========================
-   WHATSAPP PROFISSIONAL
-   ========================== */
-function buildWhatsMessage(){
-  const count = cartCountTotal();
-  if(count===0){
-    return `Olá! Quero informações sobre produtos e preços do Mercadinho Esperança.`;
+    $grid.querySelectorAll(".quickAdd").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        if (btn.disabled) return;
+        const sku = btn.dataset.sku;
+        const prod = PRODUTOS.find(x=>x.sku===sku);
+        const atual = carrinho.get(sku)?.qtd || 0;
+        carrinho.set(sku,{produto:prod,qtd:atual+1});
+        renderLista(); renderGrid();
+      });
+    });
   }
 
-  let lines = [];
-  lines.push(`Olá! Quero fazer um pedido (estimado):`);
-  lines.push(``);
+  function renderLista(){
+    const itens = Array.from(carrinho.values());
+    const totalItens = itens.reduce((acc,it)=>acc+it.qtd,0);
+    $badgeCount.textContent = `${totalItens} itens`;
 
-  const items = Array.from(cart.entries())
-    .map(([idx,qty])=>({idx,qty,p:produtos[idx]}))
-    .filter(x=>x.p && x.qty>0)
-    .sort((a,b)=> (a.p.cat+a.p.nome).localeCompare(b.p.cat+b.p.nome, "pt-BR"));
+    const total = formatBRL(totalCarrinho());
+    $totalEstimado.textContent = total;
+    $topTotal.textContent = total;
 
-  for(const it of items){
-    const p = it.p;
-    const un = p.un ? ` (${p.un})` : "";
-    lines.push(`• ${p.nome}${un} — ${it.qty}x — ${money(p.preco * it.qty)}`);
-  }
+    if(!itens.length){
+      $lista.innerHTML = `<div class="muted" style="margin-top:10px">Nenhum item ainda.</div>`;
+      return;
+    }
 
-  lines.push(``);
-  lines.push(`Total estimado: ${money(cartTotalValue())}`);
-  lines.push(``);
-  lines.push(`*Obs.: itens por kg são estimados. Pode confirmar pra mim?`);
-
-  return lines.join("\n");
-}
-function buildWhatsLink(){
-  const text = encodeURIComponent(buildWhatsMessage());
-  return `https://wa.me/${WHATS_NUMBER}?text=${text}`;
-}
-
-whatsFloat.onclick = (e)=>{
-  e.preventDefault();
-  window.open(buildWhatsLink(), "_blank");
-};
-
-document.getElementById("goWhatsappSide").onclick=()=>{
-  window.open(buildWhatsLink(), "_blank");
-};
-
-/* ==========================
-   MODAL PEDIDO
-   ========================== */
-const cartModal = document.getElementById("cartModal");
-const closeCart = document.getElementById("closeCart");
-const clearCart = document.getElementById("clearCart");
-const goWhatsapp = document.getElementById("goWhatsapp");
-const cartBtn = document.getElementById("cartBtn");
-const cartBtnMobile = document.getElementById("cartBtnMobile");
-const cartbarBtn = document.getElementById("cartbarBtn");
-
-function renderCartModal(){
-  if(cart.size===0){
-    cartListEl.innerHTML = `<div style="color:var(--muted);font-size:13px">Seu pedido está vazio.</div>`;
-    cartTotalEl.textContent = money(0);
-    return;
-  }
-  const lines = [];
-  let total = 0;
-
-  const items = Array.from(cart.entries())
-    .map(([idx,qty])=>({idx,qty,p:produtos[idx]}))
-    .filter(x=>x.p && x.qty>0)
-    .sort((a,b)=> (a.p.cat+a.p.nome).localeCompare(b.p.cat+b.p.nome, "pt-BR"));
-
-  for(const it of items){
-    const p = it.p;
-    const sub = (p.un ? ` (${p.un})` : "");
-    const lineTotal = p.preco * it.qty;
-    total += lineTotal;
-    lines.push(`
-      <div class="cart-line">
+    $lista.innerHTML = itens.map(({produto,qtd})=>`
+      <div class="listItem">
         <div>
-          <b>${p.nome}</b>
-          <div style="color:var(--muted);font-size:12px">${it.qty}x${sub}</div>
+          <div style="font-weight:1000;font-size:13px">${produto.nome}</div>
+          <div class="muted">SKU ${produto.sku} • ${produto.categoria} • ${formatBRL(produto.preco)} un</div>
         </div>
-        <div style="white-space:nowrap;font-weight:900;color:#fff">${money(lineTotal)}</div>
+        <div style="font-weight:1000;color:#bbf7d0">x${qtd}</div>
       </div>
-    `);
+    `).join("");
   }
 
-  cartListEl.innerHTML = lines.join("");
-  cartTotalEl.textContent = money(total);
-}
+  function mensagem(){
+    const itens = Array.from(carrinho.values());
+    if(!itens.length) return "Olá! Quero fazer um pedido no Mercadinho Esperança.";
 
-function openCart(){
-  renderCartModal();
-  cartModal.classList.add("show");
-  cartModal.setAttribute("aria-hidden","false");
-  whatsFloat.classList.add("hide");
-}
-function closeCartFn(){
-  cartModal.classList.remove("show");
-  cartModal.setAttribute("aria-hidden","true");
-  setTimeout(()=>whatsFloat.classList.remove("hide"), 120);
-}
+    const linhas = itens.map(({produto,qtd}) =>
+      `• ${produto.nome} (SKU ${produto.sku}) x${qtd} — ${formatBRL(produto.preco)}`
+    );
+    const obs = ($obs.value||"").trim();
+    const total = formatBRL(totalCarrinho());
 
-cartBtn.onclick=openCart;
-cartBtnMobile.onclick=openCart;
-cartbarBtn.onclick=openCart;
-closeCart.onclick=closeCartFn;
-cartModal.onclick=(e)=>{ if(e.target===cartModal) closeCartFn(); };
+    return `Olá! Quero fazer um pedido no Mercadinho Esperança:
 
-clearCart.onclick=()=>{
-  cart.clear();
-  syncCartUI();
-  render();
-  renderCartModal();
-  setUpdatedNow();
-};
+${linhas.join("\n")}
 
-goWhatsapp.onclick=()=>window.open(buildWhatsLink(),"_blank");
+Total estimado: ${total}${obs ? `
 
-/* ==========================
-   CARROSSEL
-   ========================== */
-const slidesEl = document.getElementById("slides");
-const dotsEl = document.getElementById("dots");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
-const totalSlides = slidesEl.children.length;
-let current = 0;
-let timer = null;
-
-function renderDots(){
-  dotsEl.innerHTML="";
-  for(let i=0;i<totalSlides;i++){
-    const d=document.createElement("div");
-    d.className="dot"+(i===current?" active":"");
-    d.onclick=()=>{goTo(i,true);};
-    dotsEl.appendChild(d);
-  }
-}
-function goTo(i, reset=false){
-  current = (i + totalSlides) % totalSlides;
-  slidesEl.style.transform = `translateX(-${current*100}%)`;
-  renderDots();
-  if(reset) restartAuto();
-}
-function restartAuto(){
-  if(timer) clearInterval(timer);
-  timer = setInterval(()=>goTo(current+1,false), 4500);
-}
-prev.onclick=()=>goTo(current-1,true);
-next.onclick=()=>goTo(current+1,true);
-renderDots();
-restartAuto();
-
-/* ==========================
-   MOBILE “APP FEEL”
-   ========================== */
-let lastY = window.scrollY;
-let ticking = false;
-
-function onScroll(){
-  const y = window.scrollY;
-  const goingDown = y > lastY;
-  lastY = y;
-
-  if(window.innerWidth <= 980){
-    if(y > 80) topbar.classList.add("compact");
-    else topbar.classList.remove("compact");
-  }else{
-    topbar.classList.remove("compact");
+Observações:
+${obs}` : ""}`;
   }
 
-  if(window.innerWidth <= 980){
-    if(cartModal.classList.contains("show")) return;
-    if(goingDown && y > 200) whatsFloat.classList.add("hide");
-    else whatsFloat.classList.remove("hide");
-  }else{
-    whatsFloat.classList.remove("hide");
-  }
-}
+  function render(){ renderGrid(); renderLista(); }
 
-window.addEventListener("scroll", ()=>{
-  if(!ticking){
-    window.requestAnimationFrame(()=>{
-      onScroll();
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
+  // ============================
+  // Ações
+  // ============================
+  $btnWhats.addEventListener("click", ()=> window.open(waLink(mensagem()), "_blank"));
 
-/* ==========================
-   INIT
-   ========================== */
-loadCart();
-renderDept();
-renderSubmenu();
-render();
-syncCartUI();
-onScroll();
-
-/* ==========================
-   PWA: Service Worker (GitHub Pages)
-   ========================== */
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/Mercadinho-Espera-a/service-worker.js").catch(console.error);
+  $btnClear.addEventListener("click", ()=>{
+    carrinho.clear();
+    $obs.value="";
+    render();
   });
-}
+
+  async function copyList(){
+    const msg = mensagem();
+    try{
+      await navigator.clipboard.writeText(msg);
+      return true;
+    }catch{
+      prompt("Copie a mensagem do pedido:", msg);
+      return false;
+    }
+  }
+
+  $btnCopy.addEventListener("click", async ()=>{
+    const ok = await copyList();
+    if(ok){
+      $btnCopy.textContent = "Copiado!";
+      setTimeout(()=> $btnCopy.textContent="Copiar lista", 1200);
+    }
+  });
+
+  $btnCopySide.addEventListener("click", async ()=>{
+    const ok = await copyList();
+    if(ok){
+      $btnCopySide.textContent = "Copiado!";
+      setTimeout(()=> $btnCopySide.textContent="Copiar lista", 1200);
+    }
+  });
+
+  $search.addEventListener("input", render);
+  $categoria.addEventListener("change", ()=>{
+    activeChip = $categoria.value;
+    renderChipBar();
+    render();
+  });
+
+  function doTopSearch(){
+    $search.value = $topSearch.value || "";
+    render();
+    document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+  }
+  $topSearchBtn.addEventListener("click", doTopSearch);
+  $topSearch.addEventListener("keydown", (e)=>{ if(e.key==="Enter") doTopSearch(); });
+
+  document.querySelectorAll("[data-fast]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      $search.value = btn.getAttribute("data-fast");
+      $topSearch.value = $search.value;
+      render();
+      document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+    });
+  });
+
+  $goCatalog.addEventListener("click", ()=> document.getElementById("catalogo").scrollIntoView({behavior:"smooth"}));
+  $goWhats.addEventListener("click", ()=> window.open(waLink(mensagem()), "_blank"));
+
+  $copyPattern.addEventListener("click", async ()=>{
+    const txt = "assets/images/SKU_nome-do-produto.jpg (ou assets/images/SKU.jpg)";
+    try{ await navigator.clipboard.writeText(txt); alert("Padrão copiado!"); }
+    catch{ prompt("Copie:", txt); }
+  });
+
+  $scrollGrid.addEventListener("click", ()=> document.getElementById("catalogo").scrollIntoView({behavior:"smooth"}));
+
+  // ============================
+  // Carrossel
+  // ============================
+  let slideIndex = 0;
+  let slideTimer = null;
+
+  function renderDots(){
+    $dots.innerHTML = $slides.map((_,i)=> `<div class="dot2 ${i===slideIndex?"on":""}"></div>`).join("");
+  }
+
+  function setSlide(i){
+    slideIndex = (i + $slides.length) % $slides.length;
+    $slides.forEach((s,idx)=> s.classList.toggle("active", idx===slideIndex));
+    renderDots();
+  }
+
+  function startSlides(){
+    if(slideTimer) clearInterval(slideTimer);
+    slideTimer = setInterval(()=> setSlide(slideIndex+1), 4500);
+  }
+
+  $prevSlide.addEventListener("click", ()=>{ setSlide(slideIndex-1); startSlides(); });
+  $nextSlide.addEventListener("click", ()=>{ setSlide(slideIndex+1); startSlides(); });
+
+  // ============================
+  // Status aberto/fechado
+  // ============================
+  function updateStatus(){
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const rule = (day===0) ? HOURS.sunday : HOURS.weekday;
+    const open = hour >= rule.open && hour < rule.close;
+
+    $statusDot.className = "dot " + (open ? "green" : "red");
+    $statusTxt.textContent = open ? "ABERTO AGORA" : "FECHADO AGORA";
+    $statusTitle.textContent = open ? "Atendimento disponível" : "Volta em breve";
+  }
+
+  // ============================
+  // Init
+  // ============================
+  setZap();
+  renderSelectCategorias();
+  renderSidebarCategorias();
+  renderChipBar();
+  render();
+  renderDots();
+  startSlides();
+  updateStatus();
+  setInterval(updateStatus, 60000);
 </script>
 
 </body>
 </html>
-
