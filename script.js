@@ -1,390 +1,375 @@
-/* ===== HORÁRIO ABERTO/FECHADO ===== */
-function verificarHorario(){
-  const d=new Date(), dia=d.getDay(), h=d.getHours()+d.getMinutes()/60;
-  let aberto=false;
-  if(dia===1) aberto=h>=7 && h<12;                 // segunda
-  else if(dia>=2 && dia<=6) aberto=h>=7 && h<19;   // terça-sábado
-  else if(dia===0) aberto=h>=7 && h<12;            // domingo
+// =========================
+// CONFIG
+// =========================
+const WHATSAPP_NUMBER = "558183173613";
+const FALLBACK_IMG =
+  "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=900&q=70";
 
-  const el=document.getElementById("status");
-  if(!el) return;
-  el.textContent = aberto ? "🟢 ABERTO AGORA" : "🔴 FECHADO AGORA";
-  el.className = "status " + (aberto ? "open" : "closed");
+// Imagens por SKU (sem dor de cabeça):
+// Coloque as imagens em: assets/images/SKU.jpg
+// Ex: assets/images/1001.jpg
+function imgBySku(sku) {
+  return `assets/images/${sku}.jpg`;
 }
-verificarHorario();
-setInterval(verificarHorario,60000);
 
-/* ===== DEPARTAMENTOS + SUBMENU ===== */
-const departamentos = [
-  {key:"Todos", icon:"🛒", subs:["Tudo"]},
-  {key:"Básicos", icon:"🧺", subs:["Arroz","Feijão","Óleo","Café","Açúcar","Sal","Farinha","Leite","Ovos"]},
-  {key:"Mercearia", icon:"🍪", subs:["Biscoitos","Enlatados","Massas","Molhos","Temperos","Doces"]},
-  {key:"Frios & Laticínios", icon:"🧀", subs:["Queijos","Presunto","Mortadela","Iogurte","Manteiga","Requeijão"]},
-  {key:"Açougue", icon:"🥩", subs:["Bovina","Frango","Suína","Linguiças","Peixes"]},
-  {key:"Hortifruti", icon:"🥬", subs:["Frutas","Verduras","Legumes","Temperos"]},
-  {key:"Bebidas", icon:"🥤", subs:["Água","Refrigerantes","Sucos","Cervejas","Energéticos"]},
-  {key:"Limpeza", icon:"🧼", subs:["Lavanderia","Cozinha","Casa","Sacos de lixo"]},
-  {key:"Higiene & Cuidados", icon:"🪥", subs:["Banho","Cabelo","Dental","Papel","Feminino"]},
-];
+// =========================
+// PRODUTOS (SEM PADARIA)
+// =========================
+const PRODUTOS = [
+  // Mercearia
+  { sku: "1001", nome: "Arroz Tipo 1kg", categoria: "Mercearia" },
+  { sku: "1002", nome: "Feijão Carioca 1kg", categoria: "Mercearia" },
+  { sku: "1003", nome: "Feijão Preto 1kg", categoria: "Mercearia" },
+  { sku: "1004", nome: "Macarrão Espaguete 500g", categoria: "Mercearia" },
+  { sku: "1005", nome: "Macarrão Parafuso 500g", categoria: "Mercearia" },
+  { sku: "1006", nome: "Farinha de Trigo 1kg", categoria: "Mercearia" },
+  { sku: "1007", nome: "Farinha de Mandioca 1kg", categoria: "Mercearia" },
+  { sku: "1008", nome: "Açúcar Cristal 1kg", categoria: "Mercearia" },
+  { sku: "1009", nome: "Açúcar Refinado 1kg", categoria: "Mercearia" },
+  { sku: "1010", nome: "Café Torrado e Moído 250g", categoria: "Mercearia" },
+  { sku: "1011", nome: "Sal Refinado 1kg", categoria: "Mercearia" },
+  { sku: "1012", nome: "Óleo de Soja 900ml", categoria: "Mercearia" },
+  { sku: "1013", nome: "Vinagre 750ml", categoria: "Mercearia" },
+  { sku: "1014", nome: "Molho de Tomate 300g", categoria: "Mercearia" },
+  { sku: "1015", nome: "Extrato de Tomate 140g", categoria: "Mercearia" },
+  { sku: "1016", nome: "Milho Verde Lata 170g", categoria: "Mercearia" },
+  { sku: "1017", nome: "Ervilha Lata 170g", categoria: "Mercearia" },
+  { sku: "1018", nome: "Atum Lata 170g", categoria: "Mercearia" },
+  { sku: "1019", nome: "Sardinha Lata 125g", categoria: "Mercearia" },
+  { sku: "1020", nome: "Biscoito Cream Cracker 200g", categoria: "Mercearia" },
+  { sku: "1021", nome: "Biscoito Água e Sal 200g", categoria: "Mercearia" },
+  { sku: "1022", nome: "Biscoito Recheado Chocolate", categoria: "Mercearia" },
+  { sku: "1023", nome: "Biscoito Recheado Morango", categoria: "Mercearia" },
+  { sku: "1024", nome: "Achocolatado em Pó 400g", categoria: "Mercearia" },
+  { sku: "1025", nome: "Fubá 500g", categoria: "Mercearia" },
+  { sku: "1026", nome: "Aveia em Flocos 200g", categoria: "Mercearia" },
+  { sku: "1027", nome: "Leite em Pó 400g", categoria: "Mercearia" },
+  { sku: "1028", nome: "Cereal Matinal 200g", categoria: "Mercearia" },
+  { sku: "1029", nome: "Tempero Completo 300g", categoria: "Mercearia" },
+  { sku: "1030", nome: "Caldo de Carne 57g", categoria: "Mercearia" },
+  { sku: "1031", nome: "Maionese 500g", categoria: "Mercearia" },
+  { sku: "1032", nome: "Ketchup 400g", categoria: "Mercearia" },
+  { sku: "1033", nome: "Mostarda 200g", categoria: "Mercearia" },
+  { sku: "1034", nome: "Margarina 500g", categoria: "Mercearia" },
 
-/* ===== PRODUTOS (LISTA COMPLETA) ===== */
-const produtos = [
-  // BÁSICOS
-  {nome:"Arroz 5kg", preco:25.00, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Arroz 1kg", preco:5.80, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Arroz parboilizado 1kg", preco:6.40, cat:"Básicos", sub:"Arroz", un:"pacote"},
-  {nome:"Feijão Carioca 1kg", preco:8.50, cat:"Básicos", sub:"Feijão", un:"pacote"},
-  {nome:"Feijão Preto 1kg", preco:9.20, cat:"Básicos", sub:"Feijão", un:"pacote"},
-  {nome:"Açúcar 1kg", preco:4.20, cat:"Básicos", sub:"Açúcar", un:"pacote"},
-  {nome:"Sal 1kg", preco:2.00, cat:"Básicos", sub:"Sal", un:"pacote"},
-  {nome:"Óleo de Soja 900ml", preco:6.90, cat:"Básicos", sub:"Óleo", un:"unid."},
-  {nome:"Café 500g", preco:14.90, cat:"Básicos", sub:"Café", un:"pacote"},
-  {nome:"Leite 1L", preco:4.70, cat:"Básicos", sub:"Leite", un:"unid."},
-  {nome:"Ovos (dúzia)", preco:11.90, cat:"Básicos", sub:"Ovos", un:"dúzia"},
-  {nome:"Farinha de Trigo 1kg", preco:4.80, cat:"Básicos", sub:"Farinha", un:"pacote"},
-  {nome:"Farinha de Milho (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
-  {nome:"Cuscuz (flocão) 500g", preco:3.60, cat:"Básicos", sub:"Farinha", un:"pacote"},
-
-  // MERCEARIA
-  {nome:"Biscoito Cream Cracker", preco:4.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Biscoito Recheado", preco:3.90, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Macarrão Espaguete 500g", preco:3.80, cat:"Mercearia", sub:"Massas", un:"pacote"},
-  {nome:"Macarrão Parafuso 500g", preco:4.10, cat:"Mercearia", sub:"Massas", un:"pacote"},
-  {nome:"Macarrão instantâneo", preco:2.50, cat:"Mercearia", sub:"Massas", un:"unid."},
-  {nome:"Extrato de Tomate", preco:3.50, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Molho de Tomate", preco:2.90, cat:"Mercearia", sub:"Molhos", un:"unid."},
-  {nome:"Milho Verde (lata)", preco:4.20, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Ervilha (lata)", preco:4.10, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Sardinha (lata)", preco:6.50, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Atum (lata)", preco:7.90, cat:"Mercearia", sub:"Enlatados", un:"lata"},
-  {nome:"Achocolatado", preco:6.80, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Chocolate (barra)", preco:6.50, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Gelatina", preco:2.20, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Adoçante", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Margarina", preco:5.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Maionese", preco:6.20, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Ketchup", preco:6.00, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Mostarda", preco:5.80, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Tempero completo", preco:3.50, cat:"Mercearia", sub:"Temperos", un:"unid."},
-  {nome:"Caldo de galinha", preco:2.50, cat:"Mercearia", sub:"Temperos", un:"cx"},
-  {nome:"Pipoca (milho) 500g", preco:4.20, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Fermento químico", preco:4.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-  {nome:"Canjica", preco:5.50, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Arroz doce (mistura)", preco:4.90, cat:"Mercearia", sub:"Doces", un:"pacote"},
-  {nome:"Pão de forma", preco:7.50, cat:"Mercearia", sub:"Biscoitos", un:"pacote"},
-  {nome:"Bolo pronto", preco:6.90, cat:"Mercearia", sub:"Doces", un:"unid."},
-
-  // FRIOS & LATICÍNIOS
-  {nome:"Mortadela (kg)", preco:12.90, cat:"Frios & Laticínios", sub:"Mortadela", un:"kg", obs:"Preço por kg"},
-  {nome:"Presunto (kg)", preco:28.90, cat:"Frios & Laticínios", sub:"Presunto", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Mussarela (kg)", preco:39.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Prato (kg)", preco:42.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Queijo Coalho (kg)", preco:44.90, cat:"Frios & Laticínios", sub:"Queijos", un:"kg", obs:"Preço por kg"},
-  {nome:"Iogurte (unidade)", preco:3.50, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Manteiga", preco:9.90, cat:"Frios & Laticínios", sub:"Manteiga", un:"unid."},
-  {nome:"Requeijão", preco:8.90, cat:"Frios & Laticínios", sub:"Requeijão", un:"unid."},
-  {nome:"Creme de leite", preco:4.80, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Leite condensado", preco:6.90, cat:"Frios & Laticínios", sub:"Iogurte", un:"unid."},
-  {nome:"Salsicha (pacote)", preco:9.90, cat:"Frios & Laticínios", sub:"Presunto", un:"pacote"},
-
-  // AÇOUGUE
-  {nome:"Carne Bovina 1ª (kg)", preco:39.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne Bovina 2ª (kg)", preco:32.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Acém (kg)", preco:29.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Patinho (kg)", preco:36.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Costela Bovina (kg)", preco:27.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne moída (kg)", preco:33.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Fígado bovino (kg)", preco:17.90, cat:"Açougue", sub:"Bovina", un:"kg", obs:"Preço por kg"},
-  {nome:"Frango inteiro (kg)", preco:12.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Peito de frango (kg)", preco:18.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Coxa e sobrecoxa (kg)", preco:14.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Asa de frango (kg)", preco:15.90, cat:"Açougue", sub:"Frango", un:"kg", obs:"Preço por kg"},
-  {nome:"Linguiça Toscana (kg)", preco:19.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
-  {nome:"Linguiça Calabresa (kg)", preco:23.90, cat:"Açougue", sub:"Linguiças", un:"kg", obs:"Preço por kg"},
-  {nome:"Carne suína (kg)", preco:22.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Costela suína (kg)", preco:24.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Bisteca suína (kg)", preco:23.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Bacon (kg)", preco:34.90, cat:"Açougue", sub:"Suína", un:"kg", obs:"Preço por kg"},
-  {nome:"Peixe (kg)", preco:29.90, cat:"Açougue", sub:"Peixes", un:"kg", obs:"Preço por kg"},
-
-  // HORTIFRUTI
-  {nome:"Banana (kg)", preco:4.60, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Maçã (kg)", preco:6.20, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Laranja (kg)", preco:3.90, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Mamão (unidade)", preco:6.00, cat:"Hortifruti", sub:"Frutas", un:"unid."},
-  {nome:"Uva (bandeja)", preco:8.90, cat:"Hortifruti", sub:"Frutas", un:"bandeja"},
-  {nome:"Limão (kg)", preco:4.50, cat:"Hortifruti", sub:"Frutas", un:"kg"},
-  {nome:"Tomate (kg)", preco:5.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Batata (kg)", preco:4.30, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Cebola (kg)", preco:4.80, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Cenoura (kg)", preco:4.40, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Beterraba (kg)", preco:4.90, cat:"Hortifruti", sub:"Legumes", un:"kg"},
-  {nome:"Repolho (unidade)", preco:5.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Alface (unidade)", preco:3.50, cat:"Hortifruti", sub:"Verduras", un:"unid."},
-  {nome:"Coentro (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
-  {nome:"Cebolinha (maço)", preco:2.00, cat:"Hortifruti", sub:"Temperos", un:"maço"},
-  {nome:"Alho (100g)", preco:3.50, cat:"Hortifruti", sub:"Temperos", un:"100g"},
-
-  // BEBIDAS
-  {nome:"Água mineral 500ml", preco:2.50, cat:"Bebidas", sub:"Água", un:"unid."},
-  {nome:"Água mineral 1,5L", preco:4.50, cat:"Bebidas", sub:"Água", un:"unid."},
-  {nome:"Refrigerante 2L", preco:7.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Refrigerante 1L", preco:5.99, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Refrigerante (lata)", preco:4.50, cat:"Bebidas", sub:"Refrigerantes", un:"unid."},
-  {nome:"Suco 1L", preco:5.20, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Suco (caixinha)", preco:3.90, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Cerveja (lata)", preco:3.50, cat:"Bebidas", sub:"Cervejas", un:"unid."},
-  {nome:"Cerveja 600ml", preco:7.90, cat:"Bebidas", sub:"Cervejas", un:"unid."},
-  {nome:"Energético", preco:9.90, cat:"Bebidas", sub:"Energéticos", un:"unid."},
-  {nome:"Chá gelado", preco:4.80, cat:"Bebidas", sub:"Sucos", un:"unid."},
-  {nome:"Água de coco", preco:6.50, cat:"Bebidas", sub:"Sucos", un:"unid."},
-
-  // LIMPEZA
-  {nome:"Detergente", preco:2.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Sabão em pó", preco:12.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Água sanitária", preco:3.40, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Desinfetante", preco:4.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Esponja", preco:1.80, cat:"Limpeza", sub:"Cozinha", un:"unid."},
-  {nome:"Limpa vidro", preco:7.20, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Pano de chão", preco:4.00, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Saco de lixo 30L", preco:8.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
-  {nome:"Saco de lixo 50L", preco:12.90, cat:"Limpeza", sub:"Sacos de lixo", un:"pacote"},
-  {nome:"Sabão em barra", preco:6.90, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Amaciante", preco:12.50, cat:"Limpeza", sub:"Lavanderia", un:"unid."},
-  {nome:"Álcool 70%", preco:9.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Lustra móveis", preco:10.90, cat:"Limpeza", sub:"Casa", un:"unid."},
-  {nome:"Papel toalha", preco:7.50, cat:"Limpeza", sub:"Cozinha", un:"pacote"},
-
-  // HIGIENE
-  {nome:"Sabonete", preco:2.20, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Shampoo", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
-  {nome:"Condicionador", preco:14.50, cat:"Higiene & Cuidados", sub:"Cabelo", un:"unid."},
-  {nome:"Creme dental", preco:4.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Escova de dente", preco:5.50, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Fio dental", preco:6.90, cat:"Higiene & Cuidados", sub:"Dental", un:"unid."},
-  {nome:"Papel higiênico", preco:15.90, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
-  {nome:"Papel lenço", preco:6.50, cat:"Higiene & Cuidados", sub:"Papel", un:"pacote"},
-  {nome:"Desodorante", preco:11.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-  {nome:"Absorvente", preco:9.90, cat:"Higiene & Cuidados", sub:"Feminino", un:"pacote"},
-  {nome:"Sabonete líquido", preco:12.90, cat:"Higiene & Cuidados", sub:"Banho", un:"unid."},
-];
-
-/* ===== IMAGENS (PEGA DAS SUAS PASTAS) ===== */
-const IMG_PADRAO = "logo.png";
-function imgDoProduto(p){
   // Hortifruti
-  if(p.nome === "Banana (kg)") return "img/01-hortifruti/banana.jpg";
-  if(p.nome === "Tomate (kg)") return "img/01-hortifruti/tomate.jpg";
-  if(p.nome === "Cebola (kg)") return "img/01-hortifruti/cebola.jpg";
-
-  // Básicos
-  if(p.nome.includes("Arroz")) return "img/02-basicos/arroz.jpg";
-  if(p.nome.includes("Feijão")) return "img/02-basicos/feijao.jpg";
-  if(p.nome.includes("Óleo")) return "img/02-basicos/oleo.jpg";
-  if(p.nome.includes("Leite")) return "img/02-basicos/leite.jpg";
-  if(p.nome.includes("Ovos")) return "img/02-basicos/ovos.jpg";
-  if(p.nome.includes("Farinha") || p.nome.includes("Cuscuz")) return "img/02-basicos/farinha.jpg";
-
-  // Bebidas
-  if(p.nome.includes("Refrigerante")) return "img/03-bebidas/refrigerante.jpg";
+  { sku: "2001", nome: "Banana Prata 1kg", categoria: "Hortifruti" },
+  { sku: "2002", nome: "Banana Nanica 1kg", categoria: "Hortifruti" },
+  { sku: "2003", nome: "Maçã 1kg", categoria: "Hortifruti" },
+  { sku: "2004", nome: "Laranja 1kg", categoria: "Hortifruti" },
+  { sku: "2005", nome: "Limão 500g", categoria: "Hortifruti" },
+  { sku: "2006", nome: "Tomate 1kg", categoria: "Hortifruti" },
+  { sku: "2007", nome: "Cebola 1kg", categoria: "Hortifruti" },
+  { sku: "2008", nome: "Batata 1kg", categoria: "Hortifruti" },
+  { sku: "2009", nome: "Cenoura 1kg", categoria: "Hortifruti" },
+  { sku: "2010", nome: "Alface 1 unidade", categoria: "Hortifruti" },
+  { sku: "2011", nome: "Coentro 1 maço", categoria: "Hortifruti" },
+  { sku: "2012", nome: "Cebolinha 1 maço", categoria: "Hortifruti" },
+  { sku: "2013", nome: "Pimentão 500g", categoria: "Hortifruti" },
+  { sku: "2014", nome: "Alho 200g", categoria: "Hortifruti" },
 
   // Limpeza
-  if(p.nome === "Detergente") return "img/04-limpeza/detergente.jpg";
+  { sku: "3001", nome: "Detergente Neutro 500ml", categoria: "Limpeza" },
+  { sku: "3002", nome: "Água Sanitária 1L", categoria: "Limpeza" },
+  { sku: "3003", nome: "Desinfetante 1L", categoria: "Limpeza" },
+  { sku: "3004", nome: "Sabão em Pó 1kg", categoria: "Limpeza" },
+  { sku: "3005", nome: "Sabão em Barra", categoria: "Limpeza" },
+  { sku: "3006", nome: "Amaciante 2L", categoria: "Limpeza" },
+  { sku: "3007", nome: "Esponja Multiuso", categoria: "Limpeza" },
+  { sku: "3008", nome: "Saco de Lixo 30L", categoria: "Limpeza" },
+  { sku: "3009", nome: "Saco de Lixo 50L", categoria: "Limpeza" },
+  { sku: "3010", nome: "Pano de Chão", categoria: "Limpeza" },
+  { sku: "3011", nome: "Limpador Perfumado 500ml", categoria: "Limpeza" },
+  { sku: "3012", nome: "Álcool 70 500ml", categoria: "Limpeza" },
+  { sku: "3013", nome: "Lustra Móveis 200ml", categoria: "Limpeza" },
 
-  return IMG_PADRAO;
+  // Higiene
+  { sku: "4001", nome: "Papel Higiênico 4 rolos", categoria: "Higiene" },
+  { sku: "4002", nome: "Creme Dental 90g", categoria: "Higiene" },
+  { sku: "4003", nome: "Escova de Dentes", categoria: "Higiene" },
+  { sku: "4004", nome: "Sabonete em Barra", categoria: "Higiene" },
+  { sku: "4005", nome: "Shampoo 350ml", categoria: "Higiene" },
+  { sku: "4006", nome: "Condicionador 350ml", categoria: "Higiene" },
+  { sku: "4007", nome: "Desodorante Aerosol", categoria: "Higiene" },
+  { sku: "4008", nome: "Absorvente", categoria: "Higiene" },
+  { sku: "4009", nome: "Lenço Umedecido", categoria: "Higiene" },
+  { sku: "4010", nome: "Algodão 50g", categoria: "Higiene" },
+  { sku: "4011", nome: "Cotonete 75 unidades", categoria: "Higiene" },
+
+  // Laticínios
+  { sku: "5001", nome: "Leite UHT 1L", categoria: "Laticínios" },
+  { sku: "5002", nome: "Iogurte Natural 170g", categoria: "Laticínios" },
+  { sku: "5003", nome: "Queijo Mussarela 200g", categoria: "Laticínios" },
+  { sku: "5004", nome: "Requeijão 200g", categoria: "Laticínios" },
+  { sku: "5005", nome: "Creme de Leite 200g", categoria: "Laticínios" },
+  { sku: "5006", nome: "Leite Condensado 395g", categoria: "Laticínios" },
+  { sku: "5007", nome: "Manteiga 200g", categoria: "Laticínios" },
+
+  // Carnes
+  { sku: "6001", nome: "Frango Inteiro 1kg", categoria: "Carnes" },
+  { sku: "6002", nome: "Peito de Frango 1kg", categoria: "Carnes" },
+  { sku: "6003", nome: "Coxa e Sobrecoxa 1kg", categoria: "Carnes" },
+  { sku: "6004", nome: "Carne Moída 1kg", categoria: "Carnes" },
+  { sku: "6005", nome: "Linguiça 1kg", categoria: "Carnes" },
+  { sku: "6006", nome: "Salsicha 500g", categoria: "Carnes" },
+
+  // Congelados
+  { sku: "7001", nome: "Hambúrguer Congelado", categoria: "Congelados" },
+  { sku: "7002", nome: "Batata Frita Congelada 1kg", categoria: "Congelados" },
+  { sku: "7003", nome: "Lasanha Congelada", categoria: "Congelados" },
+  { sku: "7004", nome: "Pizza Congelada", categoria: "Congelados" },
+  { sku: "7005", nome: "Nuggets 300g", categoria: "Congelados" },
+
+  // Bebidas (só Itaipava e Brahma)
+  { sku: "8001", nome: "Cerveja Itaipava Lata 350ml", categoria: "Bebidas" },
+  { sku: "8002", nome: "Cerveja Brahma Lata 350ml", categoria: "Bebidas" },
+];
+
+// =========================
+// DOM
+// =========================
+const $grid = document.getElementById("grid");
+const $lista = document.getElementById("lista");
+const $categoria = document.getElementById("categoria");
+const $search = document.getElementById("search");
+const $obs = document.getElementById("obs");
+const $btnWhats = document.getElementById("btnWhats");
+const $btnClear = document.getElementById("btnClear");
+const $btnCopy = document.getElementById("btnCopy");
+const $empty = document.getElementById("empty");
+const $cats = document.getElementById("cats");
+
+// Header/hero/footer/float
+const $btnWhatsappTop = document.getElementById("btnWhatsappTop");
+const $btnWhatsappHero = document.getElementById("btnWhatsappHero");
+const $btnWhatsappFooter = document.getElementById("btnWhatsappFooter");
+const $floatZap = document.getElementById("floatZap");
+
+// =========================
+// STATE
+// =========================
+const carrinho = new Map(); // sku -> { produto, qtd }
+
+// =========================
+// HELPERS
+// =========================
+function waLink(texto) {
+  const msg = encodeURIComponent(texto);
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
 }
 
-/* ===== ELEMENTOS ===== */
-const grid = document.getElementById("grid");
-const deptRow = document.getElementById("deptRow");
-const submenu = document.getElementById("submenu");
-const subRow = document.getElementById("subRow");
-const search = document.getElementById("search");
-const btnSearch = document.getElementById("btnSearch");
-const order = document.getElementById("order");
+function setAllZapLinks() {
+  const link = waLink("Olá! Quero fazer um pedido no Mercadinho Esperança.");
+  $btnWhatsappTop.href = link;
+  $btnWhatsappHero.href = link;
+  $btnWhatsappFooter.href = link;
+  $floatZap.href = link;
+}
 
-/* ===== FILTROS ===== */
-let filtroDept = "Todos";
-let filtroSub = "Tudo";
+function money(n) {
+  return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
 
-function renderDept(){
-  deptRow.innerHTML="";
-  departamentos.forEach(d=>{
-    const el=document.createElement("div");
-    el.className="dept"+(d.key===filtroDept?" active":"");
-    el.innerHTML=`<div class="ic">${d.icon}</div><span>${d.key}</span>`;
-    el.onclick=()=>{
-      filtroDept=d.key;
-      filtroSub="Tudo";
-      renderDept();
-      renderSubmenu();
+function getCategorias() {
+  const cats = Array.from(new Set(PRODUTOS.map(p => p.categoria)));
+  return ["Todas", ...cats];
+}
+
+function montarSelectCategorias() {
+  $categoria.innerHTML = getCategorias()
+    .map(c => `<option value="${c}">${c}</option>`)
+    .join("");
+}
+
+function montarCardsCategorias() {
+  const cats = getCategorias().filter(c => c !== "Todas");
+  const icons = {
+    "Mercearia": "🛒",
+    "Hortifruti": "🥬",
+    "Limpeza": "🧼",
+    "Higiene": "🧴",
+    "Laticínios": "🥛",
+    "Carnes": "🥩",
+    "Congelados": "🧊",
+    "Bebidas": "🍺",
+  };
+
+  $cats.innerHTML = cats.map(c => `
+    <button
+      class="text-left rounded-3xl border border-black/5 bg-white shadow-soft p-5 hover:translate-y-[-1px] transition"
+      data-cat="${c}"
+    >
+      <div class="text-2xl">${icons[c] || "🏷️"}</div>
+      <div class="font-extrabold mt-2">${c}</div>
+      <div class="text-sm text-slate-600 mt-1">Ver produtos</div>
+    </button>
+  `).join("");
+
+  $cats.querySelectorAll("button[data-cat]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const cat = btn.getAttribute("data-cat");
+      $categoria.value = cat;
       render();
-      window.scrollTo({top:240,behavior:"smooth"});
-    };
-    deptRow.appendChild(el);
+      document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
+    });
   });
 }
 
-function renderSubmenu(){
-  const dept = departamentos.find(x=>x.key===filtroDept);
-  if(!dept || dept.key==="Todos"){
-    submenu.classList.remove("show");
-    subRow.innerHTML="";
+function filtrarProdutos() {
+  const termo = ($search.value || "").trim().toLowerCase();
+  const cat = $categoria.value;
+
+  return PRODUTOS.filter(p => {
+    const okCat = (cat === "Todas") || (p.categoria === cat);
+    const okTermo = !termo || p.nome.toLowerCase().includes(termo) || p.sku.includes(termo);
+    return okCat && okTermo;
+  });
+}
+
+// =========================
+// RENDER
+// =========================
+function renderGrid() {
+  const prods = filtrarProdutos();
+
+  if (!prods.length) {
+    $grid.classList.add("hidden");
+    $empty.classList.remove("hidden");
     return;
   }
-  submenu.classList.add("show");
-  subRow.innerHTML="";
 
-  const all = ["Tudo", ...dept.subs];
-  all.forEach(s=>{
-    const el=document.createElement("div");
-    el.className="sub"+(s===filtroSub?" active":"");
-    el.textContent=s;
-    el.onclick=()=>{
-      filtroSub=s;
-      renderSubmenu();
-      render();
-    };
-    subRow.appendChild(el);
-  });
-}
+  $grid.classList.remove("hidden");
+  $empty.classList.add("hidden");
 
-function relScore(nome,q){
-  if(!q) return 0;
-  nome=nome.toLowerCase();
-  if(nome===q) return 100;
-  if(nome.startsWith(q)) return 60;
-  if(nome.includes(q)) return 30;
-  return 0;
-}
+  $grid.innerHTML = prods.map(p => {
+    const qtd = carrinho.get(p.sku)?.qtd || 0;
 
-function render(){
-  const q=(search.value||"").trim().toLowerCase();
+    return `
+      <div class="rounded-3xl bg-white border border-black/5 shadow-soft overflow-hidden">
+        <img
+          src="${imgBySku(p.sku)}"
+          alt="${p.nome}"
+          class="h-40 w-full object-cover bg-slate-100"
+          onerror="this.onerror=null; this.src='${FALLBACK_IMG}'"
+        />
+        <div class="p-5">
+          <p class="text-xs text-slate-500">${p.categoria}</p>
+          <h3 class="font-extrabold text-base leading-snug mt-1">${p.nome}</h3>
+          <p class="text-xs text-slate-400">SKU: ${p.sku}</p>
 
-  let list = produtos.filter(p=>{
-    const okDept = (filtroDept==="Todos") || (p.cat===filtroDept);
-    const okSub  = (filtroDept==="Todos") || (filtroSub==="Tudo") || (p.sub===filtroSub);
-    const okQ    = !q || p.nome.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || (p.sub||"").toLowerCase().includes(q);
-    return okDept && okSub && okQ;
-  });
+          <div class="flex items-center justify-between mt-4">
+            <button class="btnMinus w-10 h-10 rounded-full border border-black/10 hover:bg-slate-50 font-extrabold" data-sku="${p.sku}">−</button>
 
-  if(order.value==="menor") list.sort((a,b)=>a.preco-b.preco);
-  if(order.value==="maior") list.sort((a,b)=>b.preco-a.preco);
-  if(order.value==="az") list.sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
-  if(order.value==="relevancia" && q) list.sort((a,b)=>relScore(b.nome,q)-relScore(a.nome,q));
+            <div class="text-center">
+              <div class="text-xs text-slate-500">Quantidade</div>
+              <div class="font-extrabold text-emerald-700">${qtd}</div>
+            </div>
 
-  grid.innerHTML="";
-  list.forEach((p,idx)=>{
-    const card=document.createElement("div");
-    card.className="card";
-    const imgSrc = imgDoProduto(p);
-
-    card.innerHTML=`
-      <div class="meta">
-        <span class="chip">${p.cat}${p.sub ? " • "+p.sub : ""}</span>
-        <span class="unit">${p.un || "unid."}</span>
-      </div>
-
-      <img class="pimg" src="${imgSrc}" alt="${p.nome}" loading="lazy"
-           onerror="this.onerror=null;this.src='logo.png';" />
-
-      <h3>${p.nome}</h3>
-      <div class="price">R$ ${Number(p.preco).toFixed(2)}</div>
-      ${p.obs?`<div class="note">${p.obs}</div>`:""}
-
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn green" data-add="${idx}" style="flex:1;min-width:140px">Adicionar</button>
-        <button class="btn" data-viewcart="1" style="min-width:140px">Ver carrinho</button>
+            <button class="btnPlus w-10 h-10 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold" data-sku="${p.sku}">+</button>
+          </div>
+        </div>
       </div>
     `;
-    grid.appendChild(card);
+  }).join("");
+
+  // eventos +/-
+  $grid.querySelectorAll(".btnPlus").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const sku = btn.getAttribute("data-sku");
+      const prod = PRODUTOS.find(x => x.sku === sku);
+      const atual = carrinho.get(sku)?.qtd || 0;
+      carrinho.set(sku, { produto: prod, qtd: atual + 1 });
+      renderLista();
+      renderGrid();
+    });
   });
 
-  document.querySelectorAll("[data-add]").forEach(b=>{
-    b.onclick=()=>{ addToCart(); };
+  $grid.querySelectorAll(".btnMinus").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const sku = btn.getAttribute("data-sku");
+      const atual = carrinho.get(sku)?.qtd || 0;
+      if (atual <= 1) carrinho.delete(sku);
+      else {
+        const prod = carrinho.get(sku).produto;
+        carrinho.set(sku, { produto: prod, qtd: atual - 1 });
+      }
+      renderLista();
+      renderGrid();
+    });
   });
-  document.querySelectorAll("[data-viewcart]").forEach(b=>{
-    b.onclick=()=>openCart();
-  });
 }
 
-/* ===== BUSCA / ORDENAR ===== */
-btnSearch.onclick=render;
-search.addEventListener("keydown",(e)=>{if(e.key==="Enter") render();});
-order.onchange=render;
+function renderLista() {
+  const itens = Array.from(carrinho.values());
 
-/* ===== SIDEBAR ===== */
-document.getElementById("goAll").onclick=()=>{filtroDept="Todos";filtroSub="Tudo";renderDept();renderSubmenu();render();window.scrollTo({top:0,behavior:"smooth"});};
-document.getElementById("goBasics").onclick=()=>{filtroDept="Básicos";filtroSub="Tudo";renderDept();renderSubmenu();render();};
-document.getElementById("goMeat").onclick=()=>{filtroDept="Açougue";filtroSub="Tudo";renderDept();renderSubmenu();render();};
-document.getElementById("goHorti").onclick=()=>{filtroDept="Hortifruti";filtroSub="Tudo";renderDept();renderSubmenu();render();};
-document.getElementById("goPay").onclick=()=>{document.getElementById("payBox").scrollIntoView({behavior:"smooth"});};
-document.getElementById("goInfo").onclick=()=>{document.getElementById("infoBox").scrollIntoView({behavior:"smooth"});};
-
-/* ===== CARRINHO (VISUAL) ===== */
-let cartCount = 0;
-const cartCountEl = document.getElementById("cartCount");
-const cartBtn = document.getElementById("cartBtn");
-const cartModal = document.getElementById("cartModal");
-const closeCart = document.getElementById("closeCart");
-const clearCart = document.getElementById("clearCart");
-const goWhatsapp = document.getElementById("goWhatsapp");
-
-function addToCart(){
-  cartCount++;
-  cartCountEl.textContent = cartCount;
-  cartCountEl.style.transform = "scale(1.2)";
-  setTimeout(()=>cartCountEl.style.transform="scale(1)",120);
-}
-function openCart(){
-  cartModal.classList.add("show");
-  cartModal.setAttribute("aria-hidden","false");
-}
-function closeCartFn(){
-  cartModal.classList.remove("show");
-  cartModal.setAttribute("aria-hidden","true");
-}
-cartBtn.onclick=openCart;
-closeCart.onclick=closeCartFn;
-cartModal.onclick=(e)=>{ if(e.target===cartModal) closeCartFn(); };
-clearCart.onclick=()=>{ cartCount=0; cartCountEl.textContent="0"; };
-goWhatsapp.onclick=()=>window.open("https://wa.me/558183173613","_blank");
-
-/* ===== CARROSSEL ===== */
-const slidesEl = document.getElementById("slides");
-const dotsEl = document.getElementById("dots");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
-const totalSlides = slidesEl.children.length;
-let current = 0;
-let timer = null;
-
-function renderDots(){
-  dotsEl.innerHTML="";
-  for(let i=0;i<totalSlides;i++){
-    const d=document.createElement("div");
-    d.className="dot"+(i===current?" active":"");
-    d.onclick=()=>{goTo(i,true);};
-    dotsEl.appendChild(d);
+  if (!itens.length) {
+    $lista.innerHTML = `<div class="text-sm text-slate-500">Nenhum item ainda.</div>`;
+    return;
   }
-}
-function goTo(i, reset=false){
-  current = (i + totalSlides) % totalSlides;
-  slidesEl.style.transform = `translateX(-${current*100}%)`;
-  renderDots();
-  if(reset) restartAuto();
-}
-function restartAuto(){
-  if(timer) clearInterval(timer);
-  timer = setInterval(()=>goTo(current+1,false), 4500);
-}
-prev.onclick=()=>goTo(current-1,true);
-next.onclick=()=>goTo(current+1,true);
 
-renderDots();
-restartAuto();
+  $lista.innerHTML = itens.map(({ produto, qtd }) => `
+    <div class="flex items-center justify-between gap-3 bg-white rounded-2xl border border-black/5 p-3">
+      <div>
+        <div class="font-semibold text-sm">${produto.nome}</div>
+        <div class="text-xs text-slate-500">SKU ${produto.sku} • ${produto.categoria}</div>
+      </div>
+      <div class="font-extrabold text-emerald-700">x${qtd}</div>
+    </div>
+  `).join("");
+}
 
-/* ===== INIT ===== */
-renderDept();
-renderSubmenu();
-render();
+function montarMensagemWhats() {
+  const itens = Array.from(carrinho.values());
+  if (!itens.length) return "Olá! Quero fazer um pedido no Mercadinho Esperança.";
+
+  const linhas = itens.map(({ produto, qtd }) => `• ${produto.nome} (SKU ${produto.sku}) x${qtd}`);
+
+  const obs = ($obs.value || "").trim();
+  const extra = obs ? `\n\nObservações:\n${obs}` : "";
+
+  return `Olá! Quero fazer um pedido no Mercadinho Esperança:\n\n${linhas.join("\n")}${extra}`;
+}
+
+function render() {
+  renderGrid();
+  renderLista();
+}
+
+// =========================
+// ACTIONS
+// =========================
+$btnWhats.addEventListener("click", () => {
+  const msg = montarMensagemWhats();
+  window.open(waLink(msg), "_blank");
+});
+
+$btnClear.addEventListener("click", () => {
+  carrinho.clear();
+  $obs.value = "";
+  render();
+});
+
+$btnCopy.addEventListener("click", async () => {
+  const msg = montarMensagemWhats();
+  try {
+    await navigator.clipboard.writeText(msg);
+    $btnCopy.textContent = "Copiado!";
+    setTimeout(() => ($btnCopy.textContent = "Copiar lista"), 1200);
+  } catch {
+    alert("Não consegui copiar automaticamente. Vou mostrar a mensagem para você copiar.");
+    prompt("Copie a mensagem do pedido:", msg);
+  }
+});
+
+$search.addEventListener("input", render);
+$categoria.addEventListener("change", render);
+
+// =========================
+// INIT
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  setAllZapLinks();
+  montarSelectCategorias();
+  montarCardsCategorias();
+  render();
+});
